@@ -1,3 +1,4 @@
+import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_header.dart';
@@ -18,7 +19,9 @@ class LoginScreenForm extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(28, 36, 28, 32),
       child: Form(
         key: context.read<LoginCubit>().formKey,
-        child: Column(
+        child: BlocProvider(
+  create: (context) => getIt<LoginCubit>(),
+  child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Header
@@ -50,6 +53,7 @@ class LoginScreenForm extends StatelessWidget {
             CreateAccountFooter(onCreateTap: () {}),
           ],
         ),
+),
       ),
     );
   }

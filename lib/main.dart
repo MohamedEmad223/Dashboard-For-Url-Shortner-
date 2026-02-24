@@ -1,6 +1,6 @@
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen.dart';
+import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,10 +40,7 @@ class JocApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: BlocProvider(
-        create: (context) => getIt<LoginCubit>(),
-        child: const LoginScreen(),
-      ),
+      home: const SignUpScreen(),
     );
   }
 }
