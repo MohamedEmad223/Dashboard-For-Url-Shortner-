@@ -1,3 +1,4 @@
+import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,10 +36,7 @@ class JocApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: const Directionality(
-        textDirection: TextDirection.rtl,
-        child: MainNavigation(),
-      ),
+      home: LoginScreen(),
     );
   }
 }
