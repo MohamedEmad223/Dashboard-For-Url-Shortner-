@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/links/presentation/screens/links_screen.dart';
-import 'features/qr/qr_screen.dart';
+import 'features/qr/presentation/screen/qr_screen.dart';
 import 'features/settings/presentation/settings_screen.dart';
 import 'features/stats/presentation/stats_screen.dart';
 
