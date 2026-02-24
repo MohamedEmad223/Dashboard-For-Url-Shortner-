@@ -1,6 +1,9 @@
+import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
+import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/links/presentation/screens/links_screen.dart';
@@ -10,8 +13,9 @@ import 'features/states/presentation/states_screen.dart';
 
 
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await setupGetIt();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
@@ -36,7 +40,10 @@ class JocApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: LoginScreen(),
+      home: BlocProvider(
+        create: (context) => getIt<LoginCubit>(),
+        child: const LoginScreen(),
+      ),
     );
   }
 }

@@ -1,9 +1,9 @@
-import '../models/error_model.dart';
+import '../models/api_error_model.dart';
 
 class ApiException implements Exception {
-  final ErrorModel errorModel;
+  final ApiErrorModel apiErrorModel;
 
   ApiException({
-    required this.errorModel,
+    required this.apiErrorModel,
   });
 }

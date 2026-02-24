@@ -133,6 +133,13 @@ class _AuthTextFieldState extends State<AuthTextField>
                 )
                     : null,
                 border: InputBorder.none,
+                errorBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+                errorMaxLines: 3,
+                errorStyle: GoogleFonts.inter(
+                  fontSize: 12,
+                  color: Colors.red,
+                ),
                 contentPadding:
                 const EdgeInsets.symmetric(vertical: 14),
               ),

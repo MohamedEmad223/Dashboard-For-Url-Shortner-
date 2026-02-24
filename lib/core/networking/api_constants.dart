@@ -1,0 +1,3 @@
+class ApiConstants {
+  static const String baseUrl = 'https://saas-link-management-api.fly.dev/api/';
+}
