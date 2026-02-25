@@ -1,10 +1,8 @@
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_header.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_text_feild.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cubit/signup_cubit.dart';
-import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/already_have_an_account_sign_in.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';

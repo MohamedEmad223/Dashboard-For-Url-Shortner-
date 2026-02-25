@@ -1,5 +1,4 @@
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_header.dart';
