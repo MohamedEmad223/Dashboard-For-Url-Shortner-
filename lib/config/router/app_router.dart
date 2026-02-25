@@ -1,4 +1,5 @@
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
+import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/login/presentation/screens/login_screen.dart';
 
@@ -11,6 +12,10 @@ class AppRouter {
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) => const LoginScreen(),
+        );
+        case Routes.signUpScreen:
+        return MaterialPageRoute(
+          builder: (_) => const SignUpScreen(),
         );
       default:
         return null;
