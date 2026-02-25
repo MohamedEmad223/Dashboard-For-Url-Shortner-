@@ -1,6 +1,4 @@
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
-import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen.dart';
+import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,14 +33,9 @@ class SignUpBlocConsumer extends StatelessWidget {
                 ),
               ),
             );
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (_) => BlocProvider(
-                  create: (_) => getIt<LoginCubit>(),
-                  child: const LoginScreen(),
-                ),
-              ),
-                  (route) => false,
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              Routes.loginScreen,
+              (route) => false,
             );
           },
           failure: (error) {
