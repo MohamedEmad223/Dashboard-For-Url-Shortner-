@@ -11,21 +11,16 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _emailController = TextEditingController();
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
-  static const Color _teal = Color(0xFF1A8A85);
-  static const Color _tealDark = Color(0xFF146E6A);
-  static const Color _bgColor = Color(0xFFEEF6F6);
-  static const Color _textDark = Color(0xFF1A2E2D);
-  static const Color _textMuted = Color(0xFF6B8A88);
-  static const Color _borderColor = Color(0xFFC8E0DE);
+
 
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _bgColor,
+      backgroundColor: Color(0xFFEEF6F6),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -34,7 +29,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             children: [
               const SizedBox(height: 20),
               BackButton(
-                color: _teal,
+                color: Color(0xFF1A8A85),
                 onPressed: () => Navigator.of(context).pop(),
               ),
 
@@ -57,11 +52,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _teal,
+                    backgroundColor: Color(0xFF1A8A85),
                     foregroundColor: Colors.white,
-                    disabledBackgroundColor: _teal.withOpacity(0.7),
+                    disabledBackgroundColor: Color(0xFF1A8A85).withOpacity(0.7),
                     elevation: 0,
-                    shadowColor: _teal.withOpacity(0.4),
+                    shadowColor: Color(0xFF1A8A85).withOpacity(0.4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),

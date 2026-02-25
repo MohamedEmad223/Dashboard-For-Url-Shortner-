@@ -41,7 +41,7 @@ class JocApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      initialRoute: Routes.verifyCodeScreen,
+      initialRoute: Routes.resetPasswordScreen,
     );
   }
 }
