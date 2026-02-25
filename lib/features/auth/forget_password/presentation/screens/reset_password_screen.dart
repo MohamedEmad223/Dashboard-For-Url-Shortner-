@@ -1,14 +1,11 @@
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/header_of_reset_password.dart';
-import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/sign_in_button.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/reset_password_form.dart';
 import 'package:flutter/material.dart';
 
-import '../../../login/presentation/widgets/auth_text_feild.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-   ResetPasswordScreen({super.key});
+   const ResetPasswordScreen({super.key});
 
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,36 +20,11 @@ class ResetPasswordScreen extends StatelessWidget {
               const SizedBox(height: 40),
               HeaderOfResetPassword(),
               const SizedBox(height: 40),
-              AuthTextField(
-                label: 'Password',
-                hint: 'Enter your Password',
-                prefixIcon: Icons.lock,
-                controller: _passwordController,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 30),
-              AuthTextField(
-                label: 'Password Confirmation',
-                hint: 'Enter your Password Confirmation',
-                prefixIcon: Icons.lock,
-                controller: _confirmPasswordController,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 28),
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: CustomButton(
-                  text: 'Reset Password',
-                  onTap: () {
-                    // Handle reset password logic here
-                  },
-                ),
-              ),
+              ResetPasswordForm()
             ],
           ),
         ),
       ),
-    );;
+    );
   }
 }

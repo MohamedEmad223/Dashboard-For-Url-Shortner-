@@ -1,7 +1,6 @@
 import 'package:dashboard_for_url_shortner/config/router/app_router.dart';
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
-import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
