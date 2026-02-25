@@ -27,6 +27,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     );
   }
 
+  // Public method for resending code
+  Future<void> sendForgetPasswordEmail(ForgetPasswordRequestModel request) async {
+    await forgetPassword(request);
+  }
+
   void emailFormValidation(BuildContext context) {
     if (formKey.currentState?.validate() ?? false) {
       forgetPassword(ForgetPasswordRequestModel(email: emailController.text));

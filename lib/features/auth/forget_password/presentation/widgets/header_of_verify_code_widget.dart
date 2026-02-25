@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
-// ─────────────────────────────────────────────
-//  HeaderOfVerifyCodeWidget
-// ─────────────────────────────────────────────
 class HeaderOfVerifyCodeWidget extends StatefulWidget {
   final String email;
   final void Function(String code)? onCompleted;
@@ -94,8 +91,6 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-
-        // ── Icon illustration ────────────────────
         Container(
           width: 80,
           height: 80,
@@ -163,7 +158,6 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
 
         const SizedBox(height: 36),
 
-        // ── 6-field Pinput ───────────────────────
         Pinput(
           length: 6,
           controller: _pinController,
