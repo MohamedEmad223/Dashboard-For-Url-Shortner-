@@ -26,7 +26,9 @@ class AppRouter {
         );
         case Routes.verifyCodeScreen:
         return MaterialPageRoute(
-          builder: (_) =>  VerifyCodeScreen(),
+          builder: (_) =>  VerifyCodeScreen(
+            email: arguments as String?,
+          ),
         );
         case Routes.resetPasswordScreen
         :

@@ -6,7 +6,7 @@ import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widg
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cubit/signup_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/already_have_an_account_sign_in.dart';
-import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/custom_button.dart';
+import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,4 +1,8 @@
 import 'package:dashboard_for_url_shortner/core/networking/dio_factory.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/repo/forget_password_repo_impl.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/repo/forget_password_repo.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/use_case/forget_password_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/data/data_source/login_data_source.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/data/repo/login_repo_impl.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/domain/repos/login_repo.dart';
@@ -12,6 +16,8 @@ import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cub
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/auth/forget_password/data/data_source/forget_password_data_source.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
@@ -23,6 +29,8 @@ Future<void> setupGetIt() async {
   _setupLoginDependencies();
   // Sign Up
   _setupSignUpDependencies();
+  // Forget Password
+  _setupForgetPasswordDependencies();
 }
 
 void _setupLoginDependencies() {
@@ -65,5 +73,25 @@ void _setupSignUpDependencies() {
   getIt.registerFactory<SignupCubit>(
         () => SignupCubit(getIt<SignUpUseCase>()),
   );
+
+}
+
+
+void _setupForgetPasswordDependencies() {
+  getIt.registerLazySingleton<ForgetPasswordDataSource>(
+        () => ForgetPasswordDataSource(getIt<Dio>()),
+  );
+  getIt.registerLazySingleton<ForgetPasswordRepo>(
+        () => ForgetPasswordRepoImpl(getIt<ForgetPasswordDataSource>()),
+  );
+
+  getIt.registerLazySingleton<ForgetPasswordUseCase>(
+        () => ForgetPasswordUseCase(getIt<ForgetPasswordRepo>()),
+  );
+
+  getIt.registerFactory<ForgetPasswordCubit>(
+        () => ForgetPasswordCubit(getIt<ForgetPasswordUseCase>()),
+  );
+
 }
 
