@@ -76,7 +76,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ),
                   )
                       : const Text(
-                    'Send reset link',
+                    'Send reset code',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
