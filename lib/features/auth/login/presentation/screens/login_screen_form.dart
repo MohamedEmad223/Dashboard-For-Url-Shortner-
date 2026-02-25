@@ -45,7 +45,9 @@ class LoginScreenForm extends StatelessWidget {
             validator:(password) => AppRegex.isPasswordValid(password!) ? null : 'Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number',
           ),
           const SizedBox(height: 30),
-          ForgotPasswordRow(onForgotTap: () {}),
+          ForgotPasswordRow(onForgotTap: () {
+            Navigator.pushNamed(context, Routes.forgetPasswordScreen);
+          }),
           const SizedBox(height: 30),
           LoginButton(),
           const SizedBox(height: 35),
