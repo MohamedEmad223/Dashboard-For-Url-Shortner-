@@ -14,14 +14,14 @@ class LoginScreenForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(28, 36, 28, 32),
-      child: Form(
-        key: context.read<LoginCubit>().formKey,
-        child: BlocProvider(
-  create: (context) => getIt<LoginCubit>(),
-  child: Column(
+    return  BlocProvider(
+      create: (context) => getIt<LoginCubit>(),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(28, 36, 28, 32),
+        child: Form(
+          key: context.read<LoginCubit>().formKey,
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Header
@@ -53,7 +53,7 @@ class LoginScreenForm extends StatelessWidget {
             CreateAccountFooter(onCreateTap: () {}),
           ],
         ),
-),
+        ),
       ),
     );
   }

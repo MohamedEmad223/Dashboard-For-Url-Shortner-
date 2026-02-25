@@ -1,51 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignInButton extends StatefulWidget {
+class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool isLoading;
+  final String text;
 
-  const SignInButton({
+  const CustomButton({
     super.key,
     required this.onTap,
-    this.isLoading = false,
+    this.isLoading = false, required this.text,
   });
 
   @override
-  State<SignInButton> createState() => _SignInButtonState();
-}
-
-class _SignInButtonState extends State<SignInButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-  late Animation<double> _scale;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 110));
-    _scale = Tween<double>(begin: 1.0, end: 0.97)
-        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => _ctrl.forward(),
-      onTapUp: (_) {
-        _ctrl.reverse();
-        if (!widget.isLoading) widget.onTap();
-      },
-      onTapCancel: () => _ctrl.reverse(),
-      child: ScaleTransition(
-        scale: _scale,
+
+    return IgnorePointer(
+      ignoring: isLoading==true,
+      child: GestureDetector(
+        onTap: isLoading ? null : onTap,
         child: Container(
           width: double.infinity,
           height: 54,
@@ -61,7 +34,7 @@ class _SignInButtonState extends State<SignInButton>
             ],
           ),
           child: Center(
-            child: widget.isLoading
+            child: isLoading
                 ? const SizedBox(
               width: 22,
               height: 22,
@@ -71,7 +44,7 @@ class _SignInButtonState extends State<SignInButton>
               ),
             )
                 : Text(
-              'Sign In',
+              text,
               style: GoogleFonts.inter(
                 color: Colors.white,
                 fontWeight: FontWeight.w700,

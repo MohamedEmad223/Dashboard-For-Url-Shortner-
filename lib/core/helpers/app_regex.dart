@@ -5,6 +5,14 @@ class AppRegex {
     ).hasMatch(email);
   }
 
+  static bool isNameValid(String name) {
+    final trimmedName = name.trim();
+
+    return RegExp(
+      r'^[a-zA-Z\u0600-\u06FF]+(?: [a-zA-Z\u0600-\u06FF]+)*$',
+    ).hasMatch(trimmedName);
+  }
+
   static bool isPasswordValid(String password) {
     return RegExp(
       r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$",
