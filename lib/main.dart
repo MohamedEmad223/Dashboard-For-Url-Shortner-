@@ -1,9 +1,9 @@
+import 'package:dashboard_for_url_shortner/config/router/app_router.dart';
+import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
-import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
-import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen.dart';
+import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/links/presentation/screens/links_screen.dart';
@@ -31,6 +31,7 @@ class JocApp extends StatelessWidget {
     return MaterialApp(
       title: 'جو أكاديمي',
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter().generateRoute,
       theme: ThemeData(
         useMaterial3: true,
         textTheme: GoogleFonts.cairoTextTheme(),
@@ -40,7 +41,7 @@ class JocApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: const SignUpScreen(),
+      initialRoute: Routes.forgetPasswordScreen,
     );
   }
 }
