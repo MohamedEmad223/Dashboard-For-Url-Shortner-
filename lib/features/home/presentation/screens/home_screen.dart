@@ -41,26 +41,22 @@ class HomeScreen extends StatelessWidget {
                       delayMs: 150,
                       child: Row(
                         children: [
-                          Expanded(
-                            child: StatCard(
-                              title: 'النمو الشهري',
-                              value: '18%+',
-                              change: '3%',
-                              color: const Color(0xFFF97316),
-                              lightColor: const Color(0xFFFFF0E6),
-                              icon: Icons.trending_up_rounded,
-                            ),
+                          StatCard(
+                            title: 'Monthly Growth',
+                            value: '18%+',
+                            change: '3%',
+                            color: const Color(0xFFF97316),
+                            lightColor: const Color(0xFFFFF0E6),
+                            icon: Icons.trending_up_rounded,
                           ),
                           const SizedBox(width: 12),
-                          Expanded(
-                            child: StatCard(
-                              title: 'معدل النقرات',
-                              value: '0',
-                              change: '8%',
-                              color: const Color(0xFF7C3AED),
-                              lightColor: const Color(0xFFF3EEFF),
-                              icon: Icons.ads_click_rounded,
-                            ),
+                          StatCard(
+                            title: 'All Time Clicks',
+                            value: '0',
+                            change: '8%',
+                            color: const Color(0xFF7C3AED),
+                            lightColor: const Color(0xFFF3EEFF),
+                            icon: Icons.ads_click_rounded,
                           ),
                         ],
                       ),
@@ -70,26 +66,22 @@ class HomeScreen extends StatelessWidget {
                       delayMs: 250,
                       child: Row(
                         children: [
-                          Expanded(
-                            child: StatCard(
-                              title: 'إجمالي المشاهدات',
-                              value: '0',
-                              change: '12%',
-                              color: const Color(0xFF059669),
-                              lightColor: const Color(0xFFE6FAF4),
-                              icon: Icons.remove_red_eye_outlined,
-                            ),
+                          StatCard(
+                            title: 'All Views',
+                            value: '0',
+                            change: '12%',
+                            color: const Color(0xFF059669),
+                            lightColor: const Color(0xFFE6FAF4),
+                            icon: Icons.remove_red_eye_outlined,
                           ),
                           const SizedBox(width: 12),
-                          Expanded(
-                            child: StatCard(
-                              title: 'إجمالي الروابط',
-                              value: '0',
-                              change: '5%',
-                              color: const Color(0xFF2563EB),
-                              lightColor: const Color(0xFFEBF2FF),
-                              icon: Icons.link_rounded,
-                            ),
+                          StatCard(
+                            title: 'All Links',
+                            value: '0',
+                            change: '5%',
+                            color: const Color(0xFF2563EB),
+                            lightColor: const Color(0xFFEBF2FF),
+                            icon: Icons.link_rounded,
                           ),
                         ],
                       ),
