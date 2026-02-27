@@ -13,6 +13,5 @@ abstract class OverViewDataSource {
   factory OverViewDataSource(Dio dio, {String baseUrl}) = _OverViewDataSource;
 
   @GET(EndPoints.overView)
-  Future<OverViewResponseModel> overView(
-  );
+  Future<OverViewResponseModel> overView();
 }
