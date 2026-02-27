@@ -23,7 +23,7 @@ class EmptyStates extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'لا توجد روابط',
+            'No links found',
             style: GoogleFonts.cairo(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -32,7 +32,7 @@ class EmptyStates extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'أنشئ رابطك الأول الآن',
+            'Create your first link now',
             style: GoogleFonts.cairo(
               fontSize: 13,
               color: const Color(0xFF8A94A6),
@@ -66,7 +66,7 @@ class EmptyStates extends StatelessWidget {
                       color: Colors.white, size: 18),
                   const SizedBox(width: 6),
                   Text(
-                    'إنشاء رابط جديد',
+                    'Create New Link',
                     style: GoogleFonts.cairo(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,

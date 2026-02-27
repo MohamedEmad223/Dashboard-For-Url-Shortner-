@@ -17,11 +17,11 @@ class LinksSearchBar extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 0),
       child: TextField(
         controller: controller,
-        textAlign: TextAlign.right,
+        textAlign: TextAlign.left,
         style: GoogleFonts.cairo(fontSize: 14),
         onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: 'البحث عن رابط...',
+          hintText: 'Search for a link...',
           hintStyle: GoogleFonts.cairo(
             color: const Color(0xFFB0BAC9),
             fontSize: 13,

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:dashboard_for_url_shortner/core/errors/api/models/api_error_model.dart';
 
 class LinksState extends Equatable {
   final String selectedCampaign;
@@ -10,15 +11,29 @@ class LinksState extends Equatable {
   final List<String> campaigns;
   final List<String> statuses;
 
+  // Async operation states
+  final bool isLoadingLinks;
+  final bool isCreatingLink;
+  final bool isDeletingLink;
+  final bool isTogglingLink;
+  final ApiErrorModel? error;
+  final String? successMessage;
+
   const LinksState({
-    this.selectedCampaign = 'جميع الحملات',
-    this.selectedStatus = 'جميع الحالات',
+    this.selectedCampaign = 'All Campaigns',
+    this.selectedStatus = 'All Statuses',
     this.searchQuery = '',
     this.showCampaignDropdown = false,
     this.showStatusDropdown = false,
     this.links = const [],
-    this.campaigns = const ['جميع الحملات', 'بدون حملة'],
-    this.statuses = const ['جميع الحالات', 'نشط', 'غير نشط', 'منتهي'],
+    this.campaigns = const ['All Campaigns', 'No Campaign'],
+    this.statuses = const ['All Statuses', 'Active', 'Inactive', 'Expired'],
+    this.isLoadingLinks = false,
+    this.isCreatingLink = false,
+    this.isDeletingLink = false,
+    this.isTogglingLink = false,
+    this.error,
+    this.successMessage,
   });
 
   LinksState copyWith({
@@ -30,6 +45,12 @@ class LinksState extends Equatable {
     List<Map<String, dynamic>>? links,
     List<String>? campaigns,
     List<String>? statuses,
+    bool? isLoadingLinks,
+    bool? isCreatingLink,
+    bool? isDeletingLink,
+    bool? isTogglingLink,
+    ApiErrorModel? error,
+    String? successMessage,
   }) {
     return LinksState(
       selectedCampaign: selectedCampaign ?? this.selectedCampaign,
@@ -40,6 +61,12 @@ class LinksState extends Equatable {
       links: links ?? this.links,
       campaigns: campaigns ?? this.campaigns,
       statuses: statuses ?? this.statuses,
+      isLoadingLinks: isLoadingLinks ?? this.isLoadingLinks,
+      isCreatingLink: isCreatingLink ?? this.isCreatingLink,
+      isDeletingLink: isDeletingLink ?? this.isDeletingLink,
+      isTogglingLink: isTogglingLink ?? this.isTogglingLink,
+      error: error,
+      successMessage: successMessage,
     );
   }
 
@@ -47,10 +74,10 @@ class LinksState extends Equatable {
 
   int get filteredLinksCount {
     return links.where((link) {
-      final matchesCampaign = selectedCampaign == 'جميع الحملات' ||
+      final matchesCampaign = selectedCampaign == 'All Campaigns' ||
           link['campaign'] == selectedCampaign;
       final matchesStatus =
-          selectedStatus == 'جميع الحالات' || link['status'] == selectedStatus;
+          selectedStatus == 'All Statuses' || link['status'] == selectedStatus;
       final matchesSearch = searchQuery.isEmpty ||
           link['shortUrl'].toString().contains(searchQuery) ||
           link['originalUrl'].toString().contains(searchQuery);
@@ -60,10 +87,10 @@ class LinksState extends Equatable {
 
   List<Map<String, dynamic>> get filteredLinks {
     return links.where((link) {
-      final matchesCampaign = selectedCampaign == 'جميع الحملات' ||
+      final matchesCampaign = selectedCampaign == 'All Campaigns' ||
           link['campaign'] == selectedCampaign;
       final matchesStatus =
-          selectedStatus == 'جميع الحالات' || link['status'] == selectedStatus;
+          selectedStatus == 'All Statuses' || link['status'] == selectedStatus;
       final matchesSearch = searchQuery.isEmpty ||
           link['shortUrl'].toString().contains(searchQuery) ||
           link['originalUrl'].toString().contains(searchQuery);
@@ -81,6 +108,12 @@ class LinksState extends Equatable {
         links,
         campaigns,
         statuses,
+        isLoadingLinks,
+        isCreatingLink,
+        isDeletingLink,
+        isTogglingLink,
+        error,
+        successMessage,
       ];
 }
 

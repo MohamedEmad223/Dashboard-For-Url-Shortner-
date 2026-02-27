@@ -18,6 +18,14 @@ import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cub
 import 'package:dashboard_for_url_shortner/features/home/data/data_source/over_view_data_source.dart';
 import 'package:dashboard_for_url_shortner/features/home/data/repo/over_view_repo_impl.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/cubit/over_view_cubit.dart';
+import 'package:dashboard_for_url_shortner/features/links/data/data_source/links_data_source.dart';
+import 'package:dashboard_for_url_shortner/features/links/data/repo/links_repo_impl.dart';
+import 'package:dashboard_for_url_shortner/features/links/domain/repo/create_links_repo/links_repo.dart';
+import 'package:dashboard_for_url_shortner/features/links/domain/use_case/create_link_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/links/domain/use_case/delete_link_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/links/domain/use_case/get_all_links_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/links/domain/use_case/toggle_link_status_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/settings/data/data_source/log_out_data_source.dart';
 import 'package:dashboard_for_url_shortner/features/settings/data/repo/log_out_repo_impl.dart';
 import 'package:dashboard_for_url_shortner/features/settings/domain/log_out_repo.dart';
@@ -46,6 +54,47 @@ Future<void> setupGetIt() async {
   _setupLogoutDependencies();
   // overView
   _setUpOverViewDependencies();
+  // Links
+  _setupLinksDependencies();
+}
+
+void _setupLinksDependencies() {
+  // Data Source
+  getIt.registerLazySingleton<LinksDataSource>(
+    () => LinksDataSource(getIt<Dio>()),
+  );
+
+  // Repository
+  getIt.registerLazySingleton<linksRepo>(
+    () => LinksRepoImpl(getIt<LinksDataSource>()),
+  );
+
+  // Use Cases
+  getIt.registerLazySingleton<CreateLinkUseCase>(
+    () => CreateLinkUseCase(getIt<linksRepo>()),
+  );
+
+  getIt.registerLazySingleton<GetAllLinksUseCase>(
+    () => GetAllLinksUseCase(getIt<linksRepo>()),
+  );
+
+  getIt.registerLazySingleton<DeleteLinkUseCase>(
+    () => DeleteLinkUseCase(getIt<linksRepo>()),
+  );
+
+  getIt.registerLazySingleton<ToggleLinkStatusUseCase>(
+    () => ToggleLinkStatusUseCase(getIt<linksRepo>()),
+  );
+
+  // Cubit
+  getIt.registerLazySingleton<LinksCubit>(
+    () => LinksCubit(
+      getIt<CreateLinkUseCase>(),
+      getIt<GetAllLinksUseCase>(),
+      getIt<DeleteLinkUseCase>(),
+      getIt<ToggleLinkStatusUseCase>(),
+    ),
+  );
 }
 
 void _setUpOverViewDependencies() {
