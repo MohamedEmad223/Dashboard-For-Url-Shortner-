@@ -15,6 +15,9 @@ import 'package:dashboard_for_url_shortner/features/auth/signup/data/repo/sign_u
 import 'package:dashboard_for_url_shortner/features/auth/signup/domain/repo/sign_up_repo.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/domain/use_case/sign_up_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cubit/signup_cubit.dart';
+import 'package:dashboard_for_url_shortner/features/home/data/data_source/over_view_data_source.dart';
+import 'package:dashboard_for_url_shortner/features/home/data/repo/over_view_repo_impl.dart';
+import 'package:dashboard_for_url_shortner/features/home/presentation/cubit/over_view_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/settings/data/data_source/log_out_data_source.dart';
 import 'package:dashboard_for_url_shortner/features/settings/data/repo/log_out_repo_impl.dart';
 import 'package:dashboard_for_url_shortner/features/settings/domain/log_out_repo.dart';
@@ -24,6 +27,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/auth/forget_password/data/data_source/forget_password_data_source.dart';
+import '../../features/home/domain/repo/over_view_repo.dart';
+import '../../features/home/domain/use_case/over_view_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -40,6 +45,29 @@ Future<void> setupGetIt() async {
   _setupForgetPasswordDependencies();
   // Logout
   _setupLogoutDependencies();
+  // overView
+  _setUpOverViewDependencies();
+}
+
+void _setUpOverViewDependencies() {
+  
+  getIt.registerLazySingleton<OverViewDataSource>(
+
+        () => OverViewDataSource(getIt<Dio>()),
+  );
+
+  getIt.registerLazySingleton<OverViewRepo>(
+        () => OverViewRepoimpl(getIt<OverViewDataSource>()),
+  );
+
+  getIt.registerLazySingleton<OverViewUseCase>(
+        () => OverViewUseCase(getIt<OverViewRepo>()),
+  );
+
+  getIt.registerLazySingleton<OverViewCubit>(
+      ()=>OverViewCubit(getIt<OverViewUseCase>())
+  );
+
 }
 
 void _setupLogoutDependencies() {
