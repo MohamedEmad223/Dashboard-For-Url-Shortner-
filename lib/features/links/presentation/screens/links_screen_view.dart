@@ -1,4 +1,3 @@
-
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_state.dart';
@@ -6,10 +5,9 @@ import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/a
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/dropdown_overlay.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_app_bar.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_main_card.dart';
+import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/create_link_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../widgets/show_create_links_sheet.dart';
 
 class LinksScreenView extends StatefulWidget {
   const LinksScreenView({super.key});
@@ -24,6 +22,13 @@ class _LinksScreenViewState extends State<LinksScreenView> {
   final LayerLink _statusLink = LayerLink();
   OverlayEntry? _campaignOverlay;
   OverlayEntry? _statusOverlay;
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch links when screen initializes
+    context.read<LinksCubit>().getLinks();
+  }
 
   @override
   void dispose() {
@@ -53,7 +58,7 @@ class _LinksScreenViewState extends State<LinksScreenView> {
     context.read<LinksCubit>().toggleCampaignDropdown();
 
     _campaignOverlay = OverlayEntry(
-      builder:(_)=> DropdownOverlayContent(
+      builder:(_) => DropdownOverlayContent(
         link: _campaignLink,
         items: state.campaigns,
         selected: state.selectedCampaign,
@@ -75,11 +80,8 @@ class _LinksScreenViewState extends State<LinksScreenView> {
     _removeCampaignOverlay();
     context.read<LinksCubit>().toggleStatusDropdown();
 
-
-
-
     _statusOverlay = OverlayEntry(
-      builder:(_)=> DropdownOverlayContent(
+      builder:(_) => DropdownOverlayContent(
         link: _statusLink,
         items: state.statuses,
         selected: state.selectedStatus,
@@ -92,66 +94,148 @@ class _LinksScreenViewState extends State<LinksScreenView> {
     Overlay.of(ctx).insert(_statusOverlay!);
   }
 
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LinksCubit, LinksState>(
-      builder: (context, state) {
-        return GestureDetector(
-          onTap: () {
-            _removeCampaignOverlay();
-            _removeStatusOverlay();
-            context.read<LinksCubit>().closeAllDropdowns();
-          },
-          child: Scaffold(
-            backgroundColor: const Color(0xFFF4F7FA),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  // Top Bar
-                  const AnimatedCard(
-                    delayMs: 0,
-                    child: LinksAppBar(),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Main Card
-                  Expanded(
-                    child: AnimatedCard(
-                      delayMs: 100,
-                      child: LinksMainCard(
-                        searchController: _searchCtrl,
-                        campaignLink: _campaignLink,
-                        statusLink: _statusLink,
-                        selectedCampaign: state.selectedCampaign,
-                        selectedStatus: state.selectedStatus,
-                        showCampaignDropdown: state.showCampaignDropdown,
-                        showStatusDropdown: state.showStatusDropdown,
-                        onCampaignTap: () => _toggleCampaignDropdown(context, state),
-                        onStatusTap: () => _toggleStatusDropdown(context, state),
-                        links: state.filteredLinks,
-                        totalLinks: state.totalLinks,
-                        filteredLinksCount: state.filteredLinksCount,
-                        onSearchChanged: (query) {
-                          context.read<LinksCubit>().updateSearchQuery(query);
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ),
-            ),
-            floatingActionButton: AnimatedFab(
-              onTap: () => _showCreateLinkSheet(context),
-            ),
-          ),
-        );
-      },
+  void _showSuccessSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+      ),
     );
   }
 
-  void _showCreateLinkSheet(BuildContext context) {
-    ShowCreateLinksSheet();
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<LinksCubit, LinksState>(
+      listener: (context, state) {
+        // Show success messages
+        if (state.successMessage != null) {
+          _showSuccessSnackbar(state.successMessage!);
+          context.read<LinksCubit>().clearSuccessMessage();
+        }
+      },
+      child: BlocBuilder<LinksCubit, LinksState>(
+        builder: (context, state) {
+          return GestureDetector(
+            onTap: () {
+              _removeCampaignOverlay();
+              _removeStatusOverlay();
+              context.read<LinksCubit>().closeAllDropdowns();
+            },
+            child: Scaffold(
+              backgroundColor: const Color(0xFFF4F7FA),
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    const LinksAppBar(
+                      title: 'Your Links',
+                      subtitle: 'Manage and track your shortened URLs',
+                    ),
+                    const SizedBox(height: 16),
+                    // Loading indicator
+                    if (state.isLoadingLinks)
+                      const Expanded(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    else if (state.error != null)
+                      // Error state
+                      Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.error_outline,
+                                size: 60,
+                                color: Colors.red,
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                'Error Loading Links',
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 32),
+                                child: Text(
+                                  state.error!.message,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              ElevatedButton(
+                                onPressed: () {
+                                  context.read<LinksCubit>().clearError();
+                                  context.read<LinksCubit>().getLinks();
+                                },
+                                child: const Text('Retry'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    else
+                      // Main Card with content
+                      Expanded(
+                        child: AnimatedCard(
+                          delayMs: 100,
+                          child: LinksMainCard(
+                            searchController: _searchCtrl,
+                            campaignLink: _campaignLink,
+                            statusLink: _statusLink,
+                            selectedCampaign: state.selectedCampaign,
+                            selectedStatus: state.selectedStatus,
+                            showCampaignDropdown: state.showCampaignDropdown,
+                            showStatusDropdown: state.showStatusDropdown,
+                            onCampaignTap: () => _toggleCampaignDropdown(context, state),
+                            onStatusTap: () => _toggleStatusDropdown(context, state),
+                            links: state.filteredLinks,
+                            totalLinks: state.totalLinks,
+                            filteredLinksCount: state.filteredLinksCount,
+                            onSearchChanged: (query) {
+                              context.read<LinksCubit>().updateSearchQuery(query);
+                            },
+                            onDeleteLink: (linkId) {
+                              context.read<LinksCubit>().deleteLink(linkId.toString());
+                            },
+                            onToggleLinkStatus: (linkId) {
+                              context.read<LinksCubit>().toggleLinkStatus(linkId.toString());
+                            },
+                          ),
+                        ),
+                      ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              ),
+              floatingActionButton: AnimatedFab(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => CreateLinkBottomSheet(
+                      onCreateLink: (originalUrl, customAlias, title) {
+                        context.read<LinksCubit>().createLink(
+                          originalUrl: originalUrl,
+                          customAlias: customAlias,
+                          title: title,
+                        );
+                        Navigator.pop(context);
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

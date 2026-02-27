@@ -1,3 +1,4 @@
+import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/screens/links_screen_view.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class LinksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LinksCubit(),
+      create: (_) => getIt<LinksCubit>(),
       child:  LinksScreenView(),
     );
   }

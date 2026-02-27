@@ -6,4 +6,10 @@ class EndPoints {
   static const String resetPassword = 'reset-password';
   static const String logOut = 'logout';
   static const String overView = 'overview';
+  static const String generatelinks = 'generate';
+  static const String getLinks = 'links';
+
+  // Dynamic endpoints with ID parameter
+  static String deleteLink(int id) => 'delete-link/$id';
+  static String toggleLink(int id) => 'toggle-link/$id';
 }

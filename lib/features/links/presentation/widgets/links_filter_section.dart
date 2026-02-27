@@ -34,7 +34,7 @@ class LinksFilterSection extends StatelessWidget {
             child: CustomFilterChip(
               label: selectedStatus,
               icon: Icons.filter_list_rounded,
-              isActive: selectedStatus != 'جميع الحالات',
+              isActive: selectedStatus != 'All Statuses',
               isOpen: showStatusDropdown,
               onTap: onStatusTap,
             ),
@@ -45,7 +45,7 @@ class LinksFilterSection extends StatelessWidget {
             child: CustomFilterChip(
               label: selectedCampaign,
               icon: Icons.campaign_outlined,
-              isActive: selectedCampaign != 'جميع الحملات',
+              isActive: selectedCampaign != 'All Campaigns',
               isOpen: showCampaignDropdown,
               onTap: onCampaignTap,
             ),
