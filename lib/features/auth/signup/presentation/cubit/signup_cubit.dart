@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_for_url_shortner/core/errors/api/models/api_error_model.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_result.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/data/models/register_request_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/data/models/register_response_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/domain/use_case/sign_up_use_case.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'signup_state.dart';

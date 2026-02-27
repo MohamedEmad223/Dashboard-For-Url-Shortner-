@@ -12,7 +12,7 @@ part of 'sign_up_data_source.dart';
 
 class _SignUpDataSource implements SignUpDataSource {
   _SignUpDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://saas-link-management-api.fly.dev/api/';
+    baseUrl ??= 'https://unnormalising-nontangental-phylis.ngrok-free.dev/api/';
   }
 
   final Dio _dio;

@@ -12,7 +12,7 @@ part of 'login_data_source.dart';
 
 class _LoginDataSource implements LoginDataSource {
   _LoginDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://saas-link-management-api.fly.dev/api/';
+    baseUrl ??= 'https://unnormalising-nontangental-phylis.ngrok-free.dev/api/';
   }
 
   final Dio _dio;
