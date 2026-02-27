@@ -1,10 +1,9 @@
 import 'package:dashboard_for_url_shortner/core/widgets/main_header_of_pagesa_widgets.dart';
+import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/bloc_builder_for_over_view.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/lable_text_widget.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/over_view_body.dart';
 import 'package:flutter/material.dart';
 import '../widgets/header_banner.dart';
-import '../widgets/tip_card.dart';
-import '../widgets/activity_card.dart';
 import '../widgets/quick_stats_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -30,15 +29,11 @@ class HomeScreen extends StatelessWidget {
                   delegate: SliverChildListDelegate([
                     HeaderBanner(),
                     const SizedBox(height: 20),
-                    LableTextWidget(
-                      title: 'Overview',
-                    ),
-                    OverViewBody(),
+                    LableTextWidget(title: 'Overview'),
+                    BlocBuilderForOverView(),
                     const SizedBox(height: 20),
-                     const TipCard(),
-                   // const ActivityCard(),
                     const SizedBox(height: 14),
-                     const QuickStatsCard(),
+                    const QuickStatsCard(),
                   ]),
                 ),
               ),
