@@ -19,18 +19,19 @@ class StatRowWidget extends StatelessWidget {
     return Row(
       children: [
         Text(
-          value,
+          label,
           style: GoogleFonts.cairo(
-            color: valueColor,
-            fontWeight: FontWeight.w700,
+            color: const Color(0xFF4A5568),
             fontSize: 13,
           ),
         ),
         const Spacer(),
+
         Text(
-          label,
+          value,
           style: GoogleFonts.cairo(
-            color: const Color(0xFF4A5568),
+            color: valueColor,
+            fontWeight: FontWeight.w700,
             fontSize: 13,
           ),
         ),
