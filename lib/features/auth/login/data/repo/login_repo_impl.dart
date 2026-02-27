@@ -1,6 +1,8 @@
+import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
 import 'package:dashboard_for_url_shortner/core/errors/api/exceptions/api_exception.dart';
 import 'package:dashboard_for_url_shortner/core/errors/api/exceptions/exception_helper_methods.dart';
 import 'package:dashboard_for_url_shortner/core/errors/api/models/api_error_model.dart';
+import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_result.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/data/data_source/login_data_source.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/data/models/login_response_model.dart';
@@ -17,13 +19,14 @@ class LoginRepoImpl implements LoginRepo {
   Future<ApiResult<LoginResponseModel>> login(LoginUserData loginUserData) async {
     try {
       final response = await _loginDataSource.login(loginBody: loginUserData);
+      CacheHelper.setSecureData(key: ApiConstants.accessToken, value: response.data.accessToken);
       return ApiResult.success(response);
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
       ExceptionHelperMethods.handleDioExceptionsTypes(e);
       return ApiResult.failure(
-        ApiErrorModel(message: 'حدث خطأ غير متوقع', statusCode: 0),
+        ApiErrorModel(message: 'Un Excpected Error', statusCode: 0),
       );
     } catch (e) {
       return ApiResult.failure(

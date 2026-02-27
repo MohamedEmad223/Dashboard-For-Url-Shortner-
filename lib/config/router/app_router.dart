@@ -3,6 +3,7 @@ import 'package:dashboard_for_url_shortner/features/auth/forget_password/present
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/screens/reset_password_screen.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/screens/verify_code_screen.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen.dart';
+import 'package:dashboard_for_url_shortner/main.dart';
 import 'package:flutter/material.dart';
 import '../../features/auth/login/presentation/screens/login_screen.dart';
 
@@ -30,11 +31,17 @@ class AppRouter {
             email: arguments as String?,
           ),
         );
-        case Routes.resetPasswordScreen
-        :
+      case Routes.resetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) =>  ResetPasswordScreen(),
         );
+      case Routes.botNavBar:
+        return MaterialPageRoute(
+          builder: (_) => MainNavigation()
+        );
+
+
+
       default:
         return null;
     }

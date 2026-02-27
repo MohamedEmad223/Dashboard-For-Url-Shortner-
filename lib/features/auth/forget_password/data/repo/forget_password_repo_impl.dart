@@ -80,7 +80,9 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
   Future<ApiResult<ResetPasswordResponseModel>> resetPassword(ResetPasswordRequestModel resetPasswordRequestModel) async {
     try {
       final response = await _forgetPasswordDataSource.resetPassword(
-        resetPasswordRequestModel: resetPasswordRequestModel,
+        password: resetPasswordRequestModel.password,
+        passwordConfirmation: resetPasswordRequestModel.passwordConfirmation,
+        verifyToken: resetPasswordRequestModel.verifyToken,
       );
 
       if (response.status >= 400) {

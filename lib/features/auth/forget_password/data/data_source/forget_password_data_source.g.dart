@@ -12,7 +12,7 @@ part of 'forget_password_data_source.dart';
 
 class _ForgetPasswordDataSource implements ForgetPasswordDataSource {
   _ForgetPasswordDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://saas-link-management-api.fly.dev/api/';
+    baseUrl ??= 'https://unnormalising-nontangental-phylis.ngrok-free.dev/api/';
   }
 
   final Dio _dio;
@@ -88,18 +88,28 @@ class _ForgetPasswordDataSource implements ForgetPasswordDataSource {
 
   @override
   Future<ResetPasswordResponseModel> resetPassword({
-    required ResetPasswordRequestModel resetPasswordRequestModel,
+    required String password,
+    required String passwordConfirmation,
+    required String verifyToken,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(resetPasswordRequestModel.toJson());
+    final _data = {
+      'password': password,
+      'password_confirmation': passwordConfirmation,
+      'verify_token': verifyToken,
+    };
     final _options = _setStreamType<ResetPasswordResponseModel>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(
+            method: 'POST',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded',
+          )
           .compose(
             _dio.options,
-            'forgot-password/reset',
+            'reset-password',
             queryParameters: queryParameters,
             data: _data,
           )

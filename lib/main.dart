@@ -1,13 +1,15 @@
+import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
 import 'package:dashboard_for_url_shortner/config/router/app_router.dart';
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
+import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/links/presentation/screens/links_screen.dart';
 import 'features/qr/presentation/screen/qr_screen.dart';
-import 'features/settings/presentation/settings_screen.dart';
+import 'features/settings/presentation/screens/settings_screen.dart';
 import 'features/states/presentation/states_screen.dart';
 
 
@@ -19,11 +21,20 @@ void main() async {
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(const JocApp());
+  final token =
+  await CacheHelper.getSecureData(key: ApiConstants.accessToken);
+
+  final initialRoute =
+  token != null ? Routes.botNavBar : Routes.loginScreen;
+  runApp( JocApp(
+    initialRoute: initialRoute,
+  ));
 }
 
 class JocApp extends StatelessWidget {
-  const JocApp({super.key});
+  const JocApp({super.key, this.initialRoute});
+
+  final String? initialRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +51,7 @@ class JocApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      initialRoute: Routes.loginScreen,
+      initialRoute:initialRoute,
     );
   }
 }
@@ -174,11 +185,11 @@ class _BottomNav extends StatelessWidget {
   const _BottomNav({required this.currentIndex, required this.onTap});
 
   static const _items = [
-    {'icon': Icons.home_rounded, 'label': 'الرئيسية'},
-    {'icon': Icons.link_rounded, 'label': 'الروابط'},
+    {'icon': Icons.home_rounded, 'label': 'Home'},
+    {'icon': Icons.link_rounded, 'label': 'Links'},
     {'icon': Icons.qr_code_rounded, 'label': 'QR'},
-    {'icon': Icons.bar_chart_rounded, 'label': 'الإحصائيات'},
-    {'icon': Icons.settings_rounded, 'label': 'الإعدادات'},
+    {'icon': Icons.bar_chart_rounded, 'label': 'Stats'},
+    {'icon': Icons.settings_rounded, 'label': 'Settings'},
   ];
 
   @override

@@ -3,7 +3,6 @@ import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
 import 'package:dashboard_for_url_shortner/core/networking/end_points.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/forget_password_request_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/forget_password_response_model.dart';
-import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/reset_password_request_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/reset_password_response_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/verify_code_response_model.dart';
 import 'package:dio/dio.dart';
@@ -29,7 +28,12 @@ abstract class ForgetPasswordDataSource {
   });
 
   @POST(EndPoints.resetPassword)
+  @FormUrlEncoded()
   Future<ResetPasswordResponseModel> resetPassword({
-    @Body() required ResetPasswordRequestModel resetPasswordRequestModel,
+
+    @Field('password') required String password,
+    @Field('password_confirmation') required String passwordConfirmation,
+    @Field('verify_token') required String verifyToken,
+
   });
 }

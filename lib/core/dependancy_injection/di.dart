@@ -15,6 +15,11 @@ import 'package:dashboard_for_url_shortner/features/auth/signup/data/repo/sign_u
 import 'package:dashboard_for_url_shortner/features/auth/signup/domain/repo/sign_up_repo.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/domain/use_case/sign_up_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cubit/signup_cubit.dart';
+import 'package:dashboard_for_url_shortner/features/settings/data/data_source/log_out_data_source.dart';
+import 'package:dashboard_for_url_shortner/features/settings/data/repo/log_out_repo_impl.dart';
+import 'package:dashboard_for_url_shortner/features/settings/domain/log_out_repo.dart';
+import 'package:dashboard_for_url_shortner/features/settings/domain/log_out_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/settings/presentation/cubit/logout_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -33,6 +38,30 @@ Future<void> setupGetIt() async {
   _setupSignUpDependencies();
   // Forget Password
   _setupForgetPasswordDependencies();
+  // Logout
+  _setupLogoutDependencies();
+}
+
+void _setupLogoutDependencies() {
+
+  getIt.registerLazySingleton<LogOutDataSource>(
+        () => LogOutDataSource(getIt<Dio>()),
+  );
+
+  // Repository
+  getIt.registerLazySingleton<LogOutRepo>(
+        () => LogOutRepoImpl(getIt<LogOutDataSource>()),
+  );
+
+  // Use Case
+  getIt.registerLazySingleton<LogOutUseCase>(
+        () => LogOutUseCase(getIt<LogOutRepo>()),
+  );
+
+  // Cubit (factory so a new instance is created each time)
+  getIt.registerFactory<LogoutCubit>(
+        () => LogoutCubit(getIt<LogOutUseCase>()),
+  );
 }
 
 void _setupLoginDependencies() {
