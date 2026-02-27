@@ -5,4 +5,5 @@ class EndPoints {
   static const String verifyCode = 'forgot-password/verify';
   static const String resetPassword = 'reset-password';
   static const String logOut = 'logout';
+  static const String overView = 'overview';
 }

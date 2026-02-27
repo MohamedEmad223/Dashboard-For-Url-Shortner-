@@ -48,7 +48,7 @@ dependencies:
   intl: ^0.20.2
   dio: ^5.9.0
   easy_localization: ^3.0.8
-  json_annotation: ^4.9.0
+  json_annotation: ^4.11.0
   local_auth: ^3.0.0
   mockito: ^5.5.0
   pretty_dio_logger: ^1.4.0
