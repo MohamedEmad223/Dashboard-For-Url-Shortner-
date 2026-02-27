@@ -1,4 +1,5 @@
 import 'package:dashboard_for_url_shortner/core/widgets/main_header_of_pagesa_widgets.dart';
+import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/lable_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/animated_card.dart';
@@ -31,21 +32,8 @@ class HomeScreen extends StatelessWidget {
                   delegate: SliverChildListDelegate([
                     HeaderBanner(),
                     const SizedBox(height: 20),
-                    // Section title
-                    AnimatedCard(
-                      delayMs: 80,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: Text(
-                          'Overview',
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.cairo(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFF0F1E2E),
-                          ),
-                        ),
-                      ),
+                    LableTextWidget(
+                      title: 'Overview',
                     ),
 
                     // Stat cards — 2x2 grid
