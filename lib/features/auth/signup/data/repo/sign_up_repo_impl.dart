@@ -35,7 +35,7 @@ class SignUpRepoImpl implements SignUpRepo{
             return ApiResult.failure(e.apiErrorModel);
 
     }on DioException catch (e) {
-      ExceptionHelperMethods.handleDioExceptionsTypes(e);
+      ExceptionHelperMethods.handle(e);
       return ApiResult.failure(
         ApiErrorModel(message: e.toString(), statusCode: 0),
       );

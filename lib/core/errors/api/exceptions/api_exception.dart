@@ -7,3 +7,5 @@ class ApiException implements Exception {
     required this.apiErrorModel,
   });
 }
+
+

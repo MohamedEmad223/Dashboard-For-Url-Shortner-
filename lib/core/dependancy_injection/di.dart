@@ -31,6 +31,13 @@ import 'package:dashboard_for_url_shortner/features/settings/data/repo/log_out_r
 import 'package:dashboard_for_url_shortner/features/settings/domain/log_out_repo.dart';
 import 'package:dashboard_for_url_shortner/features/settings/domain/log_out_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/settings/presentation/cubit/logout_cubit.dart';
+import 'package:dashboard_for_url_shortner/features/states/data/repo/states_repo_impl.dart';
+import 'package:dashboard_for_url_shortner/features/states/data/states_data_source/states_data_source.dart';
+import 'package:dashboard_for_url_shortner/features/states/domain/repo/states_repo.dart';
+import 'package:dashboard_for_url_shortner/features/states/domain/use_case/get_clicks_over_time_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/states/domain/use_case/get_link_analytics_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/states/domain/use_case/get_recent_clicks_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/auth/forget_password/data/data_source/forget_password_data_source.dart';
@@ -56,6 +63,8 @@ Future<void> setupGetIt() async {
   _setUpOverViewDependencies();
   // Links
   _setupLinksDependencies();
+  // States
+  _setupStatesDependencies();
 }
 
 void _setupLinksDependencies() {
@@ -207,5 +216,39 @@ void _setupForgetPasswordDependencies() {
 
   getIt.registerFactory<VerifyCodeCubit>(
         () => VerifyCodeCubit(getIt<VerifyCodeUseCase>()),
+  );
+}
+
+void _setupStatesDependencies() {
+  // Data Source
+  getIt.registerLazySingleton<StatesDataSource>(
+    () => StatesDataSource(getIt<Dio>()),
+  );
+
+  // Repository
+  getIt.registerLazySingleton<StatesRepo>(
+    () => StatesRepoImpl(getIt<StatesDataSource>()),
+  );
+
+  // Use Case
+  getIt.registerLazySingleton<GetClicksOverTimeUseCase>(
+    () => GetClicksOverTimeUseCase(getIt<StatesRepo>()),
+  );
+
+  getIt.registerLazySingleton<GetLinkAnalyticsUseCase>(
+    () => GetLinkAnalyticsUseCase(getIt<StatesRepo>()),
+  );
+
+  getIt.registerLazySingleton<GetRecentClicksUseCase>(
+    () => GetRecentClicksUseCase(getIt<StatesRepo>()),
+  );
+
+  // Cubit
+  getIt.registerLazySingleton<StatsCubit>(
+    () => StatsCubit(
+      getIt<GetClicksOverTimeUseCase>(),
+      getIt<GetRecentClicksUseCase>(),
+      getIt<GetLinkAnalyticsUseCase>(),
+    ),
   );
 }

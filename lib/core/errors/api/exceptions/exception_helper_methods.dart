@@ -1,98 +1,117 @@
-import 'package:dashboard_for_url_shortner/core/errors/api/models/api_error_model.dart';
 import 'package:dio/dio.dart';
+import '../models/api_error_model.dart';
 import 'api_exception.dart';
 
 class ExceptionHelperMethods {
   ExceptionHelperMethods._();
 
-  static void handleDioExceptionsTypes(DioException e) {
+  static void handle(dynamic error) {
+    if (error is DioException) {
+      _handleDioException(error);
+    } else if (error is ApiException) {
+      throw error;
+    } else {
+      throw ApiException(
+        apiErrorModel: ApiErrorModel(
+          message: 'An unexpected error occurred.',
+          statusCode: 0,
+        ),
+      );
+    }
+  }
+
+  static void _handleDioException(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.connectionError:
-        throwApiException(noInternetErrorMessage);
-        break;
-
-      case DioExceptionType.badCertificate:
-      case DioExceptionType.cancel:
-      case DioExceptionType.unknown:
-        throwApiException(connectionErrorMessage);
+        _throwNoInternet();
         break;
 
       case DioExceptionType.badResponse:
-        badResponseErrorHandle(e);
+        _handleBadResponse(e);
         break;
 
+      case DioExceptionType.cancel:
+      case DioExceptionType.badCertificate:
+      case DioExceptionType.unknown:
       default:
-        throwApiException(connectionErrorMessage);
+        _throwConnectionError();
     }
   }
 
-  static void badResponseErrorHandle(DioException e) {
-    final statusCode = e.response?.statusCode ?? 0;
+  static void _handleBadResponse(DioException e) {
+    final response = e.response;
+    final statusCode = response?.statusCode ?? 0;
+    final data = response?.data;
 
+    if (data is Map<String, dynamic>) {
+      throw ApiException(
+        apiErrorModel: ApiErrorModel.fromJson({
+          ...data,
+          'statusCode': statusCode,
+        }),
+      );
+    }
+
+    if (data is String) {
+      throw ApiException(
+        apiErrorModel: ApiErrorModel(
+          message: data,
+          statusCode: statusCode,
+        ),
+      );
+    }
+
+    throw ApiException(
+      apiErrorModel: ApiErrorModel(
+        message: _mapStatusCodeMessage(statusCode),
+        statusCode: statusCode,
+      ),
+    );
+  }
+
+  static String _mapStatusCodeMessage(int statusCode) {
     switch (statusCode) {
       case 400:
+        return 'Invalid request.';
       case 401:
+        return 'Unauthorized. Please log in again.';
       case 403:
+        return 'You do not have permission to perform this action.';
       case 404:
+        return 'Requested resource was not found.';
       case 409:
+        return 'Data conflict occurred.';
+      case 413:
+        return 'Request entity is too large.';
       case 422:
+        return 'Validation error occurred.';
+      case 500:
       case 502:
       case 504:
-      case 302:
-        badResponseExceptionThrow(e);
-        break;
-
-      case 413:
-        throw ApiException(
-          apiErrorModel: ApiErrorModel(
-            message: "Request entity too large",
-            statusCode: statusCode,
-          ),
-        );
-
+        return 'Server error. Please try again later.';
       default:
-        badResponseExceptionThrow(e);
+        return 'An unexpected error occurred.';
     }
   }
 
-  static void badResponseExceptionThrow(DioException e) {
-    if (e.response != null && e.response!.data != null) {
-      final statusCode = e.response?.statusCode ?? 0;
-
-      if (e.response!.data is String) {
-        throw ApiException(
-          apiErrorModel: ApiErrorModel(
-            message: e.response!.data.toString(),
-            statusCode: statusCode,
-          ),
-        );
-      } else if (e.response!.data is Map<String, dynamic>) {
-        throw ApiException(
-          apiErrorModel: ApiErrorModel.fromJson(e.response!.data),
-        );
-      } else {
-        throwApiException(connectionErrorMessage);
-      }
-    } else {
-      throwApiException(connectionErrorMessage);
-    }
+  static void _throwNoInternet() {
+    throw ApiException(
+      apiErrorModel: ApiErrorModel(
+        message: 'No internet connection. Please check your network.',
+        statusCode: 0,
+      ),
+    );
   }
 
-  static void throwApiException(Map<String, dynamic> error) {
-    throw ApiException(apiErrorModel: ApiErrorModel.fromJson(error));
+  static void _throwConnectionError() {
+    throw ApiException(
+      apiErrorModel: ApiErrorModel(
+        message: 'Connection failed. Please try again later.',
+        statusCode: 0,
+      ),
+    );
   }
-
-  static Map<String, dynamic> get connectionErrorMessage => {
-    'message': 'Try again later',
-    'statusCode': 0,
-  };
-
-  static Map<String, dynamic> get noInternetErrorMessage => {
-    'message':
-        'No Internet Connection, Please check your connection and try again',
-    'statusCode': 0,
-  };
 }

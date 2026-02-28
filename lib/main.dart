@@ -10,7 +10,7 @@ import 'features/home/presentation/screens/home_screen.dart';
 import 'features/links/presentation/screens/links_screen.dart';
 import 'features/qr/presentation/screen/qr_screen.dart';
 import 'features/settings/presentation/screens/settings_screen.dart';
-import 'features/states/presentation/states_screen.dart';
+import 'features/states/presentation/screens/states_screen.dart';
 
 
 

@@ -6,10 +6,10 @@ class DateRangeChip extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   static const List<String> ranges = [
-    'آخر 7 أيام',
-    'آخر 30 يوم',
-    'آخر 90 يوم',
-    'كل الأوقات',
+    'Last 7 Days',
+    'Last 30 Days',
+    'Last 90 Days',
+    'All Time',
   ];
 
   const DateRangeChip({
@@ -67,7 +67,7 @@ class _DateRangeChipState extends State<DateRangeChip> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.10),
+                        color: Colors.black.withValues(alpha: 0.10),
                         blurRadius: 16,
                         offset: const Offset(0, 6),
                       ),
@@ -155,7 +155,7 @@ class _DateRangeChipState extends State<DateRangeChip> {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.04),
+                color: Colors.black.withValues(alpha: 0.04),
                 blurRadius: 6,
               ),
             ],
