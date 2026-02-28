@@ -7,68 +7,66 @@ import 'package:google_fonts/google_fonts.dart';
 class VisitsOverTimeChart extends StatelessWidget {
   final String selectedRange;
 
-  const VisitsOverTimeChart({super.key, this.selectedRange = 'آخر 30 يوم'});
+  /// When provided, these override the dummy-generated data.
+  final List<FlSpot>? realSpots;
+  final List<String>? realLabels;
 
-  // ── Arabic month names ──────────────────────────────────────
-  static const _arabicMonths = {
-    1: 'يناير',
-    2: 'فبراير',
-    3: 'مارس',
-    4: 'أبريل',
-    5: 'مايو',
-    6: 'يونيو',
-    7: 'يوليو',
-    8: 'أغسطس',
-    9: 'سبتمبر',
-    10: 'أكتوبر',
-    11: 'نوفمبر',
-    12: 'ديسمبر',
+  const VisitsOverTimeChart({
+    super.key,
+    this.selectedRange = 'Last 30 Days',
+    this.realSpots,
+    this.realLabels,
+  });
+
+  // ── English month names ──────────────────────────────────────
+  static const _months = {
+    1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr',
+    5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug',
+    9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec',
   };
 
   static String _formatDate(DateTime date, {bool withYear = false}) {
-    final month = _arabicMonths[date.month]!;
-    if (withYear) return '$month ${date.year % 100}';
+    final month = _months[date.month]!;
+    if (withYear) return '$month \'${date.year % 100}';
     return '$month ${date.day}';
   }
 
   // ── Generate spots & labels dynamically ─────────────────────
   int get _totalDays {
     switch (selectedRange) {
-      case 'آخر 7 أيام':
+      case 'Last 7 Days':
         return 7;
-      case 'آخر 90 يوم':
+      case 'Last 90 Days':
         return 90;
-      case 'كل الأوقات':
+      case 'All Time':
         return 365;
       default:
         return 30;
     }
   }
 
-  /// How many data points to show on the chart
   int get _pointCount {
     switch (selectedRange) {
-      case 'آخر 7 أيام':
-        return 7; // 1 point per day
-      case 'آخر 90 يوم':
-        return 12; // ~weekly
-      case 'كل الأوقات':
-        return 15; // ~monthly
+      case 'Last 7 Days':
+        return 7;
+      case 'Last 90 Days':
+        return 12;
+      case 'All Time':
+        return 15;
       default:
-        return 30; // 1 point per day
+        return 30;
     }
   }
 
-  /// How many labels to show on x-axis
   int get _labelCount {
     switch (selectedRange) {
-      case 'آخر 7 أيام':
+      case 'Last 7 Days':
         return 7;
-      case 'آخر 30 يوم':
+      case 'Last 30 Days':
         return 8;
-      case 'آخر 90 يوم':
+      case 'Last 90 Days':
         return 7;
-      case 'كل الأوقات':
+      case 'All Time':
         return 7;
       default:
         return 8;
@@ -87,7 +85,7 @@ class VisitsOverTimeChart extends StatelessWidget {
     final now = DateTime.now();
     final total = _totalDays;
     final count = _labelCount;
-    final withYear = selectedRange == 'كل الأوقات';
+    final withYear = selectedRange == 'All Time';
 
     return List.generate(count, (i) {
       final daysBack = total - (total * i / (count - 1)).round();
@@ -97,7 +95,6 @@ class VisitsOverTimeChart extends StatelessWidget {
   }
 
   // ── Helpers ─────────────────────────────────────────────────
-  double get _maxX => (_pointCount - 1).toDouble();
 
   double _maxY(List<FlSpot> spots) {
     double m = 0;
@@ -109,18 +106,16 @@ class VisitsOverTimeChart extends StatelessWidget {
 
   double _yInterval(double maxY) => (maxY / 4).ceilToDouble().clamp(5, 100);
 
-  double get _bottomInterval {
-    if (_pointCount <= 7) return 1;
-    return (_pointCount / 6).ceilToDouble();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final spots = _generateSpots();
-    final labels = _generateLabels();
-    final maxX = _maxX;
+    final spots = realSpots ?? _generateSpots();
+    final labels = realLabels ?? _generateLabels();
+    final maxX = spots.isEmpty ? 1.0 : (spots.length - 1).toDouble();
     final maxY = _maxY(spots);
     final yInterval = _yInterval(maxY);
+    final bottomInterval =
+        spots.length <= 7 ? 1.0 : (spots.length / 6).ceilToDouble();
 
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 18, 16, 12),
@@ -129,7 +124,7 @@ class VisitsOverTimeChart extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 3),
           ),
@@ -151,7 +146,7 @@ class VisitsOverTimeChart extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                'الزيارات عبر الزمن',
+                'Visits Over Time',
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
@@ -175,7 +170,7 @@ class VisitsOverTimeChart extends StatelessWidget {
           SizedBox(
             height: 180,
             child: LineChart(
-              key: ValueKey(selectedRange),
+              key: ValueKey('$selectedRange-${spots.length}'),
               LineChartData(
                 gridData: FlGridData(
                   show: true,
@@ -208,7 +203,7 @@ class VisitsOverTimeChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      interval: _bottomInterval,
+                      interval: bottomInterval,
                       reservedSize: 28,
                       getTitlesWidget: (value, _) {
                         final idx =
@@ -257,8 +252,8 @@ class VisitsOverTimeChart extends StatelessWidget {
                       show: true,
                       gradient: LinearGradient(
                         colors: [
-                          const Color(0xFF0B8A9A).withOpacity(0.18),
-                          const Color(0xFF0B8A9A).withOpacity(0.0),
+                          const Color(0xFF0B8A9A).withValues(alpha: 0.18),
+                          const Color(0xFF0B8A9A).withValues(alpha: 0.0),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -271,7 +266,7 @@ class VisitsOverTimeChart extends StatelessWidget {
                     getTooltipColor: (_) => const Color(0xFF0F1E2E),
                     getTooltipItems: (spots) => spots
                         .map((s) => LineTooltipItem(
-                              '${s.y.toInt()} زيارة',
+                              '${s.y.toInt()} visits',
                               GoogleFonts.cairo(
                                 color: Colors.white,
                                 fontSize: 12,

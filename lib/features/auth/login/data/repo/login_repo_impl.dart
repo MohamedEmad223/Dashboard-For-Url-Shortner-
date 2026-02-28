@@ -24,7 +24,7 @@ class LoginRepoImpl implements LoginRepo {
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
-      ExceptionHelperMethods.handleDioExceptionsTypes(e);
+      ExceptionHelperMethods.handle(e);
       return ApiResult.failure(
         ApiErrorModel(message: 'Un Excpected Error', statusCode: 0),
       );

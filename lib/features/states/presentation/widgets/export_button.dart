@@ -53,7 +53,7 @@ class _ExportButtonState extends State<ExportButton>
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF0B8A9A).withOpacity(0.3),
+                color: const Color(0xFF0B8A9A).withValues(alpha: 0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 3),
               ),
@@ -66,7 +66,7 @@ class _ExportButtonState extends State<ExportButton>
                   color: Colors.white, size: 16),
               const SizedBox(width: 6),
               Text(
-                'تصدير',
+                'Export',
                 style: GoogleFonts.cairo(
                   color: Colors.white,
                   fontSize: 13,

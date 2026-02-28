@@ -20,7 +20,7 @@ class LinksRepoImpl implements linksRepo {
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
-      ExceptionHelperMethods.handleDioExceptionsTypes(e);
+      ExceptionHelperMethods.handle(e);
       return ApiResult.failure(
         ApiErrorModel(message: 'Unexpected Error', statusCode: 0),
       );
@@ -38,7 +38,7 @@ class LinksRepoImpl implements linksRepo {
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
-      ExceptionHelperMethods.handleDioExceptionsTypes(e);
+      ExceptionHelperMethods.handle(e);
       return ApiResult.failure(
         ApiErrorModel(message: 'Unexpected Error', statusCode: 0),
       );
@@ -59,7 +59,7 @@ class LinksRepoImpl implements linksRepo {
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
-      ExceptionHelperMethods.handleDioExceptionsTypes(e);
+      ExceptionHelperMethods.handle(e);
       return ApiResult.failure(
         ApiErrorModel(message: 'Unexpected Error', statusCode: 0),
       );
@@ -77,7 +77,7 @@ class LinksRepoImpl implements linksRepo {
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
-      ExceptionHelperMethods.handleDioExceptionsTypes(e);
+      ExceptionHelperMethods.handle(e);
       return ApiResult.failure(
         ApiErrorModel(message: 'Unexpected Error', statusCode: 0),
       );

@@ -21,7 +21,7 @@ class TopLinksCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 3),
           ),
@@ -35,7 +35,7 @@ class TopLinksCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'أفضل الروابط أداءً',
+              'Top Performing Links',
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
@@ -78,7 +78,7 @@ class TopLinksCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'لا توجد بيانات بعد',
+              'No data yet',
               style: GoogleFonts.cairo(
                 fontSize: 13,
                 color: const Color(0xFF8A94A6),

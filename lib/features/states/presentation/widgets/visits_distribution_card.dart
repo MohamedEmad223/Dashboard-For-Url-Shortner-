@@ -27,7 +27,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 3),
           ),
@@ -41,7 +41,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'توزيع الزيارات',
+                'Visit Distribution',
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
@@ -86,7 +86,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                   ),
                 ),
                 Text(
-                  'إجمالي',
+                  'Total',
                   style: GoogleFonts.cairo(
                     fontSize: 13,
                     color: const Color(0xFF8A94A6),
@@ -103,10 +103,10 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
 
   Widget _buildChart() {
     final sections = [
-      _ChartSection('مباشر', 45, const Color(0xFF0B8A9A)),
-      _ChartSection('بحث', 30, const Color(0xFF059669)),
-      _ChartSection('إحالة', 15, const Color(0xFF7C3AED)),
-      _ChartSection('أخرى', 10, const Color(0xFFF97316)),
+      _ChartSection('Direct', 45, const Color(0xFF0B8A9A)),
+      _ChartSection('Search', 30, const Color(0xFF059669)),
+      _ChartSection('Referral', 15, const Color(0xFF7C3AED)),
+      _ChartSection('Other', 10, const Color(0xFFF97316)),
     ];
 
     return Column(
@@ -160,7 +160,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                   Text(
                     _touchedIndex >= 0
                         ? sections[_touchedIndex].label
-                        : 'إجمالي',
+                        : 'Total',
                     style: GoogleFonts.cairo(
                       fontSize: 11,
                       color: const Color(0xFF8A94A6),

@@ -17,7 +17,7 @@ class VisitsByCampaignCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 12,
             offset: const Offset(0, 3),
           ),
@@ -32,7 +32,7 @@ class VisitsByCampaignCard extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  'الزيارات حسب الحملة',
+                  'Visits by Campaign',
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
@@ -77,7 +77,7 @@ class VisitsByCampaignCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'لا توجد حملات بعد',
+              'No campaigns yet',
               style: GoogleFonts.cairo(
                 fontSize: 13,
                 color: const Color(0xFF8A94A6),
@@ -91,10 +91,10 @@ class VisitsByCampaignCard extends StatelessWidget {
 
   Widget _buildChart() {
     final data = [
-      _BarData('حملة 1', 40),
-      _BarData('حملة 2', 65),
-      _BarData('حملة 3', 30),
-      _BarData('حملة 4', 55),
+      _BarData('Camp 1', 40),
+      _BarData('Camp 2', 65),
+      _BarData('Camp 3', 30),
+      _BarData('Camp 4', 55),
     ];
 
     return SizedBox(

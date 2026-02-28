@@ -12,4 +12,9 @@ class EndPoints {
   // Dynamic endpoints with ID parameter
   static String deleteLink(int id) => 'delete-link/$id';
   static String toggleLink(int id) => 'toggle-link/$id';
+
+
+  static const String clicksOverTime = 'clicks-over-time';
+  static const String recentClicks = 'recent-clicks';
+  static String linkAnalytics(int id) => 'links/$id';
 }
