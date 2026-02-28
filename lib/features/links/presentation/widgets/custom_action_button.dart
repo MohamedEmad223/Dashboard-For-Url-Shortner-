@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomActionButton extends StatelessWidget {
   final IconData icon;
@@ -8,12 +9,12 @@ class CustomActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(6),
+      padding:  EdgeInsets.all(6.r),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(7.r),
       ),
-      child: Icon(icon, size: 15, color: color),
+      child: Icon(icon, size: 15.r, color: color),
     );
   }
 }

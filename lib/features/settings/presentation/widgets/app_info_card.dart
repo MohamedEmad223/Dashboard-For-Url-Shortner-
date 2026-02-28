@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppInfoCard extends StatelessWidget {
   const AppInfoCard({super.key});
 
   static const _rows = [
-    {'label': 'Version', 'value': '1.0.0', 'isLink': false},
+    {'label': 'Version', 'value': '1.0', 'isLink': false},
     {'label': 'Domain', 'value': 'joc.li', 'isLink': true},
     {'label': 'Platform', 'value': 'Jo Academy', 'isLink': false},
     {
@@ -22,11 +23,11 @@ class AppInfoCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3),
             ),
           ],
@@ -42,42 +43,42 @@ class AppInfoCard extends StatelessWidget {
                     'App Information',
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: const Color(0xFF0F1E2E),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                   SizedBox(width: 8.w),
                   Container(
-                    padding: const EdgeInsets.all(7),
+                    padding:  EdgeInsets.all(7.r),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF4F7FA),
-                      borderRadius: BorderRadius.circular(9),
+                      borderRadius: BorderRadius.circular(9.r),
                     ),
-                    child: const Icon(
+                    child:  Icon(
                       Icons.info_outline_rounded,
-                      size: 17,
+                      size: 17.r,
                       color: Color(0xFF8A94A6),
                     ),
                   ),
                 ],
               ),
             ),
-            const Divider(height: 1, color: Color(0xFFF0F3F7)),
+             Divider(height: 1.h, color: Color(0xFFF0F3F7)),
             ..._rows.asMap().entries.map((e) {
               final isLast = e.key == _rows.length - 1;
               final row = e.value;
               return Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 14),
+                    padding:  EdgeInsets.symmetric(
+                        horizontal: 18.w, vertical: 14.h),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           row['label'] as String,
                           style: GoogleFonts.cairo(
-                            fontSize: 13,
+                            fontSize: 13.sp,
                             color: const Color(0xFF8A94A6),
                             fontWeight: FontWeight.w500,
                           ),
@@ -89,7 +90,7 @@ class AppInfoCard extends StatelessWidget {
                             row['value'] as String,
                             textAlign: TextAlign.right,
                             style: GoogleFonts.cairo(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               fontWeight: FontWeight.w600,
                               color: row['isLink'] == true
                                   ? const Color(0xFF0B8A9A)
@@ -102,8 +103,8 @@ class AppInfoCard extends StatelessWidget {
                     ),
                   ),
                   if (!isLast)
-                    const Divider(
-                      height: 1,
+                     Divider(
+                      height: 1.h,
                       color: Color(0xFFF0F3F7),
                       indent: 18,
                       endIndent: 18,

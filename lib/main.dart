@@ -1,18 +1,17 @@
-import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
+﻿import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
 import 'package:dashboard_for_url_shortner/config/router/app_router.dart';
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'features/home/presentation/screens/home_screen.dart';
 import 'features/links/presentation/screens/links_screen.dart';
 import 'features/qr/presentation/screen/qr_screen.dart';
 import 'features/settings/presentation/screens/settings_screen.dart';
 import 'features/states/presentation/screens/states_screen.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +21,11 @@ void main() async {
     statusBarIconBrightness: Brightness.dark,
   ));
   final token =
-  await CacheHelper.getSecureData(key: ApiConstants.accessToken);
+      await CacheHelper.getSecureData(key: ApiConstants.accessToken);
 
   final initialRoute =
-  token != null ? Routes.botNavBar : Routes.loginScreen;
-  runApp( JocApp(
-    initialRoute: initialRoute,
-  ));
+      token != null ? Routes.botNavBar : Routes.loginScreen;
+  runApp(JocApp(initialRoute: initialRoute));
 }
 
 class JocApp extends StatelessWidget {
@@ -38,20 +35,27 @@ class JocApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'جو أكاديمي',
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRouter().generateRoute,
-      theme: ThemeData(
-        useMaterial3: true,
-        textTheme: GoogleFonts.cairoTextTheme(),
-        scaffoldBackgroundColor: const Color(0xFFF4F7FA),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF0B8A9A),
-          brightness: Brightness.light,
+    return ScreenUtilInit(
+      // Design canvas = 390 × 844 (iPhone 14 logical pixels)
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) => MaterialApp(
+        title: 'جو أكاديمي',
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: AppRouter().generateRoute,
+        theme: ThemeData(
+          useMaterial3: true,
+          textTheme: GoogleFonts.cairoTextTheme(),
+          scaffoldBackgroundColor: const Color(0xFFF4F7FA),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF0B8A9A),
+            brightness: Brightness.light,
+          ),
         ),
+        initialRoute: initialRoute,
+        home: child,
       ),
-      initialRoute:initialRoute,
     );
   }
 }
@@ -152,24 +156,24 @@ class _AnimatedFabState extends State<_AnimatedFab>
       child: ScaleTransition(
         scale: _scale,
         child: Container(
-          width: 56,
-          height: 56,
+          width: 56.w,
+          height: 56.h,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               colors: [Color(0xFF076475), Color(0xFF13C5D8)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(18.r),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF0B8A9A).withOpacity(0.45),
-                blurRadius: 16,
+                blurRadius: 16.r,
                 offset: const Offset(0, 6),
               ),
             ],
           ),
-          child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
+          child:  Icon(Icons.add_rounded, color: Colors.white, size: 28.r),
         ),
       ),
     );
@@ -200,15 +204,15 @@ class _BottomNav extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
+            blurRadius: 20.r,
             offset: const Offset(0, -4),
           ),
         ],
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius:  BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+          padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _items.asMap().entries.map((e) {
@@ -285,8 +289,7 @@ class _NavItemState extends State<_NavItem>
     return GestureDetector(
       onTap: widget.onTap,
       behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 72,
+      child: SizedBox(width: 72.w,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -296,25 +299,25 @@ class _NavItemState extends State<_NavItem>
                 duration: const Duration(milliseconds: 220),
                 curve: Curves.easeOutCubic,
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                 EdgeInsets.symmetric(horizontal: 16.w, vertical: 7.h),
                 decoration: BoxDecoration(
                   color: widget.isSelected
                       ? const Color(0xFFE0F5F7)
                       : Colors.transparent,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(14.r),
                 ),
                 child: Icon(
                   widget.icon,
-                  size: 22,
+                  size: 22.r,
                   color: widget.isSelected ? teal : gray,
                 ),
               ),
             ),
-            const SizedBox(height: 3),
+             SizedBox(height: 3.h),
             AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 200),
               style: GoogleFonts.cairo(
-                fontSize: 11,
+                fontSize: 11.sp,
                 fontWeight: widget.isSelected
                     ? FontWeight.w700
                     : FontWeight.w400,

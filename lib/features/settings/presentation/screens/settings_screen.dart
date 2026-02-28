@@ -1,4 +1,4 @@
-
+﻿
 import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
 import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
@@ -11,6 +11,7 @@ import 'package:dashboard_for_url_shortner/features/settings/presentation/cubit/
 import 'package:dashboard_for_url_shortner/features/settings/presentation/widgets/app_info_card.dart';
 import 'package:dashboard_for_url_shortner/features/settings/presentation/widgets/log_out_bloc_listener.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {

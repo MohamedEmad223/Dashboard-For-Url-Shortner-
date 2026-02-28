@@ -1,5 +1,6 @@
-import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/color_row.dart';
+﻿import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/color_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'color_picker_sheet.dart';
@@ -33,14 +34,14 @@ class ColorCustomizationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3)),
         ],
       ),
@@ -54,45 +55,42 @@ class ColorCustomizationCard extends StatelessWidget {
               Text('تخصيص الألوان',
                   style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       color: const Color(0xFF0F1E2E))),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(7),
+                padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFF3EEFF),
-                    borderRadius: BorderRadius.circular(9)),
-                child: const Icon(Icons.palette_outlined,
-                    size: 17, color: Color(0xFF7C3AED)),
+                    borderRadius: BorderRadius.circular(9.r)),
+                child:  Icon(Icons.palette_outlined,
+                    size: 17.r, color: Color(0xFF7C3AED)),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
           // QR Color row
           ColorRow(
             label: 'لون QR Code',
             color: qrColor,
             onTap: () => _showColorPicker(context, qrColor, onQrColorChanged),
           ),
-          const SizedBox(height: 12),
-          // BG Color row
+           SizedBox(height: 12.h),
           ColorRow(
             label: 'لون الخلفية',
             color: bgColor,
             onTap: () => _showColorPicker(context, bgColor, onBgColorChanged),
           ),
-          const SizedBox(height: 16),
-          // Quick colors label
+           SizedBox(height: 16.h),
           Align(
             alignment: Alignment.centerRight,
             child: Text('ألوان سريعة',
                 style: GoogleFonts.cairo(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     color: const Color(0xFF8A94A6),
                     fontWeight: FontWeight.w500)),
           ),
-          const SizedBox(height: 10),
-          // Quick color swatches
+           SizedBox(height: 10.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: _quickColors.map((c) {
@@ -101,9 +99,9 @@ class ColorCustomizationCard extends StatelessWidget {
                 onTap: () => onQrColorChanged(c),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 180),
-                  margin: const EdgeInsets.only(left: 8),
-                  width: 28,
-                  height: 28,
+                  margin:  EdgeInsets.only(left: 8.w),
+                  width: 28.w,
+                  height: 28.h,
                   decoration: BoxDecoration(
                     color: c,
                     shape: BoxShape.circle,
@@ -117,14 +115,14 @@ class ColorCustomizationCard extends StatelessWidget {
                         ? [
                       BoxShadow(
                           color: c.withOpacity(0.4),
-                          blurRadius: 8,
+                          blurRadius: 8.r,
                           offset: const Offset(0, 2))
                     ]
                         : [],
                   ),
                   child: isSelected
-                      ? const Icon(Icons.check_rounded,
-                      color: Colors.white, size: 14)
+                      ?  Icon(Icons.check_rounded,
+                      color: Colors.white, size: 14.r)
                       : null,
                 ),
               );

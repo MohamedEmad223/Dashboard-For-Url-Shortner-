@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/config/router/routes.dart';
+﻿import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/verify_code_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyCodeBlocListeners extends StatelessWidget {
@@ -22,8 +23,8 @@ class VerifyCodeBlocListeners extends StatelessWidget {
         content: Text(message),
         backgroundColor: backgroundColor,
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin:  EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       ),
     );
   }

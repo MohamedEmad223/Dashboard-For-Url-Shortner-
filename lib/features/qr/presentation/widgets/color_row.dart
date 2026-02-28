@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ColorRow extends StatelessWidget {
@@ -14,42 +15,41 @@ class ColorRow extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+        padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 11.h),
         decoration: BoxDecoration(
           color: const Color(0xFFF8FAFC),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: const Color(0xFFEDF0F4)),
-        ),
-        child: Row(
-          children: [
-            // Color swatch
-            Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: const Color(0xFFDDE3EC)),
+         ),
+        child: Expanded(
+          child: Row(
+            children: [
+              Container(
+                width: 30.w,
+                height: 30.h,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(8.r),
+                  border: Border.all(color: const Color(0xFFDDE3EC)),
+                ),
               ),
-            ),
-            const SizedBox(width: 10),
-            // Hex code
-            Text(
-              '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
-              style: GoogleFonts.robotoMono(
-                fontSize: 13,
-                color: const Color(0xFF4A5568),
-                fontWeight: FontWeight.w500,
+               SizedBox(width: 10.w),
+              Text(
+                '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
+                style: GoogleFonts.robotoMono(
+                  fontSize: 13.sp,
+                  color: const Color(0xFF4A5568),
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            const Spacer(),
-            // Label
-            Text(label,
-                style: GoogleFonts.cairo(
-                    fontSize: 13,
-                    color: const Color(0xFF4A5568),
-                    fontWeight: FontWeight.w600)),
-          ],
+              const Spacer(),
+              Text(label,
+                  style: GoogleFonts.cairo(
+                      fontSize: 13.sp,
+                      color: const Color(0xFF4A5568),
+                      fontWeight: FontWeight.w600)),
+            ],
+          ),
         ),
       ),
     );

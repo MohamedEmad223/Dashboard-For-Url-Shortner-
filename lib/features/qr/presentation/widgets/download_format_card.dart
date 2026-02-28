@@ -1,5 +1,6 @@
-import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/download_format_option.dart';
+﻿import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/download_format_option.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum DownloadFormat { png, svg, jpeg }
@@ -38,14 +39,14 @@ class DownloadFormatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3)),
         ],
       ),
@@ -59,25 +60,25 @@ class DownloadFormatCard extends StatelessWidget {
               Text('تنسيق التنزيل',
                   style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       color: const Color(0xFF0F1E2E))),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(7),
+                padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFFFF0E6),
-                    borderRadius: BorderRadius.circular(9)),
-                child: const Icon(Icons.download_rounded,
-                    size: 17, color: Color(0xFFF97316)),
+                    borderRadius: BorderRadius.circular(9.r)),
+                child:  Icon(Icons.download_rounded,
+                    size: 17.r, color: Color(0xFFF97316)),
               ),
             ],
           ),
-          const SizedBox(height: 6),
+           SizedBox(height: 6.h),
           Text('اختر صيغة الملف المناسبة لاحتياجاتك',
               textAlign: TextAlign.right,
               style: GoogleFonts.cairo(
-                  fontSize: 12, color: const Color(0xFF8A94A6))),
-          const SizedBox(height: 14),
+                  fontSize: 12.sp, color: const Color(0xFF8A94A6))),
+           SizedBox(height: 14.h),
           // Format options
           Row(
             children: _formats.map((f) {
@@ -98,31 +99,30 @@ class DownloadFormatCard extends StatelessWidget {
               );
             }).toList(),
           ),
-          const SizedBox(height: 12),
-          // Hint banner
+           SizedBox(height: 12.h),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 250),
             child: Container(
               key: ValueKey(selectedFormat),
               width: double.infinity,
               padding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+               EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
               decoration: BoxDecoration(
                 color: const Color(0xFFEFF6FF),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.r),
                 border:
-                Border.all(color: const Color(0xFFBFDBFE), width: 1),
+                Border.all(color: const Color(0xFFBFDBFE), width: 1.w),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline_rounded,
-                      size: 15, color: Color(0xFF2563EB)),
-                  const SizedBox(width: 8),
+                   Icon(Icons.info_outline_rounded,
+                      size: 15.r, color: Color(0xFF2563EB)),
+                   SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
                       _getHint(selectedFormat),
                       style: GoogleFonts.cairo(
-                          fontSize: 12, color: const Color(0xFF2563EB)),
+                          fontSize: 12.sp, color: const Color(0xFF2563EB)),
                       textAlign: TextAlign.right,
                     ),
                   ),

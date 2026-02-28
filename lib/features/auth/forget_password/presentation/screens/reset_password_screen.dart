@@ -1,6 +1,7 @@
-import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/header_of_reset_password.dart';
+﻿import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/header_of_reset_password.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/reset_password_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class ResetPasswordScreen extends StatelessWidget {
@@ -17,9 +18,9 @@ class ResetPasswordScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+               SizedBox(height: 40.h),
               HeaderOfResetPassword(),
-              const SizedBox(height: 40),
+               SizedBox(height: 40.h),
               ResetPasswordForm()
             ],
           ),

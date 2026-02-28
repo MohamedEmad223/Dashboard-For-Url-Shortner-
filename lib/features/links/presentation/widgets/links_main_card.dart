@@ -1,9 +1,10 @@
-import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/custom_action_button.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/empty_states.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_filter_section.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LinksMainCard extends StatelessWidget {
@@ -44,12 +45,12 @@ class LinksMainCard extends StatelessWidget {
 
   Widget _headerCell(String text) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      padding:  EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       child: Text(
         text,
         textAlign: TextAlign.center,
         style: GoogleFonts.cairo(
-          fontSize: 13,
+          fontSize: 13.sp,
           fontWeight: FontWeight.w700,
           color: const Color(0xFF475569),
         ),
@@ -59,7 +60,7 @@ class LinksMainCard extends StatelessWidget {
 
   Widget _dataCell(Widget child) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 13),
+      padding:  EdgeInsets.symmetric(horizontal: 12.w, vertical: 13.h),
       child: child,
     );
   }
@@ -88,14 +89,14 @@ class LinksMainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      margin:  EdgeInsets.symmetric(horizontal: 16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 16,
+            blurRadius: 16.r,
             offset: const Offset(0, 4),
           ),
         ],
@@ -108,15 +109,15 @@ class LinksMainCard extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding:  EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                   decoration: BoxDecoration(
                     color: const Color(0xFFF4F7FA),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
                     '$filteredLinksCount of $totalLinks links',
                     style: GoogleFonts.cairo(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       color: const Color(0xFF8A94A6),
                     ),
                   ),
@@ -126,30 +127,27 @@ class LinksMainCard extends StatelessWidget {
                   'All Short Links',
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.w700,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: const Color(0xFF0F1E2E),
                   ),
                 ),
-                const SizedBox(width: 8),
+                 SizedBox(width: 8.w),
                 Container(
-                  padding: const EdgeInsets.all(7),
+                  padding:  EdgeInsets.all(7.r),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE0F5F7),
-                    borderRadius: BorderRadius.circular(9),
+                    borderRadius: BorderRadius.circular(9.r),
                   ),
-                  child: const Icon(
+                  child:  Icon(
                     Icons.link_rounded,
-                    size: 17,
+                    size: 17.r,
                     color: Color(0xFF0B8A9A),
                   ),
                 ),
               ],
             ),
           ),
-
-          const Divider(height: 1, color: Color(0xFFEDF0F4)),
-
-          // Search bar
+           Divider(height: 1.h, color: Color(0xFFEDF0F4)),
           AnimatedCard(
             delayMs: 180,
             child: LinksSearchBar(
@@ -157,8 +155,6 @@ class LinksMainCard extends StatelessWidget {
               onChanged: onSearchChanged,
             ),
           ),
-
-          // Filter chips row
           AnimatedCard(
             delayMs: 240,
             child: LinksFilterSection(
@@ -172,10 +168,7 @@ class LinksMainCard extends StatelessWidget {
               onStatusTap: onStatusTap,
             ),
           ),
-
-          const SizedBox(height: 14),
-
-          // Table
+           SizedBox(height: 14.h),
           Expanded(
             child: links.isEmpty
                 ? const EmptyStates()
@@ -185,7 +178,7 @@ class LinksMainCard extends StatelessWidget {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           child: Table(
                             defaultColumnWidth: const IntrinsicColumnWidth(),
                             columnWidths: const {
@@ -197,10 +190,9 @@ class LinksMainCard extends StatelessWidget {
                             },
                             border: TableBorder.all(
                               color: const Color(0xFFE2E8F0),
-                              width: 1,
+                              width: 1.w,
                             ),
                             children: [
-                              // ── Header row ──
                               TableRow(
                                 decoration: const BoxDecoration(
                                   color: Color(0xFFF8FAFC),
@@ -213,7 +205,6 @@ class LinksMainCard extends StatelessWidget {
                                   _headerCell('Actions'),
                                 ],
                               ),
-                              // ── Data rows ──
                               ...links.map(
                                 (link) => TableRow(
                                   decoration: const BoxDecoration(
@@ -228,13 +219,12 @@ class LinksMainCard extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         style: GoogleFonts.cairo(
-                                          fontSize: 13,
+                                          fontSize: 13.sp,
                                           fontWeight: FontWeight.w700,
                                           color: const Color(0xFF0B8A9A),
                                         ),
                                       ),
                                     ),
-                                    // Original URL
                                     _dataCell(
                                       Text(
                                         link['original'] ?? '',
@@ -242,7 +232,7 @@ class LinksMainCard extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         style: GoogleFonts.cairo(
-                                          fontSize: 13,
+                                          fontSize: 13.sp,
                                           fontWeight: FontWeight.w500,
                                           color: const Color(0xFF64748B),
                                         ),
@@ -254,7 +244,7 @@ class LinksMainCard extends StatelessWidget {
                                         '${link['visits'] ?? 0}',
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.cairo(
-                                          fontSize: 14,
+                                          fontSize: 14.sp,
                                           fontWeight: FontWeight.w600,
                                           color: const Color(0xFF0F1E2E),
                                         ),
@@ -264,18 +254,18 @@ class LinksMainCard extends StatelessWidget {
                                     _dataCell(
                                       Center(
                                         child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 4),
+                                          padding:  EdgeInsets.symmetric(
+                                              horizontal: 10.w, vertical: 4.h),
                                           decoration: BoxDecoration(
                                             color: _statusBg(link['status']),
                                             borderRadius:
-                                                BorderRadius.circular(6),
+                                                BorderRadius.circular(6.r),
                                           ),
                                           child: Text(
                                             _statusLabel(link['status']),
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.cairo(
-                                              fontSize: 12,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w700,
                                               color:
                                                   _statusFg(link['status']),
@@ -298,7 +288,7 @@ class LinksMainCard extends StatelessWidget {
                                               color: const Color(0xFF0B8A9A),
                                             ),
                                           ),
-                                          const SizedBox(width: 8),
+                                           SizedBox(width: 8.w),
                                           GestureDetector(
                                             onTap: () {
                                               showDialog(

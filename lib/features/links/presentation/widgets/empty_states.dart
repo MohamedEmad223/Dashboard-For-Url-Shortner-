@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/pressable_card.dart';
 
@@ -12,49 +13,49 @@ class EmptyStates extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(22),
+            padding:  EdgeInsets.all(22.r),
             decoration: BoxDecoration(
               color: const Color(0xFFF0FAFB),
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFCCEEF2), width: 2),
+              border: Border.all(color: const Color(0xFFCCEEF2), width: 2.w),
             ),
-            child: const Icon(Icons.link_off_rounded,
-                size: 36, color: Color(0xFFB0D8DC)),
+            child:  Icon(Icons.link_off_rounded,
+                size: 36.r, color: Color(0xFFB0D8DC)),
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
           Text(
             'No links found',
             style: GoogleFonts.cairo(
-              fontSize: 15,
+              fontSize: 15.sp,
               fontWeight: FontWeight.w700,
               color: const Color(0xFF4A5568),
             ),
           ),
-          const SizedBox(height: 6),
+           SizedBox(height: 6.h),
           Text(
             'Create your first link now',
             style: GoogleFonts.cairo(
-              fontSize: 13,
+              fontSize: 13.sp,
               color: const Color(0xFF8A94A6),
             ),
           ),
-          const SizedBox(height: 20),
+           SizedBox(height: 20.h),
           PressableCard(
             onTap: () {},
             child: Container(
               padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
+               EdgeInsets.symmetric(horizontal: 20.w, vertical: 11.h),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   colors: [Color(0xFF076475), Color(0xFF13C5D8)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
                 boxShadow: [
                   BoxShadow(
                     color: const Color(0xFF0B8A9A).withOpacity(0.3),
-                    blurRadius: 12,
+                    blurRadius: 12.r,
                     offset: const Offset(0, 4),
                   ),
                 ],
@@ -62,15 +63,15 @@ class EmptyStates extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.add_rounded,
-                      color: Colors.white, size: 18),
-                  const SizedBox(width: 6),
+                   Icon(Icons.add_rounded,
+                      color: Colors.white, size: 18.r),
+                   SizedBox(width: 6.w),
                   Text(
                     'Create New Link',
                     style: GoogleFonts.cairo(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                     ),
                   ),
                 ],

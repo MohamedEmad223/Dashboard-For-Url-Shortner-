@@ -1,4 +1,5 @@
-// import 'package:flutter/material.dart';
+﻿// import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:google_fonts/google_fonts.dart';
 //
 // class SaveSettingsButton extends StatefulWidget {
@@ -53,7 +54,7 @@
 //         child: AnimatedContainer(
 //           duration: const Duration(milliseconds: 300),
 //           width: double.infinity,
-//           padding: const EdgeInsets.symmetric(vertical: 16),
+//           padding: const EdgeInsets.symmetric(vertical: 16.h),
 //           decoration: BoxDecoration(
 //             gradient: LinearGradient(
 //               colors: _saved
@@ -62,14 +63,14 @@
 //               begin: Alignment.topLeft,
 //               end: Alignment.bottomRight,
 //             ),
-//             borderRadius: BorderRadius.circular(14),
+//             borderRadius: BorderRadius.circular(14.r),
 //             boxShadow: [
 //               BoxShadow(
 //                 color: (_saved
 //                     ? const Color(0xFF059669)
 //                     : const Color(0xFF0B8A9A))
 //                     .withOpacity(0.35),
-//                 blurRadius: 14,
+//                 blurRadius: 14.r,
 //                 offset: const Offset(0, 5),
 //               ),
 //             ],
@@ -85,10 +86,10 @@
 //                       : Icons.save_outlined,
 //                   key: ValueKey(_saved),
 //                   color: Colors.white,
-//                   size: 20,
+//                   size: 20.r,
 //                 ),
 //               ),
-//               const SizedBox(width: 8),
+//               const SizedBox(width: 8.w),
 //               AnimatedSwitcher(
 //                 duration: const Duration(milliseconds: 250),
 //                 child: Text(
@@ -97,7 +98,7 @@
 //                   style: GoogleFonts.cairo(
 //                     color: Colors.white,
 //                     fontWeight: FontWeight.w700,
-//                     fontSize: 15,
+//                     fontSize: 15.sp,
 //                   ),
 //                 ),
 //               ),

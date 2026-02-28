@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedFab extends StatefulWidget {
   final VoidCallback onTap;
@@ -40,24 +41,24 @@ class _AnimatedFabState extends State<AnimatedFab>
       child: ScaleTransition(
         scale: _scale,
         child: Container(
-          width: 56,
-          height: 56,
+          width: 56.w,
+          height: 56.h,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               colors: [Color(0xFF076475), Color(0xFF13C5D8)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(18.r),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF0B8A9A).withOpacity(0.45),
-                blurRadius: 16,
+                blurRadius: 16.r,
                 offset: const Offset(0, 6),
               ),
             ],
           ),
-          child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
+          child:  Icon(Icons.add_rounded, color: Colors.white, size: 28.r),
         ),
       ),
     );

@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/features/home/data/model/over_view_response_model.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/data/model/over_view_response_model.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/stat_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OverViewBody extends StatelessWidget {
   const OverViewBody({super.key, this.overViewResponseModel});
@@ -13,7 +14,7 @@ class OverViewBody extends StatelessWidget {
     final data = overViewResponseModel?.data;
 
     return SliverPadding(
-      padding: const EdgeInsets.all(16),
+      padding:  EdgeInsets.all(16.r),
       sliver: SliverList(
         delegate: SliverChildListDelegate([
           AnimatedCard(
@@ -28,7 +29,7 @@ class OverViewBody extends StatelessWidget {
                   lightColor: const Color(0xFFFFF0E6),
                   icon: Icons.trending_up_rounded,
                 ),
-                const SizedBox(width: 12),
+                 SizedBox(width: 12.w),
                 StatCard(
                   title: "Total Clicks",
                   value: data?.totalClicks.toString() ?? "0",
@@ -40,7 +41,7 @@ class OverViewBody extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 12),
+           SizedBox(height: 12.h),
           AnimatedCard(
             delayMs: 250,
             child: Row(
@@ -53,7 +54,7 @@ class OverViewBody extends StatelessWidget {
                   lightColor: const Color(0xFFE6FAF4),
                   icon: Icons.remove_red_eye_outlined,
                 ),
-                const SizedBox(width: 12),
+                 SizedBox(width: 12.w),
                 StatCard(
                   title: 'Unique Clicks',
                   value: data?.uniqueClicks?.toString() ?? "0",

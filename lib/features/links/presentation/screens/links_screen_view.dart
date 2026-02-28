@@ -1,4 +1,4 @@
-import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_state.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/animated_fab.dart';
@@ -7,6 +7,7 @@ import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/l
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_main_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/create_link_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LinksScreenView extends StatefulWidget {
@@ -131,7 +132,7 @@ class _LinksScreenViewState extends State<LinksScreenView> {
                       title: 'Your Links',
                       subtitle: 'Manage and track your shortened URLs',
                     ),
-                    const SizedBox(height: 16),
+                     SizedBox(height: 16.h),
                     // Loading indicator
                     if (state.isLoadingLinks)
                       const Expanded(
@@ -146,28 +147,28 @@ class _LinksScreenViewState extends State<LinksScreenView> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
+                               Icon(
                                 Icons.error_outline,
-                                size: 60,
+                                size: 60.r,
                                 color: Colors.red,
                               ),
-                              const SizedBox(height: 16),
+                               SizedBox(height: 16.h),
                               Text(
                                 'Error Loading Links',
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                               SizedBox(height: 8.h),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 32),
+                                padding:  EdgeInsets.symmetric(horizontal: 32.w),
                                 child: Text(
                                   state.error!.message,
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                               SizedBox(height: 24.h),
                               ElevatedButton(
                                 onPressed: () {
                                   context.read<LinksCubit>().clearError();
@@ -209,7 +210,7 @@ class _LinksScreenViewState extends State<LinksScreenView> {
                           ),
                         ),
                       ),
-                    const SizedBox(height: 16),
+                     SizedBox(height: 16.h),
                   ],
                 ),
               ),

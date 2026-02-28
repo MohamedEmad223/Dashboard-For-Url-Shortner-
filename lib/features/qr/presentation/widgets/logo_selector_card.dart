@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LogoSelectorCard extends StatelessWidget {
@@ -14,14 +15,14 @@ class LogoSelectorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3)),
         ],
       ),
@@ -34,20 +35,20 @@ class LogoSelectorCard extends StatelessWidget {
               Text('شعار Jo Academy',
                   style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       color: const Color(0xFF0F1E2E))),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(7),
+                padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFE6FAF4),
-                    borderRadius: BorderRadius.circular(9)),
-                child: const Icon(Icons.image_outlined,
-                    size: 17, color: Color(0xFF059669)),
+                    borderRadius: BorderRadius.circular(9.r)),
+                child:  Icon(Icons.image_outlined,
+                    size: 17.r, color: Color(0xFF059669)),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
           Row(
             children: [
               Expanded(
@@ -58,7 +59,7 @@ class LogoSelectorCard extends StatelessWidget {
                   onTap: () => onChanged(false),
                 ),
               ),
-              const SizedBox(width: 12),
+               SizedBox(width: 12.w),
               Expanded(
                 child: _LogoOption(
                   label: 'مع الشعار',
@@ -124,12 +125,12 @@ class _LogoOptionState extends State<_LogoOption>
         scale: _scale,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding:  EdgeInsets.symmetric(vertical: 16.h),
           decoration: BoxDecoration(
             color: widget.isSelected
                 ? const Color(0xFFE8F6F8)
                 : const Color(0xFFF8FAFC),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: widget.isSelected
                   ? const Color(0xFF0B8A9A)
@@ -140,14 +141,14 @@ class _LogoOptionState extends State<_LogoOption>
           child: Column(
             children: [
               Icon(widget.icon,
-                  size: 28,
+                  size: 28.r,
                   color: widget.isSelected
                       ? const Color(0xFF0B8A9A)
                       : const Color(0xFF8A94A6)),
-              const SizedBox(height: 8),
+               SizedBox(height: 8.h),
               Text(widget.label,
                   style: GoogleFonts.cairo(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: widget.isSelected
                           ? FontWeight.w700
                           : FontWeight.w500,

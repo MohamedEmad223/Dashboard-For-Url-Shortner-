@@ -1,9 +1,10 @@
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
+﻿import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/core/widgets/main_header_of_pagesa_widgets.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/cubit/over_view_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/bloc_builder_for_over_view.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/lable_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/header_banner.dart';
 
@@ -33,11 +34,11 @@ class HomeScreen extends StatelessWidget {
                     subtitle: 'hello again, ',
                   ),
                   SliverPadding(
-                    padding: const EdgeInsets.all(16),
+                    padding:  EdgeInsets.all(16.r),
                     sliver: SliverList(
                       delegate: SliverChildListDelegate([
                         HeaderBanner(),
-                        const SizedBox(height: 20),
+                         SizedBox(height: 20.h),
                         LableTextWidget(title: 'Overview'),
                         BlocBuilderForOverView(),
                       ]),

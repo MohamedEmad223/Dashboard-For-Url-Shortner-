@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/config/theme/app_colors.dart';
+﻿import 'package:dashboard_for_url_shortner/config/theme/app_colors.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/Banner_button.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderBanner extends StatelessWidget {
@@ -20,11 +21,11 @@ class HeaderBanner extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: AppColors.teal.withOpacity(0.35),
-              blurRadius: 24,
+              blurRadius: 24.r,
               offset: const Offset(0, 8),
             ),
           ],
@@ -36,8 +37,8 @@ class HeaderBanner extends StatelessWidget {
               top: -20,
               left: -20,
               child: Container(
-                width: 100,
-                height: 100,
+                width: 100.w,
+                height: 100.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withOpacity(0.05),
@@ -48,8 +49,8 @@ class HeaderBanner extends StatelessWidget {
               bottom: -30,
               right: -10,
               child: Container(
-                width: 140,
-                height: 140,
+                width: 140.w,
+                height: 140.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withOpacity(0.04),
@@ -64,7 +65,7 @@ class HeaderBanner extends StatelessWidget {
                   'Hello in your dashboard links,',
                   style: GoogleFonts.cairo(
                     color: Colors.white.withOpacity(0.85),
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.left,
@@ -73,22 +74,22 @@ class HeaderBanner extends StatelessWidget {
                   'John Academy',
                   style: GoogleFonts.cairo(
                     color: Colors.white,
-                    fontSize: 26,
+                    fontSize: 26.sp,
                     fontWeight: FontWeight.w800,
                     height: 1.2,
                   ),
                   textAlign: TextAlign.left,
                 ),
-                const SizedBox(height: 6),
+                 SizedBox(height: 6.h),
                 Text(
                   'Make Your Links Short & Memorable with Our Dashboard',
                   style: GoogleFonts.cairo(
                     color: Colors.white.withOpacity(0.7),
-                    fontSize: 13,
+                    fontSize: 13.sp,
                   ),
                   textAlign: TextAlign.left,
                 ),
-                const SizedBox(height: 20),
+                 SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -98,7 +99,7 @@ class HeaderBanner extends StatelessWidget {
                       filled: true,
                       onTap: () {},
                     ),
-                    const SizedBox(width: 10),
+                     SizedBox(width: 10.w),
                     BannerButton(
                       label: 'All Links',
                       icon: Icons.list_alt_rounded,

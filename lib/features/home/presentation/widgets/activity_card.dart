@@ -1,6 +1,7 @@
-import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/pressable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ActivityCard extends StatelessWidget {
@@ -36,14 +37,14 @@ class ActivityCard extends StatelessWidget {
       delayMs: 450,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(18),
+        padding:  EdgeInsets.all(18.r),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3),
             ),
           ],
@@ -58,23 +59,23 @@ class ActivityCard extends StatelessWidget {
                   'النشاط الأخير',
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.w700,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: const Color(0xFF0F1E2E),
                   ),
                 ),
-                const SizedBox(width: 8),
+                 SizedBox(width: 8.w),
                 Container(
-                  padding: const EdgeInsets.all(6),
+                  padding:  EdgeInsets.all(6.r),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE0F5F7),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
-                  child: const Icon(Icons.access_time_rounded,
-                      size: 18, color: Color(0xFF0B8A9A)),
+                  child:  Icon(Icons.access_time_rounded,
+                      size: 18.r, color: Color(0xFF0B8A9A)),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+             SizedBox(height: 16.h),
             ..._activities.asMap().entries.map((e) {
               final a = e.value;
               final isLast = e.key == _activities.length - 1;
@@ -82,15 +83,15 @@ class ActivityCard extends StatelessWidget {
                 children: [
                   PressableCard(
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 4),
+                      padding:  EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 4.w),
                       child: Row(
                         children: [
                           // Time
                           Text(
                             a['time'] as String,
                             style: GoogleFonts.cairo(
-                              fontSize: 11,
+                              fontSize: 11.sp,
                               color: const Color(0xFF8A94A6),
                             ),
                           ),
@@ -100,23 +101,22 @@ class ActivityCard extends StatelessWidget {
                             child: Text(
                               a['text'] as String,
                               style: GoogleFonts.cairo(
-                                fontSize: 13,
+                                fontSize: 13.sp,
                                 fontWeight: FontWeight.w600,
                                 color: const Color(0xFF0F1E2E),
                               ),
                               textAlign: TextAlign.right,
                             ),
                           ),
-                          const SizedBox(width: 10),
-                          // Icon
+                           SizedBox(width: 10.w),
                           Container(
-                            padding: const EdgeInsets.all(7),
+                            padding:  EdgeInsets.all(7.r),
                             decoration: BoxDecoration(
                               color: a['bg'] as Color,
-                              borderRadius: BorderRadius.circular(9),
+                              borderRadius: BorderRadius.circular(9.r),
                             ),
                             child: Icon(a['icon'] as IconData,
-                                size: 16, color: a['color'] as Color),
+                                size: 16.r, color: a['color'] as Color),
                           ),
                         ],
                       ),
@@ -124,7 +124,7 @@ class ActivityCard extends StatelessWidget {
                   ),
                   if (!isLast)
                     Divider(
-                        height: 1,
+                        height: 1.h,
                         color: const Color(0xFFEDF0F4),
                         indent: 40,
                         endIndent: 0),

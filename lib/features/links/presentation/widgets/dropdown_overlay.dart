@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'custom_drob_down_menu.dart';
 
 class DropdownOverlayContent extends StatelessWidget {
@@ -18,7 +19,7 @@ class DropdownOverlayContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      width: 180,
+      width: 180.w,
       child: CompositedTransformFollower(
         link: link,
         showWhenUnlinked: false,

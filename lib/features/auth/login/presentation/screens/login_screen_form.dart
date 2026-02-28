@@ -1,4 +1,4 @@
-import 'package:dashboard_for_url_shortner/config/router/routes.dart';
+﻿import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_header.dart';
@@ -7,6 +7,7 @@ import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widg
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/forget_password_row.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/login_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreenForm extends StatelessWidget {
@@ -24,7 +25,7 @@ class LoginScreenForm extends StatelessWidget {
         children: [
           // Header
           const AuthHeader(),
-          const SizedBox(height: 36),
+           SizedBox(height: 36.h),
           // Email field
           AuthTextField(
             label: 'Email',
@@ -34,7 +35,7 @@ class LoginScreenForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             validator: (email) => AppRegex.isEmailValid(email!) ? null : 'Please enter a valid email address',
           ),
-          const SizedBox(height: 28),
+          SizedBox(height: 28.h),
           AuthTextField(
             label: 'Password',
             hint: '••••••••',
@@ -43,13 +44,13 @@ class LoginScreenForm extends StatelessWidget {
             isPassword: true,
             validator:(password) => AppRegex.isPasswordValid(password!) ? null : 'Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number',
           ),
-          const SizedBox(height: 30),
+           SizedBox(height: 30.h),
           ForgotPasswordRow(onForgotTap: () {
             Navigator.pushNamed(context, Routes.forgetPasswordScreen);
           }),
-          const SizedBox(height: 30),
+           SizedBox(height: 30.h),
           LoginButton(),
-          const SizedBox(height: 35),
+           SizedBox(height: 35.h),
           CreateAccountFooter(onCreateTap: () {
             Navigator.pushReplacementNamed(context,  Routes.signUpScreen);
           }),

@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AlreadyHaveAnAccountSignIn extends StatelessWidget {
@@ -15,7 +16,7 @@ class AlreadyHaveAnAccountSignIn extends StatelessWidget {
         Text(
           'Already Have an Account? ',
           style: GoogleFonts.inter(
-            fontSize: 14,
+            fontSize: 14.sp,
             color: const Color(0xFF8A94A6),
           ),
         ),
@@ -24,7 +25,7 @@ class AlreadyHaveAnAccountSignIn extends StatelessWidget {
           child: Text(
             'Sign in',
             style: GoogleFonts.inter(
-              fontSize: 14,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w700,
               color: const Color(0xFF0B8A9A),
             ),

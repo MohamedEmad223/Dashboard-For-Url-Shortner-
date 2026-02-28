@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
@@ -21,23 +22,22 @@ class CustomButton extends StatelessWidget {
         onTap: isLoading ? null : onTap,
         child: Container(
           width: double.infinity,
-          height: 54,
+          height: 54.h,
           decoration: BoxDecoration(
             color: const Color(0xFF0B8A9A),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFF0B8A9A).withOpacity(0.35),
-                blurRadius: 16,
+                blurRadius: 16.r,
                 offset: const Offset(0, 6),
               ),
             ],
           ),
           child: Center(
             child: isLoading
-                ? const SizedBox(
-              width: 22,
-              height: 22,
+                ?  SizedBox(width: 22.w,
+              height: 22.h,
               child: CircularProgressIndicator(
                 strokeWidth: 2.5,
                 color: Colors.white,
@@ -48,7 +48,7 @@ class CustomButton extends StatelessWidget {
               style: GoogleFonts.inter(
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
-                fontSize: 16,
+                fontSize: 16.sp,
                 letterSpacing: 0.3,
               ),
             ),
