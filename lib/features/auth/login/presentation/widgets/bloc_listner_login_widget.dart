@@ -22,7 +22,7 @@ class LoginBlocConsumer extends StatelessWidget {
           success: (response) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text('تم تسجيل الدخول بنجاح'),
+                content: const Text('Login successful'),
                 backgroundColor: Colors.green,
                 behavior: SnackBarBehavior.floating,
                 margin:  EdgeInsets.only(

@@ -4,8 +4,8 @@ part 'verify_code_response_model.g.dart';
 
 @JsonSerializable()
 class VerifyCodeResponseModel {
-  final String message;
-  final int status;
+  final dynamic message;
+  final dynamic status;
   @JsonKey(fromJson: _dataFromJson)
   final VerifyCodeData? data;
 

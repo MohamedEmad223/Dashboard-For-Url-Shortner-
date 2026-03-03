@@ -1,4 +1,4 @@
-﻿﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/custom_action_button.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/empty_states.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_filter_section.dart';
@@ -24,6 +24,7 @@ class LinksMainCard extends StatelessWidget {
   final ValueChanged<String>? onSearchChanged;
   final Function(int)? onDeleteLink;
   final Function(dynamic linkId, {bool newStatus})? onToggleLinkStatus;
+  final String searchQuery;
 
   const LinksMainCard({
     super.key,
@@ -42,6 +43,7 @@ class LinksMainCard extends StatelessWidget {
     this.onSearchChanged,
     this.onDeleteLink,
     this.onToggleLinkStatus,
+    this.searchQuery = '',
   });
 
   Widget _headerCell(String text) {
@@ -108,7 +110,9 @@ class LinksMainCard extends StatelessWidget {
               shape: BoxShape.circle,
               color: label == 'Active'
                   ? const Color(0xFF059669)
-                  : const Color(0xFFF97316),
+                  : label == 'Expired'
+                      ? const Color(0xFFDC2626)
+                      : const Color(0xFFF97316),
             ),
           ),
           SizedBox(width: 12.w),
@@ -123,6 +127,71 @@ class LinksMainCard extends StatelessWidget {
           const Spacer(),
           if (isSelected)
             Icon(Icons.check_rounded, color: const Color(0xFF0B8A9A), size: 20.r),
+        ],
+      ),
+    );
+  }
+
+  void _copyToClipboard(BuildContext context, String text, String label) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.check_circle_outline, color: Colors.white, size: 18.r),
+            SizedBox(width: 8.w),
+            Text(
+              '$label copied!',
+              style: GoogleFonts.cairo(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: const Color(0xFF0B8A9A),
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  Widget _noSearchResults() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.all(22.r),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF0FAFB),
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFFCCEEF2), width: 2.w),
+            ),
+            child: Icon(Icons.search_off_rounded,
+                size: 36.r, color: const Color(0xFFB0D8DC)),
+          ),
+          SizedBox(height: 16.h),
+          Text(
+            'No results found',
+            style: GoogleFonts.cairo(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFF4A5568),
+            ),
+          ),
+          SizedBox(height: 6.h),
+          Text(
+            'Try a different search term',
+            style: GoogleFonts.cairo(
+              fontSize: 13.sp,
+              color: const Color(0xFF8A94A6),
+            ),
+          ),
         ],
       ),
     );
@@ -213,7 +282,7 @@ class LinksMainCard extends StatelessWidget {
            SizedBox(height: 14.h),
           Expanded(
             child: links.isEmpty
-                ? const EmptyStates()
+                ? (searchQuery.isNotEmpty ? _noSearchResults() : const EmptyStates())
                 : Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     child: SingleChildScrollView(
@@ -224,8 +293,8 @@ class LinksMainCard extends StatelessWidget {
                           child: Table(
                             defaultColumnWidth: const IntrinsicColumnWidth(),
                             columnWidths: const {
-                              0: FixedColumnWidth(200), // Short URL
-                              1: FixedColumnWidth(250), // Original URL
+                              0: FixedColumnWidth(230), // Short URL
+                              1: FixedColumnWidth(280), // Original URL
                               2: FixedColumnWidth(100), // Visits
                               3: FixedColumnWidth(100), // Status
                               4: FixedColumnWidth(120), // Actions
@@ -255,29 +324,71 @@ class LinksMainCard extends StatelessWidget {
                                   children: [
                                     // Short URL
                                     _dataCell(
-                                      Text(
-                                        link['short'] ?? '',
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.cairo(
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF0B8A9A),
-                                        ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () => _copyToClipboard(
+                                              context,
+                                              link['short'] ?? '',
+                                              'Short URL',
+                                            ),
+                                            child: Icon(
+                                              Icons.copy_rounded,
+                                              size: 16.r,
+                                              color: const Color(0xFF94A3B8),
+                                            ),
+                                          ),
+                                          SizedBox(width: 6.w),
+                                          Flexible(
+                                            child: Text(
+                                              link['short'] ?? '',
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: GoogleFonts.cairo(
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w700,
+                                                color: const Color(0xFF0B8A9A),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     _dataCell(
-                                      Text(
-                                        link['original'] ?? '',
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.cairo(
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: const Color(0xFF64748B),
-                                        ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () => _copyToClipboard(
+                                              context,
+                                              link['original'] ?? '',
+                                              'Original URL',
+                                            ),
+                                            child: Icon(
+                                              Icons.copy_rounded,
+                                              size: 16.r,
+                                              color: const Color(0xFF94A3B8),
+                                            ),
+                                          ),
+                                          SizedBox(width: 6.w),
+                                          Flexible(
+                                            child: Text(
+                                              link['original'] ?? '',
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: GoogleFonts.cairo(
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color: const Color(0xFF64748B),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     // Visits
@@ -339,6 +450,7 @@ class LinksMainCard extends StatelessWidget {
                                                   children: [
                                                     _statusOption(ctx, 'Active', currentLabel, link['id']),
                                                     _statusOption(ctx, 'Inactive', currentLabel, link['id']),
+                                                    _statusOption(ctx, 'Expired', currentLabel, link['id']),
                                                   ],
                                                 ),
                                               );

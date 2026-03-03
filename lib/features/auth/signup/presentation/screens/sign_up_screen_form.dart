@@ -24,7 +24,10 @@ class SignUpScreenForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AuthHeader(),
+                const AuthHeader(
+                  title: 'Create an account',
+                  subtitle: 'Join us today and start shortening your links with ease!',
+                ),
                  SizedBox(height: 36.h),
                 AuthTextField(
                   label: 'Name',

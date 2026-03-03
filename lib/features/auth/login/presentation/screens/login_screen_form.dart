@@ -24,7 +24,10 @@ class LoginScreenForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
-          const AuthHeader(),
+           AuthHeader(
+            title: 'Welcome Back!',
+            subtitle: 'Please login to your account',
+          ),
            SizedBox(height: 36.h),
           // Email field
           AuthTextField(

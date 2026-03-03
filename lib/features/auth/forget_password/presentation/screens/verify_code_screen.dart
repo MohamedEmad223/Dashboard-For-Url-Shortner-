@@ -66,6 +66,8 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   }
 
   void _handleResendCode(BuildContext context) {
+    if (!_canResend) return;
+
     if (widget.email == null || widget.email!.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -79,9 +81,12 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
       return;
     }
 
-    context.read<ForgetPasswordCubit>().sendForgetPasswordEmail(
-          ForgetPasswordRequestModel(email: widget.email!),
-        );
+    // Reset the cubit state before sending new request
+    final cubit = context.read<ForgetPasswordCubit>();
+    cubit.resetState();
+    cubit.sendForgetPasswordEmail(
+      ForgetPasswordRequestModel(email: widget.email!),
+    );
   }
 
   @override

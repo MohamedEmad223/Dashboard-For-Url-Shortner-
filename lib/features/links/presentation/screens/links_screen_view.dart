@@ -1,5 +1,4 @@
-﻿import 'package:dashboard_for_url_shortner/core/widgets/no_links_placeholder.dart';
-import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/cubit/links_state.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/animated_fab.dart';
@@ -188,6 +187,7 @@ class _LinksScreenViewState extends State<LinksScreenView> {
                             links: state.filteredLinks,
                             totalLinks: state.totalLinks,
                             filteredLinksCount: state.filteredLinksCount,
+                            searchQuery: state.searchQuery,
                             onSearchChanged: (query) {
                               context.read<LinksCubit>().updateSearchQuery(
                                 query,

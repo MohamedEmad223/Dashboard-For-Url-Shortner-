@@ -87,23 +87,7 @@ class _QrScreenState extends State<QrScreen> {
                           setState(() => _qrStyle = s),
                     ),
                   ),
-                   SizedBox(height: 14.h),
-                  AnimatedCard(
-                    delayMs: 400,
-                    child: LogoSelectorCard(
-                      withLogo: _withLogo,
-                      onChanged: (v) => setState(() => _withLogo = v),
-                    ),
-                  ),
-                   SizedBox(height: 14.h),
-                  AnimatedCard(
-                    delayMs: 480,
-                    child: DownloadFormatCard(
-                      selectedFormat: _downloadFormat,
-                      onFormatChanged: (f) =>
-                          setState(() => _downloadFormat = f),
-                    ),
-                  ),
+
                 ]),
               ),
             ),

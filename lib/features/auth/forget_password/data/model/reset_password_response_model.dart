@@ -4,8 +4,8 @@ part 'reset_password_response_model.g.dart';
 
 @JsonSerializable()
 class ResetPasswordResponseModel {
-  final String message;
-  final int status;
+  final dynamic message;
+  final dynamic status;
   @JsonKey(fromJson: _dataFromJson)
   final dynamic data;
 

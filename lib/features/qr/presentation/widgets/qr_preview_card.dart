@@ -135,12 +135,12 @@ class _QrPreviewCardState extends State<QrPreviewCard>
           Row(
             children: [
               Container(
-                padding:  EdgeInsets.all(7.r),
+                padding: EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFE0F5F7),
                     borderRadius: BorderRadius.circular(9.r)),
-                child:  Icon(Icons.qr_code_2_rounded,
-                    size: 17.r, color: Color(0xFF0B8A9A)),
+                child: Icon(Icons.qr_code_2_rounded,
+                    size: 17.r, color: const Color(0xFF0B8A9A)),
               ),
                SizedBox(width: 8.w),
               Text('QR Code Preview',

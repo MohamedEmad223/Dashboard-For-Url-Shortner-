@@ -6,19 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 class StatCard extends StatelessWidget {
   final String title;
   final String value;
-  final String change;
   final Color color;
   final Color lightColor;
   final IconData icon;
+  final double? progress;
 
   const StatCard({
     super.key,
     required this.title,
     required this.value,
-    required this.change,
     required this.color,
     required this.lightColor,
     required this.icon,
+    this.progress,
   });
 
   @override
@@ -32,7 +32,7 @@ class StatCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 12.r,
                 offset: const Offset(0, 3),
               ),
@@ -52,32 +52,7 @@ class StatCard extends StatelessWidget {
                     ),
                     child: Icon(icon, color: color, size: 20.r),
                   ),
-                  Container(
-                    padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE6FAF4),
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                         Icon(
-                          Icons.arrow_upward,
-                          size: 10.r,
-                          color: Color(0xFF059669),
-                        ),
-                         SizedBox(width: 2.w),
-                        Text(
-                          change,
-                          style: GoogleFonts.cairo(
-                            color: const Color(0xFF059669),
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+
                 ],
               ),
                SizedBox(height: 14.h),
@@ -100,15 +75,16 @@ class StatCard extends StatelessWidget {
                 ),
               ),
                SizedBox(height: 12.h),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4.r),
-                child: LinearProgressIndicator(
-                  value: 0.35,
-                  minHeight: 4.h,
-                  backgroundColor: lightColor,
-                  valueColor: AlwaysStoppedAnimation<Color>(color),
+              if (progress != null)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4.r),
+                  child: LinearProgressIndicator(
+                    value: progress,
+                    minHeight: 4.h,
+                    backgroundColor: lightColor,
+                    valueColor: AlwaysStoppedAnimation<Color>(color),
+                  ),
                 ),
-              ),
             ],
           ),
         ),

@@ -46,11 +46,11 @@ class ColorCustomizationCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text('Color Picker',
                   style: GoogleFonts.cairo(
@@ -59,17 +59,16 @@ class ColorCustomizationCard extends StatelessWidget {
                       color: const Color(0xFF0F1E2E))),
                SizedBox(width: 8.w),
               Container(
-                padding:  EdgeInsets.all(7.r),
+                padding: EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFF3EEFF),
                     borderRadius: BorderRadius.circular(9.r)),
-                child:  Icon(Icons.palette_outlined,
-                    size: 17.r, color: Color(0xFF7C3AED)),
+                child: Icon(Icons.palette_outlined,
+                    size: 17.r, color: const Color(0xFF7C3AED)),
               ),
             ],
           ),
            SizedBox(height: 16.h),
-          // QR Color row
           ColorRow(
             label: 'Color QR',
             color: qrColor,
@@ -83,53 +82,56 @@ class ColorCustomizationCard extends StatelessWidget {
           ),
            SizedBox(height: 16.h),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.bottomLeft,
             child: Text('Quick Colors',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
                 style: GoogleFonts.cairo(
                     fontSize: 12.sp,
                     color: const Color(0xFF8A94A6),
                     fontWeight: FontWeight.w500)),
           ),
            SizedBox(height: 10.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: _quickColors.map((c) {
-              final isSelected = c == qrColor;
-              return GestureDetector(
-                onTap: () => onQrColorChanged(c),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 180),
-                  margin:  EdgeInsets.only(left: 8.w),
-                  width: 28.w,
-                  height: 28.h,
-                  decoration: BoxDecoration(
-                    color: c,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isSelected
-                          ? const Color(0xFF0B8A9A)
-                          : Colors.transparent,
-                      width: 2.5,
+            Wrap(
+              spacing: 8.w,
+              runSpacing: 8.h,
+              children: _quickColors.map((c) {
+                final isSelected = c == qrColor;
+                return GestureDetector(
+                  onTap: () => onQrColorChanged(c),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 180),
+                    width: 28.w,
+                    height: 28.h,
+                    decoration: BoxDecoration(
+                      color: c,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isSelected
+                            ? const Color(0xFF0B8A9A)
+                            : Colors.transparent,
+                        width: 2.5,
+                      ),
+                      boxShadow: isSelected
+                          ? [
+                        BoxShadow(
+                            color: c.withOpacity(0.4),
+                            blurRadius: 8.r,
+                            offset: const Offset(0, 2))
+                      ]
+                          : [],
                     ),
-                    boxShadow: isSelected
-                        ? [
-                      BoxShadow(
-                          color: c.withOpacity(0.4),
-                          blurRadius: 8.r,
-                          offset: const Offset(0, 2))
-                    ]
-                        : [],
+                    child: isSelected
+                        ? Icon(Icons.check_rounded,
+                        color: Colors.white, size: 14.r)
+                        : null,
                   ),
-                  child: isSelected
-                      ?  Icon(Icons.check_rounded,
-                      color: Colors.white, size: 14.r)
-                      : null,
-                ),
-              );
-            }).toList(),
-          ),
-        ],
+                );
+              }).toList(),
+            ),
+          ]
       ),
+
     );
   }
 

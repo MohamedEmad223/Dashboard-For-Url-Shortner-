@@ -34,7 +34,7 @@ class ColorPickerSheet extends StatelessWidget {
             ),
           ),
            SizedBox(height: 18.h),
-          Text('اختر لوناً',
+          Text('Pick a color',
               style: GoogleFonts.cairo(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w700,
@@ -71,7 +71,7 @@ class ColorPickerSheet extends StatelessWidget {
                     ],
                   ),
                   child: isSel
-                      ?  Icon(Icons.check_rounded,
+                      ? Icon(Icons.check_rounded,
                       color: Colors.white, size: 22.r)
                       : null,
                 ),

@@ -34,12 +34,12 @@ class QrStyleCard extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding:  EdgeInsets.all(7.r),
+                padding: EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFEBF2FF),
                     borderRadius: BorderRadius.circular(9.r)),
-                child:  Icon(Icons.style_outlined,
-                    size: 17.r, color: Color(0xFF2563EB)),
+                child: Icon(Icons.style_outlined,
+                    size: 17.r, color: const Color(0xFF2563EB)),
               ),
                SizedBox(width: 8.w),
               Text('QR Code Style',

@@ -3,24 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AuthHeader extends StatelessWidget {
-  const AuthHeader({super.key});
+  const AuthHeader({super.key, required this.title, required this.subtitle});
+
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          'WELCOME BACK',
-          style: GoogleFonts.inter(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFF0B8A9A),
-            letterSpacing: 1.8,
-          ),
-        ),
-         SizedBox(height: 20.h),
-        Text(
-          'Sign in to your account',
+          title,
           textAlign: TextAlign.center,
           style: GoogleFonts.inter(
             fontSize: 26.sp,
@@ -31,7 +24,7 @@ class AuthHeader extends StatelessWidget {
         ),
          SizedBox(height: 20.h),
         Text(
-          'Enter your credentials to access your account',
+          subtitle,
           textAlign: TextAlign.center,
           style: GoogleFonts.inter(
             fontSize: 14.sp,
