@@ -1,7 +1,8 @@
-import 'dart:math';
+﻿import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VisitsOverTimeChart extends StatelessWidget {
@@ -121,11 +122,11 @@ class VisitsOverTimeChart extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 18, 16, 12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 12,
+            blurRadius: 12.r,
             offset: const Offset(0, 3),
           ),
         ],
@@ -140,7 +141,7 @@ class VisitsOverTimeChart extends StatelessWidget {
               Text(
                 selectedRange,
                 style: GoogleFonts.cairo(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: const Color(0xFF8A94A6),
                 ),
               ),
@@ -149,26 +150,25 @@ class VisitsOverTimeChart extends StatelessWidget {
                 'Visits Over Time',
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.w700,
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   color: const Color(0xFF0F1E2E),
                 ),
               ),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(6),
+                padding:  EdgeInsets.all(6.r),
                 decoration: BoxDecoration(
                   color: const Color(0xFFE0F5F7),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: const Icon(Icons.trending_up_rounded,
-                    size: 16, color: Color(0xFF0B8A9A)),
+                child:  Icon(Icons.trending_up_rounded,
+                    size: 16.r, color: Color(0xFF0B8A9A)),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+           SizedBox(height: 20.h),
           // Chart
-          SizedBox(
-            height: 180,
+          SizedBox(height: 180.h,
             child: LineChart(
               key: ValueKey('$selectedRange-${spots.length}'),
               LineChartData(
@@ -194,7 +194,7 @@ class VisitsOverTimeChart extends StatelessWidget {
                       getTitlesWidget: (v, _) => Text(
                         v.toInt().toString(),
                         style: GoogleFonts.cairo(
-                          fontSize: 10,
+                          fontSize: 10.sp,
                           color: const Color(0xFFB0BAC9),
                         ),
                       ),
@@ -210,11 +210,11 @@ class VisitsOverTimeChart extends StatelessWidget {
                             (value / maxX * (labels.length - 1)).round();
                         if (idx >= 0 && idx < labels.length) {
                           return Padding(
-                            padding: const EdgeInsets.only(top: 6),
+                            padding:  EdgeInsets.only(top: 6.h),
                             child: Text(
                               labels[idx],
                               style: GoogleFonts.cairo(
-                                fontSize: 9,
+                                fontSize: 9.sp,
                                 color: const Color(0xFFB0BAC9),
                               ),
                             ),
@@ -269,7 +269,7 @@ class VisitsOverTimeChart extends StatelessWidget {
                               '${s.y.toInt()} visits',
                               GoogleFonts.cairo(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w700,
                               ),
                             ))

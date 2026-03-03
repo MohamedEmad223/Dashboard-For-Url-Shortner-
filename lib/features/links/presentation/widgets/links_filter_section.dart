@@ -1,5 +1,6 @@
-import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/filterd_chip.dart';
+﻿import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/filterd_chip.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LinksFilterSection extends StatelessWidget {
   final LayerLink campaignLink;
@@ -39,7 +40,7 @@ class LinksFilterSection extends StatelessWidget {
               onTap: onStatusTap,
             ),
           ),
-          const SizedBox(width: 10),
+           SizedBox(width: 10.w),
           CompositedTransformTarget(
             link: campaignLink,
             child: CustomFilterChip(

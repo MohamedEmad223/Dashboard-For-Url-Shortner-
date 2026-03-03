@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Mobile-first tap feedback: scales down on press, back up on release
 class PressableCard extends StatefulWidget {

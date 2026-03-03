@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+﻿import 'package:bloc/bloc.dart';
 import 'package:dashboard_for_url_shortner/core/errors/api/models/api_error_model.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_result.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/forget_password_request_model.dart';
@@ -27,9 +27,12 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     );
   }
 
-  // Public method for resending code
   Future<void> sendForgetPasswordEmail(ForgetPasswordRequestModel request) async {
     await forgetPassword(request);
+  }
+
+  void resetState() {
+    emit(const ForgetPasswordState.initial());
   }
 
   void emailFormValidation(BuildContext context) {

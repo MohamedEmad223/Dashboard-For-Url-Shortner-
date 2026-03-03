@@ -1,5 +1,6 @@
-import 'package:fl_chart/fl_chart.dart';
+﻿import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VisitsDistributionCard extends StatefulWidget {
@@ -13,22 +14,21 @@ class VisitsDistributionCard extends StatefulWidget {
 class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
   int _touchedIndex = -1;
 
-  // Sample data — replace with real data when available
   final bool _hasData = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 250.h,
 
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 12,
+            blurRadius: 12.r,
             offset: const Offset(0, 3),
           ),
         ],
@@ -44,23 +44,23 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                 'Visit Distribution',
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.w700,
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   color: const Color(0xFF0F1E2E),
                 ),
               ),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(6),
+                padding:  EdgeInsets.all(6.r),
                 decoration: BoxDecoration(
                   color: const Color(0xFFE6FAF4),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: const Icon(Icons.remove_red_eye_outlined,
-                    size: 16, color: Color(0xFF059669)),
+                child:  Icon(Icons.remove_red_eye_outlined,
+                    size: 16.r, color: Color(0xFF059669)),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+           SizedBox(height: 20.h),
           // Chart or empty state
           _hasData ? _buildChart() : _buildEmptyState(),
         ],
@@ -71,16 +71,16 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
   Widget _buildEmptyState() {
     return Column(
       children: [
-        const SizedBox(height: 16),
+         SizedBox(height: 16.h),
         Center(
           child: Center(
             child: Column(
               children: [
-                SizedBox(height: 30,),
+                SizedBox(height: 30.h,),
                 Text(
                   '0',
                   style: GoogleFonts.cairo(
-                    fontSize: 36,
+                    fontSize: 36.sp,
                     fontWeight: FontWeight.w800,
                     color: const Color(0xFF0F1E2E),
                   ),
@@ -88,7 +88,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                 Text(
                   'Total',
                   style: GoogleFonts.cairo(
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: const Color(0xFF8A94A6),
                   ),
                 ),
@@ -96,7 +96,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+         SizedBox(height: 16.h),
       ],
     );
   }
@@ -111,8 +111,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
 
     return Column(
       children: [
-        SizedBox(
-          height: 160,
+        SizedBox(height: 160.h,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -152,7 +151,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                         ? '${sections[_touchedIndex].value.toInt()}%'
                         : '100%',
                     style: GoogleFonts.cairo(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w800,
                       color: const Color(0xFF0F1E2E),
                     ),
@@ -162,7 +161,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                         ? sections[_touchedIndex].label
                         : 'Total',
                     style: GoogleFonts.cairo(
-                      fontSize: 11,
+                      fontSize: 11.sp,
                       color: const Color(0xFF8A94A6),
                     ),
                   ),
@@ -171,7 +170,7 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
             ],
           ),
         ),
-        const SizedBox(height: 12),
+         SizedBox(height: 12.h),
         Wrap(
           spacing: 12,
           runSpacing: 6,
@@ -183,15 +182,15 @@ class _VisitsDistributionCardState extends State<VisitsDistributionCard> {
                 Text(
                   s.label,
                   style: GoogleFonts.cairo(
-                      fontSize: 11, color: const Color(0xFF4A5568)),
+                      fontSize: 11.sp, color: const Color(0xFF4A5568)),
                 ),
-                const SizedBox(width: 4),
+                 SizedBox(width: 4.w),
                 Container(
-                  width: 10,
-                  height: 10,
+                  width: 10.w,
+                  height: 10.h,
                   decoration: BoxDecoration(
                     color: s.color,
-                    borderRadius: BorderRadius.circular(3),
+                    borderRadius: BorderRadius.circular(3.r),
                   ),
                 ),
               ],

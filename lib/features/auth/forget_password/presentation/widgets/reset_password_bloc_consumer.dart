@@ -1,6 +1,7 @@
-import 'package:dashboard_for_url_shortner/config/router/routes.dart';
+﻿import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResetPasswordBlocConsumer extends StatelessWidget {
@@ -24,12 +25,12 @@ class ResetPasswordBlocConsumer extends StatelessWidget {
                 backgroundColor: Colors.green,
                 behavior: SnackBarBehavior.floating,
                 margin:  EdgeInsets.only(
-                  bottom: 16,
-                  left: 16,
-                  right: 16,
+                  bottom: 16.h,
+                  left: 16.w,
+                  right: 16.w,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
               ),
             );
@@ -45,13 +46,13 @@ class ResetPasswordBlocConsumer extends StatelessWidget {
                 content: Text(error.message),
                 backgroundColor: Colors.red,
                 behavior: SnackBarBehavior.floating,
-                margin: const EdgeInsets.only(
-                  bottom: 16,
-                  left: 16,
-                  right: 16,
+                margin:  EdgeInsets.only(
+                  bottom: 16.h,
+                  left: 16.w,
+                  right: 16.w,
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
               ),
             );

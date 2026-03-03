@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/forget_password_request_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/forget_password_cubit.dart';
@@ -8,6 +8,7 @@ import 'package:dashboard_for_url_shortner/features/auth/forget_password/present
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/verify_code_bloc_listeners.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/verify_code_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyCodeScreen extends StatefulWidget {
@@ -65,22 +66,27 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   }
 
   void _handleResendCode(BuildContext context) {
+    if (!_canResend) return;
+
     if (widget.email == null || widget.email!.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Email not found. Please try again.'),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,
-          margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          margin:  EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
         ),
       );
       return;
     }
 
-    context.read<ForgetPasswordCubit>().sendForgetPasswordEmail(
-          ForgetPasswordRequestModel(email: widget.email!),
-        );
+    // Reset the cubit state before sending new request
+    final cubit = context.read<ForgetPasswordCubit>();
+    cubit.resetState();
+    cubit.sendForgetPasswordEmail(
+      ForgetPasswordRequestModel(email: widget.email!),
+    );
   }
 
   @override
@@ -101,28 +107,20 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 40),
-
-                  // Header with PIN input
+                   SizedBox(height: 40.h),
                   HeaderOfVerifyCodeWidget(
                     email: widget.email ?? '',
                     onCompleted: (code) {
                       setState(() => _enteredCode = code);
                     },
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // Timer or Resend Button
+                   SizedBox(height: 20.h),
                   TimerResendSection(
                     canResend: _canResend,
                     timeText: _formatTime(_remainingSeconds),
                     onResendTap: () => _handleResendCode(context),
                   ),
-
-                  const SizedBox(height: 28),
-
-                  // Verify Code Button
+                   SizedBox(height: 28.h),
                   VerifyCodeButton(
                     email: widget.email ?? '',
                     enteredCode: _enteredCode,

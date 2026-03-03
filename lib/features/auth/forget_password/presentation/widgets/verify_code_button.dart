@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/verify_code_request_model.dart';
+﻿import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/verify_code_request_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/verify_code_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/sign_in_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyCodeButton extends StatelessWidget {
@@ -20,8 +21,8 @@ class VerifyCodeButton extends StatelessWidget {
         content: Text(message),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin:  EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       ),
     );
   }
@@ -62,7 +63,7 @@ class VerifyCodeButton extends StatelessWidget {
 
         return SizedBox(
           width: double.infinity,
-          height: 56,
+          height: 56.h,
           child: CustomButton(
             isLoading: isLoading,
             onTap: () => _handleVerifyCode(context),

@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
+﻿import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cubit/signup_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/screens/sign_up_screen_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -19,12 +20,12 @@ class SignUpScreen extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding:  EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   children: [
-                    const SizedBox(height: 60),
+                     SizedBox(height: 60.h),
                     SignUpScreenForm(),
-                    const SizedBox(height: 40),
+                     SizedBox(height: 40.h),
                   ],
                 ),
               ),

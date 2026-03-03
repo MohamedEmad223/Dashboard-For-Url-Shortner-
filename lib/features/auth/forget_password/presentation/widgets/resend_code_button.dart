@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ResendCodeButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -15,7 +16,7 @@ class ResendCodeButton extends StatelessWidget {
     return GestureDetector(
       onTap: isLoading ? null : onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isLoading
@@ -27,11 +28,11 @@ class ResendCodeButton extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFF0B8A9A).withValues(alpha: 0.3),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 4),
             ),
           ],
@@ -40,25 +41,24 @@ class ResendCodeButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (isLoading)
-              const SizedBox(
-                width: 20,
-                height: 20,
+               SizedBox(width: 20.w,
+                height: 20.h,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               )
             else
-              const Icon(
+               Icon(
                 Icons.refresh_rounded,
-                size: 20,
+                size: 20.r,
                 color: Colors.white,
               ),
-            const SizedBox(width: 8),
+             SizedBox(width: 8.w),
             Text(
               isLoading ? 'Sending...' : 'Resend Code',
-              style: const TextStyle(
-                fontSize: 15,
+              style:  TextStyle(
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
               ),

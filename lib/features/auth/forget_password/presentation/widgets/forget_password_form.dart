@@ -1,8 +1,9 @@
-import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
+﻿import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/forget_password_button.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_text_feild.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPasswordForm extends StatelessWidget {
@@ -22,7 +23,7 @@ class ForgetPasswordForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             validator: (email) => AppRegex.isEmailValid(email!) ? null : 'Please enter a valid email address',
           ),
-          const SizedBox(height: 28),
+           SizedBox(height: 28.h),
           ForgetPasswordButton()
         ],
       ),

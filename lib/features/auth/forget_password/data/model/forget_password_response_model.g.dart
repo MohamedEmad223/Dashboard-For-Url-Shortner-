@@ -9,9 +9,9 @@ part of 'forget_password_response_model.dart';
 ForgetPasswordResponseModel _$ForgetPasswordResponseModelFromJson(
   Map<String, dynamic> json,
 ) => ForgetPasswordResponseModel(
-  message: json['message'] as String,
-  status: (json['status'] as num).toInt(),
-  data: json['data'] as List<dynamic>,
+  message: json['message'],
+  status: json['status'],
+  data: json['data'],
 );
 
 Map<String, dynamic> _$ForgetPasswordResponseModelToJson(

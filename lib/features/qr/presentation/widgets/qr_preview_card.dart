@@ -1,7 +1,8 @@
-import 'dart:typed_data';
+﻿import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gal/gal.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,7 +60,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       _qrKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
 
       if (boundary == null) {
-        _showSnackBar('خطأ في التقاط الصورة', isError: true);
+        _showSnackBar('Error capturing image', isError: true);
         return;
       }
 
@@ -68,13 +69,13 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       await image.toByteData(format: ui.ImageByteFormat.png);
 
       if (byteData == null) {
-        _showSnackBar('فشل في تحويل الصورة', isError: true);
+        _showSnackBar('Failed to convert image', isError: true);
         return;
       }
 
       final Uint8List pngBytes = byteData.buffer.asUint8List();
 
-      // ✅ حفظ باستخدام gal
+      // ✅ Save using gal
 
       await Gal.putImageBytes(
         pngBytes,
@@ -82,11 +83,11 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       );
 
       if (mounted) {
-        _showSnackBar('تم حفظ QR Code بنجاح ✓');
+        _showSnackBar('QR Code saved successfully ✓');
       }
     } catch (e) {
       if (mounted) {
-        _showSnackBar('حدث خطأ أثناء الحفظ', isError: true);
+        _showSnackBar('Error while saving', isError: true);
       }
     } finally {
       if (mounted) {
@@ -106,8 +107,8 @@ class _QrPreviewCardState extends State<QrPreviewCard>
         backgroundColor:
             isError ? const Color(0xFFE53E3E) : const Color(0xFF0B8A9A),
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        margin: const EdgeInsets.all(16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+        margin:  EdgeInsets.all(16.r),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -116,59 +117,56 @@ class _QrPreviewCardState extends State<QrPreviewCard>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3)),
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('معاينة QR Code',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                      color: const Color(0xFF0F1E2E))),
-              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.all(7),
+                padding: EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFE0F5F7),
-                    borderRadius: BorderRadius.circular(9)),
-                child: const Icon(Icons.qr_code_2_rounded,
-                    size: 17, color: Color(0xFF0B8A9A)),
+                    borderRadius: BorderRadius.circular(9.r)),
+                child: Icon(Icons.qr_code_2_rounded,
+                    size: 17.r, color: const Color(0xFF0B8A9A)),
               ),
+               SizedBox(width: 8.w),
+              Text('QR Code Preview',
+                  style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: const Color(0xFF0F1E2E))),
             ],
           ),
-          const SizedBox(height: 16),
-
-          // QR Preview box
+           SizedBox(height: 16.h),
           Center(
             child: RepaintBoundary(
               key: _qrKey,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                width: 200,
-                height: 200,
+                width: 200.w,
+                height: 200.h,
                 decoration: BoxDecoration(
                   color: widget.bgColor,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   border:
-                      Border.all(color: const Color(0xFFEDF0F4), width: 1),
+                      Border.all(color: const Color(0xFFEDF0F4), width: 1.w),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.04),
-                        blurRadius: 8,
+                        blurRadius: 8.r,
                         offset: const Offset(0, 2))
                   ],
                 ),
@@ -177,9 +175,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
               ),
             ),
           ),
-          const SizedBox(height: 18),
-
-          // Download button
+           SizedBox(height: 18.h),
           GestureDetector(
             onTapDown: (_) {
               if (widget.hasUrl) _btnCtrl.forward();
@@ -189,7 +185,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
               if (widget.hasUrl) {
                 _saveQrImage();
               } else {
-                _showSnackBar('يرجى إدخال رابط أولاً', isError: true);
+                _showSnackBar('Please enter a URL first', isError: true);
               }
             },
             onTapCancel: () => _btnCtrl.reverse(),
@@ -198,7 +194,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                padding:  EdgeInsets.symmetric(vertical: 14.h),
                 decoration: BoxDecoration(
                   gradient: widget.hasUrl
                       ? const LinearGradient(
@@ -208,12 +204,12 @@ class _QrPreviewCardState extends State<QrPreviewCard>
                         )
                       : null,
                   color: widget.hasUrl ? null : const Color(0xFFEDF0F4),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   boxShadow: [
                     BoxShadow(
                         color: const Color(0xFF0B8A9A)
                             .withOpacity(widget.hasUrl ? 0.3 : 0.0),
-                        blurRadius: 10,
+                        blurRadius: 10.r,
                         offset: const Offset(0, 4))
                   ],
                 ),
@@ -221,9 +217,8 @@ class _QrPreviewCardState extends State<QrPreviewCard>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (_isSaving)
-                      const SizedBox(
-                        width: 18,
-                        height: 18,
+                       SizedBox(width: 18.w,
+                        height: 18.h,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           color: Colors.white,
@@ -234,16 +229,16 @@ class _QrPreviewCardState extends State<QrPreviewCard>
                           color: widget.hasUrl
                               ? Colors.white
                               : const Color(0xFFB0BAC9),
-                          size: 18),
-                    const SizedBox(width: 8),
+                          size: 18.r),
+                     SizedBox(width: 8.w),
                     Text(
-                      _isSaving ? 'جاري الحفظ...' : 'تحميل QR Code',
+                      _isSaving ? 'Saving...' : 'Download QR Code',
                       style: GoogleFonts.cairo(
                         color: widget.hasUrl
                             ? Colors.white
                             : const Color(0xFFB0BAC9),
                         fontWeight: FontWeight.w700,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ],
@@ -261,13 +256,13 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.qr_code_2_rounded,
-            size: 52, color: const Color(0xFFDDE3EC)),
-        const SizedBox(height: 8),
+            size: 52.r, color: const Color(0xFFDDE3EC)),
+         SizedBox(height: 8.h),
         Text(
-          'أدخل رابطاً لتوليد\nرمز QR',
+          'Enter a URL to generate\na QR Code',
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
-              fontSize: 12, color: const Color(0xFFB0BAC9), height: 1.5),
+              fontSize: 12.sp, color: const Color(0xFFB0BAC9), height: 1.5),
         ),
       ],
     );
@@ -275,7 +270,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
 
   Widget _buildQrCode() {
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding:  EdgeInsets.all(12.r),
       child: QrImageView(
         data: widget.url,
         version: QrVersions.auto,
@@ -297,13 +292,13 @@ class _QrPreviewCardState extends State<QrPreviewCard>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline,
-                    size: 36, color: Colors.red),
-                const SizedBox(height: 6),
+                 Icon(Icons.error_outline,
+                    size: 36.r, color: Colors.red),
+                 SizedBox(height: 6.h),
                 Text(
-                  'رابط غير صالح',
+                  'Invalid URL',
                   style: GoogleFonts.cairo(
-                      fontSize: 11, color: const Color(0xFFE53E3E)),
+                      fontSize: 11.sp, color: const Color(0xFFE53E3E)),
                 ),
               ],
             ),

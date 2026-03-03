@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
+﻿import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/screens/login_screen_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -19,12 +20,12 @@ class LoginScreen extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding:  EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   children: [
-                    const SizedBox(height: 60),
+                     SizedBox(height: 60.h),
                     const LoginScreenForm(),
-                    const SizedBox(height: 40),
+                     SizedBox(height: 40.h),
                   ],
                 ),
               ),

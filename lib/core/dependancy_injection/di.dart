@@ -95,8 +95,8 @@ void _setupLinksDependencies() {
     () => ToggleLinkStatusUseCase(getIt<linksRepo>()),
   );
 
-  // Cubit
-  getIt.registerLazySingleton<LinksCubit>(
+  // Cubit (factory so a new instance is created each time)
+  getIt.registerFactory<LinksCubit>(
     () => LinksCubit(
       getIt<CreateLinkUseCase>(),
       getIt<GetAllLinksUseCase>(),
@@ -121,7 +121,8 @@ void _setUpOverViewDependencies() {
         () => OverViewUseCase(getIt<OverViewRepo>()),
   );
 
-  getIt.registerLazySingleton<OverViewCubit>(
+  // Cubit (factory so a new instance is created each time)
+  getIt.registerFactory<OverViewCubit>(
       ()=>OverViewCubit(getIt<OverViewUseCase>())
   );
 
@@ -144,7 +145,7 @@ void _setupLogoutDependencies() {
   );
 
   // Cubit (factory so a new instance is created each time)
-  getIt.registerFactory<LogoutCubit>(
+  getIt.registerLazySingleton<LogoutCubit>(
         () => LogoutCubit(getIt<LogOutUseCase>()),
   );
 }
@@ -243,8 +244,8 @@ void _setupStatesDependencies() {
     () => GetRecentClicksUseCase(getIt<StatesRepo>()),
   );
 
-  // Cubit
-  getIt.registerLazySingleton<StatsCubit>(
+  // Cubit (factory so a new instance is created each time)
+  getIt.registerFactory<StatsCubit>(
     () => StatsCubit(
       getIt<GetClicksOverTimeUseCase>(),
       getIt<GetRecentClicksUseCase>(),

@@ -1,4 +1,4 @@
-import 'package:dashboard_for_url_shortner/config/router/routes.dart';
+﻿import 'package:dashboard_for_url_shortner/config/router/routes.dart';
 import 'package:dashboard_for_url_shortner/core/helpers/app_regex.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_header.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/presentation/widgets/auth_text_feild.dart';
@@ -6,6 +6,7 @@ import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/cub
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/already_have_an_account_sign_in.dart';
 import 'package:dashboard_for_url_shortner/features/auth/signup/presentation/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpScreenForm extends StatelessWidget {
@@ -23,8 +24,11 @@ class SignUpScreenForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AuthHeader(),
-                const SizedBox(height: 36),
+                const AuthHeader(
+                  title: 'Create an account',
+                  subtitle: 'Join us today and start shortening your links with ease!',
+                ),
+                 SizedBox(height: 36.h),
                 AuthTextField(
                   label: 'Name',
                   hint: 'Enter your Name',
@@ -33,7 +37,7 @@ class SignUpScreenForm extends StatelessWidget {
                   keyboardType: TextInputType.name,
                   validator: (name) => AppRegex.isNameValid(name!) ? null : 'Please enter a valid name address',
                 ),
-                const SizedBox(height: 28),
+                 SizedBox(height: 28.h),
                 AuthTextField(
                   label: 'Email',
                   hint: 'Enter your Email',
@@ -41,7 +45,7 @@ class SignUpScreenForm extends StatelessWidget {
                   controller: context.read<SignupCubit>().emailController,
                   validator: (email) => AppRegex.isEmailValid(email!) ? null : 'Please enter a valid email address',
                 ),
-                const SizedBox(height: 28),
+                 SizedBox(height: 28.h),
                 AuthTextField(
                   label: 'Password',
                   hint: '••••••••',
@@ -50,7 +54,7 @@ class SignUpScreenForm extends StatelessWidget {
                   isPassword: true,
                   validator: (password) => AppRegex.isPasswordValid(password!) ? null : 'Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number',
                 ),
-                const SizedBox(height: 28),
+                 SizedBox(height: 28.h),
                 AuthTextField(
                   label: 'Password confirmation',
                   hint: '••••••••',
@@ -75,9 +79,9 @@ class SignUpScreenForm extends StatelessWidget {
                     return null;
                   },
                 ),
-                const SizedBox(height: 30),
+                 SizedBox(height: 30.h),
                 SignUpButton(),
-                const SizedBox(height: 35),
+                 SizedBox(height: 35.h),
                 AlreadyHaveAnAccountSignIn(onCreateTap: () {
 Navigator.pushReplacementNamed(context,  Routes.loginScreen);              }),
               ],

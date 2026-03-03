@@ -9,8 +9,8 @@ part of 'reset_password_response_model.dart';
 ResetPasswordResponseModel _$ResetPasswordResponseModelFromJson(
   Map<String, dynamic> json,
 ) => ResetPasswordResponseModel(
-  message: json['message'] as String,
-  status: (json['status'] as num).toInt(),
+  message: json['message'],
+  status: json['status'],
   data: ResetPasswordResponseModel._dataFromJson(json['data']),
 );
 

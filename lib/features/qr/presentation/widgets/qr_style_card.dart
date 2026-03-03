@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum QrStyle { rounded, square }
@@ -16,54 +17,53 @@ class QrStyleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 12,
+              blurRadius: 12.r,
               offset: const Offset(0, 3)),
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('أسلوب QR Code',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
-                      color: const Color(0xFF0F1E2E))),
-              const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.all(7),
+                padding: EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                     color: const Color(0xFFEBF2FF),
-                    borderRadius: BorderRadius.circular(9)),
-                child: const Icon(Icons.style_outlined,
-                    size: 17, color: Color(0xFF2563EB)),
+                    borderRadius: BorderRadius.circular(9.r)),
+                child: Icon(Icons.style_outlined,
+                    size: 17.r, color: const Color(0xFF2563EB)),
               ),
+               SizedBox(width: 8.w),
+              Text('QR Code Style',
+                  style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: const Color(0xFF0F1E2E))),
             ],
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
           Row(
             children: [
               Expanded(
                 child: _StyleOption(
-                  label: 'مستدير',
+                  label: 'Rounded',
                   icon: Icons.circle_outlined,
                   isSelected: selectedStyle == QrStyle.rounded,
                   onTap: () => onStyleChanged(QrStyle.rounded),
                 ),
               ),
-              const SizedBox(width: 12),
+               SizedBox(width: 12.w),
               Expanded(
                 child: _StyleOption(
-                  label: 'مربعات',
+                  label: 'Square',
                   icon: Icons.crop_square_rounded,
                   isSelected: selectedStyle == QrStyle.square,
                   onTap: () => onStyleChanged(QrStyle.square),
@@ -126,12 +126,12 @@ class _StyleOptionState extends State<_StyleOption>
         scale: _scale,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding:  EdgeInsets.symmetric(vertical: 16.h),
           decoration: BoxDecoration(
             color: widget.isSelected
                 ? const Color(0xFFE8F6F8)
                 : const Color(0xFFF8FAFC),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: widget.isSelected
                   ? const Color(0xFF0B8A9A)
@@ -142,14 +142,14 @@ class _StyleOptionState extends State<_StyleOption>
           child: Column(
             children: [
               Icon(widget.icon,
-                  size: 28,
+                  size: 28.r,
                   color: widget.isSelected
                       ? const Color(0xFF0B8A9A)
                       : const Color(0xFF8A94A6)),
-              const SizedBox(height: 8),
+               SizedBox(height: 8.h),
               Text(widget.label,
                   style: GoogleFonts.cairo(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: widget.isSelected
                           ? FontWeight.w700
                           : FontWeight.w500,

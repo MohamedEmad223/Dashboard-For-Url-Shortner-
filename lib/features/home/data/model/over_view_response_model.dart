@@ -82,7 +82,7 @@ class AnalyticsOverviewDataModel {
 @JsonSerializable()
 class LinkAnalyticsModel {
   final int id;
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'short_code')
   final String shortCode;
@@ -94,7 +94,7 @@ class LinkAnalyticsModel {
 
   LinkAnalyticsModel({
     required this.id,
-    required this.title,
+    this.title,
     required this.shortCode,
     required this.originalUrl,
     required this.clicks,

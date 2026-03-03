@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TimerWidget extends StatelessWidget {
   final String timeText;
@@ -11,25 +12,25 @@ class TimerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       decoration: BoxDecoration(
         color: const Color(0xFFE0F5F4),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: const Color(0xFF1A8A85).withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
+           Icon(
             Icons.timer_outlined,
-            size: 20,
+            size: 20.r,
             color: Color(0xFF1A8A85),
           ),
-          const SizedBox(width: 8),
+           SizedBox(width: 8.w),
           Text(
             'Resend code in $timeText',
-            style: const TextStyle(
-              fontSize: 14,
+            style:  TextStyle(
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: Color(0xFF1A8A85),
             ),

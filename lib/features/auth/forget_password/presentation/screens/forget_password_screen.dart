@@ -1,7 +1,8 @@
-import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
+﻿import 'package:dashboard_for_url_shortner/core/dependancy_injection/di.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/forget_password_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/widgets/header_of_forget_password_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/forget_password_form.dart';
@@ -23,7 +24,7 @@ class ForgetPasswordScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
+                 SizedBox(height: 20.h),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: BackButton(
@@ -31,9 +32,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                 ),
-                const SizedBox(height: 40),
+                 SizedBox(height: 40.h),
                 HeaderOfForgetPasswordScreen(),
-                const SizedBox(height: 40),
+                 SizedBox(height: 40.h),
                 ForgetPasswordForm()
               ],
             ),

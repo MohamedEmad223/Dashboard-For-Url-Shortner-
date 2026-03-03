@@ -1,5 +1,6 @@
-import 'package:dashboard_for_url_shortner/config/theme/app_colors.dart';
+﻿import 'package:dashboard_for_url_shortner/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BannerButton extends StatefulWidget {
@@ -52,31 +53,31 @@ class _BannerButtonState extends State<BannerButton>
         scale: _scale,
         child: Container(
           padding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+           EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           decoration: BoxDecoration(
             color: widget.filled
                 ? Colors.white
                 : Colors.white.withOpacity(0.15),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: widget.filled
                 ? null
                 : Border.all(
-                color: Colors.white.withOpacity(0.4), width: 1),
+                color: Colors.white.withOpacity(0.4), width: 1.w),
           ),
           child: Row(
             children: [
               Icon(
                 widget.icon,
-                size: 16,
+                size: 16.r,
                 color: widget.filled
                     ? AppColors.teal
                     : Colors.white,
               ),
-              const SizedBox(width: 6),
+               SizedBox(width: 6.w),
               Text(
                 widget.label,
                 style: GoogleFonts.cairo(
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
                   color: widget.filled ? AppColors.teal : Colors.white,
                 ),

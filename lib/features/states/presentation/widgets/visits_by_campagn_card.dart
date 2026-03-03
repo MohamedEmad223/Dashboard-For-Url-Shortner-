@@ -1,5 +1,6 @@
-import 'package:fl_chart/fl_chart.dart';
+﻿import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VisitsByCampaignCard extends StatelessWidget {
@@ -10,15 +11,15 @@ class VisitsByCampaignCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
-      padding: const EdgeInsets.all(18),
+      height: 250.h,
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 12,
+            blurRadius: 12.r,
             offset: const Offset(0, 3),
           ),
         ],
@@ -26,7 +27,6 @@ class VisitsByCampaignCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          // Header
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -35,24 +35,24 @@ class VisitsByCampaignCard extends StatelessWidget {
                   'Visits by Campaign',
                   style: GoogleFonts.cairo(
                     fontWeight: FontWeight.w700,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: const Color(0xFF0F1E2E),
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(6),
+                padding:  EdgeInsets.all(6.r),
                 decoration: BoxDecoration(
                   color: const Color(0xFFEBF2FF),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: const Icon(Icons.bar_chart_rounded,
-                    size: 16, color: Color(0xFF2563EB)),
+                child:  Icon(Icons.bar_chart_rounded,
+                    size: 16.r, color: Color(0xFF2563EB)),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+           SizedBox(height: 20.h),
           _hasData ? _buildChart() : _buildEmptyState(),
         ],
       ),
@@ -60,26 +60,25 @@ class VisitsByCampaignCard extends StatelessWidget {
   }
 
   Widget _buildEmptyState() {
-    return SizedBox(
-      height: 130,
+    return SizedBox(height: 130.h,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(14),
+              padding:  EdgeInsets.all(14.r),
               decoration: BoxDecoration(
                 color: const Color(0xFFF4F7FA),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.campaign_outlined,
-                  size: 24, color: Color(0xFFB0BAC9)),
+              child:  Icon(Icons.campaign_outlined,
+                  size: 24.r, color: Color(0xFFB0BAC9)),
             ),
-            const SizedBox(height: 10),
+             SizedBox(height: 10.h),
             Text(
               'No campaigns yet',
               style: GoogleFonts.cairo(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: const Color(0xFF8A94A6),
               ),
             ),
@@ -97,8 +96,7 @@ class VisitsByCampaignCard extends StatelessWidget {
       _BarData('Camp 4', 55),
     ];
 
-    return SizedBox(
-      height: 130,
+    return SizedBox(height: 130.h,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
@@ -125,11 +123,11 @@ class VisitsByCampaignCard extends StatelessWidget {
                   final idx = v.toInt();
                   if (idx < data.length) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 4),
+                      padding:  EdgeInsets.only(top: 4.h),
                       child: Text(
                         data[idx].label,
                         style: GoogleFonts.cairo(
-                          fontSize: 10,
+                          fontSize: 10.sp,
                           color: const Color(0xFFB0BAC9),
                         ),
                       ),
@@ -151,9 +149,9 @@ class VisitsByCampaignCard extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
-                  width: 18,
-                  borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(6)),
+                  width: 18.w,
+                  borderRadius:  BorderRadius.vertical(
+                      top: Radius.circular(6.r)),
                 ),
               ],
             );

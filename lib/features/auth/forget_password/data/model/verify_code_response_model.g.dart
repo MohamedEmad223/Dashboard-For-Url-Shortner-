@@ -9,8 +9,8 @@ part of 'verify_code_response_model.dart';
 VerifyCodeResponseModel _$VerifyCodeResponseModelFromJson(
   Map<String, dynamic> json,
 ) => VerifyCodeResponseModel(
-  message: json['message'] as String,
-  status: (json['status'] as num).toInt(),
+  message: json['message'],
+  status: json['status'],
   data: VerifyCodeResponseModel._dataFromJson(json['data']),
 );
 

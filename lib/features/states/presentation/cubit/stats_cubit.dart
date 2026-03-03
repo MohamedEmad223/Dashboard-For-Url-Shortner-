@@ -36,6 +36,7 @@ class StatsCubit extends Cubit<StatsState> {
       to: fmt.format(to),
     );
 
+    if (isClosed) return;
     result.map(
       success: (s) => emit(state.copyWith(
         isLoading: false,
@@ -72,6 +73,7 @@ class StatsCubit extends Cubit<StatsState> {
 
     final result = await _getRecentClicksUseCase(limit: limit);
 
+    if (isClosed) return;
     result.map(
       success: (s) => emit(state.copyWith(
         isLoadingRecentClicks: false,
@@ -95,6 +97,7 @@ class StatsCubit extends Cubit<StatsState> {
 
     final result = await _getLinkAnalyticsUseCase(linkId);
 
+    if (isClosed) return;
     result.map(
       success: (s) => emit(state.copyWith(
         isLoadingLinkAnalytics: false,

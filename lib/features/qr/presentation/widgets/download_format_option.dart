@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DownloadFormatOption extends StatefulWidget {
@@ -52,12 +53,12 @@ class _DownloadFormatOptionState extends State<DownloadFormatOption>
         scale: _scale,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 14),
+          padding:  EdgeInsets.symmetric(vertical: 14.h),
           decoration: BoxDecoration(
             color: widget.isSelected
                 ? const Color(0xFFE8F6F8)
                 : const Color(0xFFF8FAFC),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: widget.isSelected
                   ? const Color(0xFF0B8A9A)
@@ -68,22 +69,22 @@ class _DownloadFormatOptionState extends State<DownloadFormatOption>
           child: Column(
             children: [
               Icon(widget.icon,
-                  size: 22,
+                  size: 22.r,
                   color: widget.isSelected
                       ? const Color(0xFF0B8A9A)
                       : const Color(0xFF8A94A6)),
-              const SizedBox(height: 6),
+               SizedBox(height: 6.h),
               Text(widget.label,
                   style: GoogleFonts.robotoMono(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w700,
                       color: widget.isSelected
                           ? const Color(0xFF0B8A9A)
                           : const Color(0xFF0F1E2E))),
-              const SizedBox(height: 2),
+               SizedBox(height: 2.h),
               Text(widget.sub,
                   style: GoogleFonts.cairo(
-                      fontSize: 10,
+                      fontSize: 10.sp,
                       color: widget.isSelected
                           ? const Color(0xFF0B8A9A).withOpacity(0.7)
                           : const Color(0xFF8A94A6))),

@@ -1,5 +1,7 @@
-import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/custom_action_button.dart';
+﻿import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/custom_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LinkRow extends StatelessWidget {
@@ -15,12 +17,12 @@ class LinkRow extends StatelessWidget {
   Widget _buildFixedCell(Widget child, double width, {bool isLast = false}) {
     return Container(
       width: width,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      padding:  EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
       decoration: BoxDecoration(
         border: Border(
           right: isLast
               ? BorderSide.none
-              : const BorderSide(color: Color(0xFFE2E8F0), width: 1),
+              :  BorderSide(color: Color(0xFFE2E8F0), width: 1.w),
         ),
       ),
       child: child,
@@ -28,15 +30,15 @@ class LinkRow extends StatelessWidget {
   }
 
   String _getStatusText(dynamic status) {
-    if (status == null) return 'غير نشط';
+    if (status == null) return 'Inactive';
 
     final statusStr = status.toString().toLowerCase();
     if (statusStr == 'active' || statusStr == 'نشط' || status == true) {
-      return 'نشط';
+      return 'Active';
     } else if (statusStr == 'expired' || statusStr == 'منتهي') {
-      return 'منتهي';
+      return 'Expired';
     } else {
-      return 'غير نشط';
+      return 'Inactive';
     }
   }
 
@@ -66,6 +68,34 @@ class LinkRow extends StatelessWidget {
     }
   }
 
+  void _copyToClipboard(BuildContext context, String text, String label) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(Icons.check_circle_outline, color: Colors.white, size: 18.r),
+            SizedBox(width: 8.w),
+            Text(
+              '$label copied!',
+              style: GoogleFonts.cairo(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: const Color(0xFF0B8A9A),
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,15 +103,15 @@ class LinkRow extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: isLast
-            ? const BorderRadius.only(
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(12),
+            ?  BorderRadius.only(
+                bottomLeft: Radius.circular(12.r),
+                bottomRight: Radius.circular(12.r),
               )
             : null,
-        border: const Border(
-          left: BorderSide(color: Color(0xFFE2E8F0), width: 1),
-          right: BorderSide(color: Color(0xFFE2E8F0), width: 1),
-          bottom: BorderSide(color: Color(0xFFE2E8F0), width: 1),
+        border:  Border(
+          left: BorderSide(color: Color(0xFFE2E8F0), width: 1.w),
+          right: BorderSide(color: Color(0xFFE2E8F0), width: 1.w),
+          bottom: BorderSide(color: Color(0xFFE2E8F0), width: 1.w),
         ),
       ),
       child: SingleChildScrollView(
@@ -97,7 +127,7 @@ class LinkRow extends StatelessWidget {
                   CustomActionButton(
                       icon: Icons.edit_outlined,
                       color: const Color(0xFF0B8A9A)),
-                  const SizedBox(width: 8),
+                   SizedBox(width: 8.w),
                   CustomActionButton(
                       icon: Icons.delete_outline_rounded,
                       color: const Color(0xFFE53E3E)),
@@ -110,16 +140,16 @@ class LinkRow extends StatelessWidget {
             _buildFixedCell(
               Center(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding:  EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
                   decoration: BoxDecoration(
                     color: _getStatusBackgroundColor(link['status']),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(6.r),
                   ),
                   child: Text(
                     _getStatusText(link['status']),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.cairo(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w700,
                       color: _getStatusTextColor(link['status']),
                     ),
@@ -136,7 +166,7 @@ class LinkRow extends StatelessWidget {
                   '${link['visits'] ?? 0}',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.cairo(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF0F1E2E)),
                 ),
@@ -147,37 +177,79 @@ class LinkRow extends StatelessWidget {
             // Original URL column
             _buildFixedCell(
               Center(
-                child: Text(
-                  link['original'] ?? '',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.cairo(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF64748B),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () => _copyToClipboard(
+                        context,
+                        link['original'] ?? '',
+                        'Original URL',
+                      ),
+                      child: Icon(
+                        Icons.copy_rounded,
+                        size: 16.r,
+                        color: const Color(0xFF94A3B8),
+                      ),
+                    ),
+                    SizedBox(width: 6.w),
+                    Flexible(
+                      child: Text(
+                        link['original'] ?? '',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.cairo(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF64748B),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              250,
+              280,
             ),
 
             // Short URL column
             _buildFixedCell(
               Center(
-                child: Text(
-                  link['short'] ?? '',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.cairo(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xFF0B8A9A),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () => _copyToClipboard(
+                        context,
+                        link['short'] ?? '',
+                        'Short URL',
+                      ),
+                      child: Icon(
+                        Icons.copy_rounded,
+                        size: 16.r,
+                        color: const Color(0xFF94A3B8),
+                      ),
+                    ),
+                    SizedBox(width: 6.w),
+                    Flexible(
+                      child: Text(
+                        link['short'] ?? '',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.cairo(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF0B8A9A),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              200,
+              230,
               isLast: true,
             ),
           ],

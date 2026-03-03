@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Sidebar extends StatefulWidget {
@@ -23,30 +24,30 @@ class _SidebarState extends State<Sidebar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: 200.w,
       color: Colors.white,
       child: Column(
         children: [
-          const SizedBox(height: 24),
-          const Icon(Icons.ac_unit, size: 32, color: Color(0xFF0D7A8A)),
-          const SizedBox(height: 24),
+           SizedBox(height: 24.h),
+           Icon(Icons.ac_unit, size: 32.r, color: Color(0xFF0D7A8A)),
+           SizedBox(height: 24.h),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding:  EdgeInsets.symmetric(horizontal: 16.w),
             child: ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Icons.add, size: 16),
+              icon:  Icon(Icons.add, size: 16.r),
               label: Text('إنشاء رابط جديد',
-                  style: GoogleFonts.cairo(fontSize: 13)),
+                  style: GoogleFonts.cairo(fontSize: 13.sp)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0D7A8A),
                 foregroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 42),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(10.r)),
               ),
             ),
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
 
           // Nav Items
           ...items.asMap().entries.map((e) {
@@ -68,7 +69,7 @@ class _SidebarState extends State<Sidebar> {
             isSelected: false,
             onTap: () {},
           ),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
         ],
       ),
     );
@@ -162,17 +163,17 @@ class _SidebarItemState extends State<_SidebarItem>
             final shadowOpacity = 0.0;
 
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              margin:  EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
               padding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+               EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
               decoration: BoxDecoration(
                 color: bgColor,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: borderColor, width: 1),
+                borderRadius: BorderRadius.circular(10.r),
+                border: Border.all(color: borderColor, width: 1.w),
                 boxShadow: [
                   BoxShadow(
                     color: teal.withOpacity(shadowOpacity),
-                    blurRadius: 8,
+                    blurRadius: 8.r,
                     offset: const Offset(0, 2),
                   ),
                 ],
@@ -183,21 +184,21 @@ class _SidebarItemState extends State<_SidebarItem>
                   Text(
                     widget.label,
                     style: GoogleFonts.cairo(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: widget.isSelected || t > 0.5
                           ? FontWeight.w600
                           : FontWeight.normal,
                       color: textColor,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                   SizedBox(width: 10.w),
                   Container(
-                    padding: const EdgeInsets.all(6),
+                    padding:  EdgeInsets.all(6.r),
                     decoration: BoxDecoration(
                       color: iconBgColor,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
-                    child: Icon(widget.icon, size: 18, color: iconColor),
+                    child: Icon(widget.icon, size: 18.r, color: iconColor),
                   ),
                 ],
               ),

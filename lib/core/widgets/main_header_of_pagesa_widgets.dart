@@ -1,5 +1,6 @@
-import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainHeaderOfPagesWidgets extends StatelessWidget {
@@ -18,28 +19,28 @@ class MainHeaderOfPagesWidgets extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 42,
-                height: 42,
+                width: 42.w,
+                height: 42.h,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [Color(0xFF0B8A9A), Color(0xFF13C5D8)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Center(
+                child:  Center(
                   child: Text(
                     'J',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+               SizedBox(width: 12.w),
               // Title
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,7 @@ class MainHeaderOfPagesWidgets extends StatelessWidget {
                   Text(
                     title,
                     style: GoogleFonts.cairo(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w800,
                       color: const Color(0xFF0F1E2E),
                     ),
@@ -55,7 +56,7 @@ class MainHeaderOfPagesWidgets extends StatelessWidget {
                   Text(
                    subtitle,
                     style: GoogleFonts.cairo(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       color: const Color(0xFF8A94A6),
                     ),
                   ),

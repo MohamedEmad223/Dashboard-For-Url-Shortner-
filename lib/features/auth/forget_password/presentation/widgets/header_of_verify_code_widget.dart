@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 
 class HeaderOfVerifyCodeWidget extends StatefulWidget {
@@ -38,21 +39,21 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
   Widget build(BuildContext context) {
     // Default pin theme
     final defaultTheme = PinTheme(
-      width: 50,
-      height: 56,
-      textStyle: const TextStyle(
-        fontSize: 22,
+      width: 50.w,
+      height: 56.h,
+      textStyle:  TextStyle(
+        fontSize: 22.sp,
         fontWeight: FontWeight.w700,
         color: _textDark,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
         border: Border.all(color: _borderColor, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: _teal.withOpacity(0.06),
-            blurRadius: 6,
+            blurRadius: 6.r,
             offset: const Offset(0, 2),
           ),
         ],
@@ -62,11 +63,11 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
     // Focused pin theme
     final focusedTheme = defaultTheme.copyWith(
       decoration: defaultTheme.decoration!.copyWith(
-        border: Border.all(color: _teal, width: 2),
+        border: Border.all(color: _teal, width: 2.w),
         boxShadow: [
           BoxShadow(
             color: _teal.withOpacity(0.15),
-            blurRadius: 10,
+            blurRadius: 10.r,
             offset: const Offset(0, 4),
           ),
         ],
@@ -84,7 +85,7 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
     // Error pin theme
     final errorTheme = defaultTheme.copyWith(
       decoration: defaultTheme.decoration!.copyWith(
-        border: Border.all(color: _errorColor, width: 2),
+        border: Border.all(color: _errorColor, width: 2.w),
       ),
     );
 
@@ -92,54 +93,54 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: 80,
-          height: 80,
+          width: 80.w,
+          height: 80.h,
           decoration: BoxDecoration(
             gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [Color(0xFFE0F5F4), Color(0xFFB2E8E5)],
             ),
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(24.r),
             boxShadow: [
               BoxShadow(
                 color: _teal.withOpacity(0.18),
-                blurRadius: 20,
+                blurRadius: 20.r,
                 offset: const Offset(0, 8),
               ),
             ],
           ),
-          child: const Icon(
+          child:  Icon(
             Icons.verified_user_rounded,
-            size: 40,
+            size: 40.r,
             color: _teal,
           ),
         ),
-        const SizedBox(height: 28),
-        const Text(
+         SizedBox(height: 28.h),
+         Text(
           'VERIFY CODE',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 12.sp,
             fontWeight: FontWeight.w700,
             color: _teal,
             letterSpacing: 1.8,
           ),
         ),
-        const SizedBox(height: 10),
-        const Text(
+         SizedBox(height: 10.h),
+         Text(
           'Enter OTP code',
           style: TextStyle(
-            fontSize: 32,
+            fontSize: 32.sp,
             fontWeight: FontWeight.w800,
             color: _textDark,
             height: 1.2,
           ),
         ),
-        const SizedBox(height: 12),
+         SizedBox(height: 12.h),
         RichText(
           text: TextSpan(
-            style: const TextStyle(
-              fontSize: 15,
+            style:  TextStyle(
+              fontSize: 15.sp,
               color: _textMuted,
               height: 1.5,
             ),
@@ -155,9 +156,7 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
             ],
           ),
         ),
-
-        const SizedBox(height: 36),
-
+         SizedBox(height: 36.h),
         Pinput(
           length: 6,
           controller: _pinController,
@@ -174,12 +173,12 @@ class _HeaderOfVerifyCodeWidgetState extends State<HeaderOfVerifyCodeWidget> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                margin: const EdgeInsets.only(bottom: 9),
-                width: 22,
-                height: 2,
+                margin:  EdgeInsets.only(bottom: 9.h),
+                width: 22.w,
+                height: 2.h,
                 decoration: BoxDecoration(
                   color: _teal,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
             ],

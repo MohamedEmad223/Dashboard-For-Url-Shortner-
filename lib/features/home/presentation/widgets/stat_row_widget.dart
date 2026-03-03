@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StatRowWidget extends StatelessWidget {
@@ -22,7 +23,7 @@ class StatRowWidget extends StatelessWidget {
           label,
           style: GoogleFonts.cairo(
             color: const Color(0xFF4A5568),
-            fontSize: 13,
+            fontSize: 13.sp,
           ),
         ),
         const Spacer(),
@@ -32,11 +33,11 @@ class StatRowWidget extends StatelessWidget {
           style: GoogleFonts.cairo(
             color: valueColor,
             fontWeight: FontWeight.w700,
-            fontSize: 13,
+            fontSize: 13.sp,
           ),
         ),
-        const SizedBox(width: 8),
-        Icon(icon, size: 16, color: const Color(0xFF8A94A6)),
+         SizedBox(width: 8.w),
+        Icon(icon, size: 16.r, color: const Color(0xFF8A94A6)),
       ],
     );
   }

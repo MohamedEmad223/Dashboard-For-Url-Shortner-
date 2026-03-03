@@ -1,5 +1,6 @@
 import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
 import 'package:dashboard_for_url_shortner/core/errors/api/exceptions/api_exception.dart';
+import 'package:dashboard_for_url_shortner/core/errors/api/exceptions/exception_helper_methods.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_result.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/data_source/forget_password_data_source.dart';
@@ -10,7 +11,6 @@ import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/mo
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/verify_code_request_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/model/verify_code_response_model.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/repo/forget_password_repo.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../../core/errors/api/models/api_error_model.dart';
 
@@ -24,18 +24,20 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
       final response = await _forgetPasswordDataSource.forgetPassword(
           forgetPasswordRequestModel: forgetPasswordRequestModel);
       return ApiResult.success(response);
-    } on ApiException catch (error) {
-      return ApiResult.failure(
-        ApiErrorModel(message: error.apiErrorModel.message,
-            statusCode: error.apiErrorModel.statusCode),);
-    } on DioException catch (e) {
-      return ApiResult.failure(
-        ApiErrorModel(
-            message: e.toString(), statusCode: e.response?.statusCode ?? 0),
-      );
     } catch (e) {
+      try {
+        ExceptionHelperMethods.handle(e);
+      } on ApiException catch (error) {
+        return ApiResult.failure(
+          ApiErrorModel(
+            message: error.apiErrorModel.message,
+            statusCode: error.apiErrorModel.statusCode,
+          ),
+        );
+      }
+      // Fallback if exception is not handled
       return ApiResult.failure(
-        ApiErrorModel(message: e.toString(), statusCode: 0),
+        ApiErrorModel(message: 'An unexpected error occurred', statusCode: 0),
       );
     }
   }
@@ -47,31 +49,24 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
         email: verifyCodeRequestModel.email,
         code: verifyCodeRequestModel.code,
       );
-      // Check the status field in the response body
-      if (response.status >= 400) {
-        return ApiResult.failure(
-          ApiErrorModel(
-            message: response.message,
-            statusCode: response.status,
-          ),
-        );
-      }
 
       CacheHelper.setSecureData(key: ApiConstants.verifyToken, value: response.data?.verifyToken??'There is No verify token');
 
       return ApiResult.success(response);
-    } on ApiException catch (error) {
-      return ApiResult.failure(
-        ApiErrorModel(message: error.apiErrorModel.message,
-            statusCode: error.apiErrorModel.statusCode),);
-    } on DioException catch (e) {
-      return ApiResult.failure(
-        ApiErrorModel(
-            message: e.toString(), statusCode: e.response?.statusCode ?? 0),
-      );
     } catch (e) {
+      try {
+        ExceptionHelperMethods.handle(e);
+      } on ApiException catch (error) {
+        return ApiResult.failure(
+          ApiErrorModel(
+            message: error.apiErrorModel.message,
+            statusCode: error.apiErrorModel.statusCode,
+          ),
+        );
+      }
+      // Fallback if exception is not handled
       return ApiResult.failure(
-        ApiErrorModel(message: e.toString(), statusCode: 0),
+        ApiErrorModel(message: 'An unexpected error occurred', statusCode: 0),
       );
     }
   }
@@ -85,28 +80,21 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
         verifyToken: resetPasswordRequestModel.verifyToken,
       );
 
-      if (response.status >= 400) {
+      return ApiResult.success(response);
+    } catch (e) {
+      try {
+        ExceptionHelperMethods.handle(e);
+      } on ApiException catch (error) {
         return ApiResult.failure(
           ApiErrorModel(
-            message: response.message,
-            statusCode: response.status,
+            message: error.apiErrorModel.message,
+            statusCode: error.apiErrorModel.statusCode,
           ),
         );
       }
-
-      return ApiResult.success(response);
-    } on ApiException catch (error) {
+      // Fallback if exception is not handled
       return ApiResult.failure(
-        ApiErrorModel(message: error.apiErrorModel.message,
-            statusCode: error.apiErrorModel.statusCode),);
-    } on DioException catch (e) {
-      return ApiResult.failure(
-        ApiErrorModel(
-            message: e.toString(), statusCode: e.response?.statusCode ?? 0),
-      );
-    } catch (e) {
-      return ApiResult.failure(
-        ApiErrorModel(message: e.toString(), statusCode: 0),
+        ApiErrorModel(message: 'An unexpected error occurred', statusCode: 0),
       );
     }
   }

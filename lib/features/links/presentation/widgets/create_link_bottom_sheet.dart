@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/pressable_card.dart';
 
@@ -43,13 +44,13 @@ class _CreateLinkBottomSheetState extends State<CreateLinkBottomSheet> {
     return Container(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 20,
-        right: 20,
-        top: 16,
+        left: 20.w,
+        right: 20.w,
+        top: 16.h,
       ),
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       child: SingleChildScrollView(
         child: Form(
@@ -61,34 +62,32 @@ class _CreateLinkBottomSheetState extends State<CreateLinkBottomSheet> {
               // Handle bar
               Center(
                 child: Container(
-                  width: 40,
-                  height: 4,
+                  width: 40.w,
+                  height: 4.h,
                   decoration: BoxDecoration(
                     color: const Color(0xFFDDE3EC),
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               Text(
                 'Create New Link',
                 style: GoogleFonts.cairo(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w800,
                   color: const Color(0xFF0F1E2E),
                 ),
               ),
-              const SizedBox(height: 4),
+               SizedBox(height: 4.h),
               Text(
                 'Enter the original URL and optionally customize the short link',
                 style: GoogleFonts.cairo(
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   color: const Color(0xFF8A94A6),
                 ),
               ),
-              const SizedBox(height: 20),
-
-              // Original URL field (required)
+               SizedBox(height: 20.h),
               _SheetInput(
                 label: 'Original URL',
                 hint: 'https://example.com/...',
@@ -103,44 +102,38 @@ class _CreateLinkBottomSheetState extends State<CreateLinkBottomSheet> {
                   return null;
                 },
               ),
-              const SizedBox(height: 14),
-
-              // Custom Alias field (optional)
+               SizedBox(height: 14.h),
               _SheetInput(
                 label: 'Custom Alias (Optional)',
                 hint: 'my-short-link',
                 controller: _customAliasCtrl,
                 validator: (value) => null,
               ),
-              const SizedBox(height: 14),
-
-              // Title field (optional)
+               SizedBox(height: 14.h),
               _SheetInput(
                 label: 'Title (Optional)',
                 hint: 'Link title...',
                 controller: _titleCtrl,
                 validator: (value) => null,
               ),
-              const SizedBox(height: 24),
-
-              // Create button
+               SizedBox(height: 24.h),
               SizedBox(
                 width: double.infinity,
                 child: PressableCard(
                   onTap: _submitForm,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding:  EdgeInsets.symmetric(vertical: 14.h),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [Color(0xFF076475), Color(0xFF13C5D8)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(14.r),
                       boxShadow: [
                         BoxShadow(
                           color: const Color(0xFF0B8A9A).withOpacity(0.35),
-                          blurRadius: 12,
+                          blurRadius: 12.r,
                           offset: const Offset(0, 4),
                         ),
                       ],
@@ -151,14 +144,14 @@ class _CreateLinkBottomSheetState extends State<CreateLinkBottomSheet> {
                         style: GoogleFonts.cairo(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
-                          fontSize: 15,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 32),
+               SizedBox(height: 32.h),
             ],
           ),
         ),
@@ -188,49 +181,49 @@ class _SheetInput extends StatelessWidget {
         Text(
           label,
           style: GoogleFonts.cairo(
-            fontSize: 13,
+            fontSize: 13.sp,
             fontWeight: FontWeight.w600,
             color: const Color(0xFF4A5568),
           ),
         ),
-        const SizedBox(height: 6),
+         SizedBox(height: 6.h),
         TextFormField(
           controller: controller,
           textAlign: TextAlign.left,
-          style: GoogleFonts.cairo(fontSize: 14),
+          style: GoogleFonts.cairo(fontSize: 14.sp),
           validator: validator,
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: GoogleFonts.cairo(
               color: const Color(0xFFB0BAC9),
-              fontSize: 13,
+              fontSize: 13.sp,
             ),
             filled: true,
             fillColor: const Color(0xFFF8FAFC),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 13,
+            contentPadding:  EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 13.h,
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: const BorderSide(color: Color(0xFFEDF0F4)),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: const BorderSide(color: Color(0xFFEDF0F4)),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               borderSide: const BorderSide(
                 color: Color(0xFF0B8A9A),
                 width: 1.5,
               ),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide:  BorderSide(
                 color: Colors.red,
-                width: 1,
+                width: 1.w,
               ),
             ),
           ),

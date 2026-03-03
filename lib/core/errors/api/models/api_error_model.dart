@@ -13,7 +13,21 @@ class ApiErrorModel {
     final rawStatus = json['statusCode'] ?? json['status'] ?? 0;
 
     Map<String, List<String>>? errors;
-    if (json['data'] is Map<String, dynamic>) {
+
+    // Check if message itself is a Map (validation errors)
+    if (json['message'] is Map<String, dynamic>) {
+      final messageMap = json['message'] as Map<String, dynamic>;
+      errors = messageMap.map(
+            (key, value) => MapEntry(
+          key,
+          value is List
+              ? value.map((e) => e.toString()).toList()
+              : [value.toString()],
+        ),
+      );
+    }
+    // Otherwise check data field for errors
+    else if (json['data'] is Map<String, dynamic>) {
       final data = json['data'] as Map<String, dynamic>;
       errors = data.map(
             (key, value) => MapEntry(
@@ -25,10 +39,19 @@ class ApiErrorModel {
       );
     }
 
-    String message = json['message']?.toString() ?? 'حدث خطأ غير متوقع';
+    String message;
 
+    // If we have errors from message or data, use them
     if (errors != null && errors.isNotEmpty) {
       message = errors.values.expand((e) => e).join('\n');
+    }
+    // If message is a string, use it
+    else if (json['message'] is String) {
+      message = json['message'] as String;
+    }
+    // Fallback
+    else {
+      message = 'An unexpected error occurred';
     }
 
     return ApiErrorModel(

@@ -1,9 +1,11 @@
+﻿import 'package:dashboard_for_url_shortner/core/widgets/no_links_placeholder.dart';
 import 'package:dashboard_for_url_shortner/features/states/data/models/analytics_count_item.dart';
 import 'package:dashboard_for_url_shortner/features/states/data/models/link_analytics_data.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_state.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,14 +21,14 @@ class LinkAnalyticsBlocBuilder extends StatelessWidget {
           prev.linkAnalyticsError != curr.linkAnalyticsError,
       builder: (context, state) {
         return Container(
-          padding: const EdgeInsets.all(18),
+          padding:  EdgeInsets.all(18.r),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 12,
+                blurRadius: 12.r,
                 offset: const Offset(0, 3),
               ),
             ],
@@ -34,42 +36,43 @@ class LinkAnalyticsBlocBuilder extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Header ───────────────────────────────────
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(6),
+                    padding:  EdgeInsets.all(6.r),
                     decoration: BoxDecoration(
                       color: const Color(0xFFEBF2FF),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
-                    child: const Icon(Icons.bar_chart_rounded,
-                        size: 16, color: Color(0xFF2563EB)),
+                    child:  Icon(Icons.bar_chart_rounded,
+                        size: 16.r, color: Color(0xFF2563EB)),
                   ),
                   Text(
                     'Link Analytics',
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       color: const Color(0xFF0F1E2E),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 14),
-
-              // ── Body ─────────────────────────────────────
+               SizedBox(height: 14.h),
               if (state.isLoadingLinkAnalytics)
-                const SizedBox(
-                  height: 120,
+                 SizedBox(height: 120.h,
                   child: Center(
                     child: CircularProgressIndicator(
                         color: Color(0xFF0B8A9A), strokeWidth: 2.5),
                   ),
                 )
               else if (state.linkAnalyticsError != null)
-                _LinkAnalyticsError(
+                state.linkAnalyticsError!.statusCode == 404
+                    ? const NoLinksPlaceholder(
+                        title: 'No links yet',
+                        subtitle: 'Create a short link to see link analytics',
+                      )
+                    : _LinkAnalyticsError(
                   message: state.linkAnalyticsError!.message,
                   onRetry: () =>
                       context.read<StatsCubit>().fetchLinkAnalytics(1),
@@ -94,55 +97,52 @@ class _LinkAnalyticsError extends StatelessWidget {
   const _LinkAnalyticsError({required this.message, required this.onRetry});
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        height: 100,
+  Widget build(BuildContext context) => SizedBox(height: 100.h,
         child: Center(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            const Icon(Icons.error_outline_rounded,
-                color: Color(0xFFE53E3E), size: 28),
-            const SizedBox(height: 6),
+             Icon(Icons.error_outline_rounded,
+                color: Color(0xFFE53E3E), size: 28.r),
+             SizedBox(height: 6.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding:  EdgeInsets.symmetric(horizontal: 16.w),
               child: Text(message,
                   style: GoogleFonts.cairo(
-                      fontSize: 12, color: const Color(0xFF8A94A6)),
+                      fontSize: 12.sp, color: const Color(0xFF8A94A6)),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis),
             ),
             TextButton.icon(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh_rounded,
-                  size: 14, color: Color(0xFF0B8A9A)),
+              icon:  Icon(Icons.refresh_rounded,
+                  size: 14.r, color: Color(0xFF0B8A9A)),
               label: Text('Try again',
                   style: GoogleFonts.cairo(
-                      fontSize: 12, color: const Color(0xFF0B8A9A))),
+                      fontSize: 12.sp, color: const Color(0xFF0B8A9A))),
             ),
           ]),
         ),
       );
 }
 
-// ── Empty ──────────────────────────────────────────────────────────────────
 class _LinkAnalyticsEmpty extends StatelessWidget {
   const _LinkAnalyticsEmpty();
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        height: 100,
+  Widget build(BuildContext context) => SizedBox(height: 100.h,
         child: Center(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding:  EdgeInsets.all(12.r),
               decoration: const BoxDecoration(
                   color: Color(0xFFF4F7FA), shape: BoxShape.circle),
-              child: const Icon(Icons.analytics_outlined,
-                  size: 22, color: Color(0xFFB0BAC9)),
+              child:  Icon(Icons.analytics_outlined,
+                  size: 22.r, color: Color(0xFFB0BAC9)),
             ),
-            const SizedBox(height: 8),
+             SizedBox(height: 8.h),
             Text('No analytics yet',
                 style: GoogleFonts.cairo(
-                    fontSize: 13, color: const Color(0xFF8A94A6))),
+                    fontSize: 13.sp, color: const Color(0xFF8A94A6))),
           ]),
         ),
       );
@@ -161,35 +161,35 @@ class _LinkAnalyticsContent extends StatelessWidget {
         // Browsers bar chart
         if (analytics.browsers.isNotEmpty) ...[
           _SectionTitle(title: 'Browsers', icon: Icons.public_rounded),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
           _HorizontalBars(items: analytics.browsers, color: const Color(0xFF0B8A9A)),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
         ],
         // Platforms bar chart
         if (analytics.platforms.isNotEmpty) ...[
           _SectionTitle(title: 'Platforms', icon: Icons.devices_rounded),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
           _HorizontalBars(items: analytics.platforms, color: const Color(0xFF7C3AED)),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
         ],
         // Top countries
         if (analytics.topCountries.isNotEmpty) ...[
           _SectionTitle(title: 'Top Countries', icon: Icons.flag_rounded),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
           _HorizontalBars(items: analytics.topCountries, color: const Color(0xFF059669)),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
         ],
         // Top cities
         if (analytics.topCities.isNotEmpty) ...[
           _SectionTitle(title: 'Top Cities', icon: Icons.location_city_rounded),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
           _HorizontalBars(items: analytics.topCities, color: const Color(0xFFF97316)),
-          const SizedBox(height: 16),
+           SizedBox(height: 16.h),
         ],
         // Peak hours
         if (analytics.peakHours.isNotEmpty) ...[
           _SectionTitle(title: 'Peak Hours', icon: Icons.access_time_rounded),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
           _PeakHoursChart(peakHours: analytics.peakHours),
         ],
       ],
@@ -197,7 +197,7 @@ class _LinkAnalyticsContent extends StatelessWidget {
   }
 }
 
-// ── Section title ──────────────────────────────────────────────────────────
+
 class _SectionTitle extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -205,17 +205,16 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(children: [
-        Icon(icon, size: 14, color: const Color(0xFF8A94A6)),
-        const SizedBox(width: 4),
+        Icon(icon, size: 14.r, color: const Color(0xFF8A94A6)),
+         SizedBox(width: 4.w),
         Text(title,
             style: GoogleFonts.cairo(
-                fontSize: 12,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF8A94A6))),
       ]);
 }
 
-// ── Horizontal bar rows ────────────────────────────────────────────────────
 class _HorizontalBars extends StatelessWidget {
   final List<AnalyticsCountItem> items;
   final Color color;
@@ -230,31 +229,30 @@ class _HorizontalBars extends StatelessWidget {
       children: items.take(4).map((item) {
         final ratio = maxVal == 0 ? 0.0 : item.total / maxVal;
         return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding:  EdgeInsets.only(bottom: 8.h),
           child: Row(children: [
-            SizedBox(
-              width: 60,
+            SizedBox(width: 60.w,
               child: Text(item.label,
                   style: GoogleFonts.cairo(
-                      fontSize: 11, color: const Color(0xFF4A5568)),
+                      fontSize: 11.sp, color: const Color(0xFF4A5568)),
                   overflow: TextOverflow.ellipsis),
             ),
-            const SizedBox(width: 8),
+             SizedBox(width: 8.w),
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(4.r),
                 child: LinearProgressIndicator(
                   value: ratio.toDouble(),
                   backgroundColor: const Color(0xFFF0F3F7),
                   valueColor: AlwaysStoppedAnimation<Color>(color),
-                  minHeight: 8,
+                  minHeight: 8.h,
                 ),
               ),
             ),
-            const SizedBox(width: 8),
+             SizedBox(width: 8.w),
             Text('${item.total}',
                 style: GoogleFonts.cairo(
-                    fontSize: 11,
+                    fontSize: 11.sp,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFF0F1E2E))),
           ]),
@@ -275,8 +273,7 @@ class _PeakHoursChart extends StatelessWidget {
         ? 1
         : peakHours.map((e) => e.total as int).reduce((a, b) => a > b ? a : b);
 
-    return SizedBox(
-      height: 80,
+    return SizedBox(height: 80.h,
       child: BarChart(
         BarChartData(
           alignment: BarChartAlignment.spaceAround,
@@ -300,7 +297,7 @@ class _PeakHoursChart extends StatelessWidget {
                     return Text(
                       '${hour}h',
                       style: GoogleFonts.cairo(
-                          fontSize: 9, color: const Color(0xFFB0BAC9)),
+                          fontSize: 9.sp, color: const Color(0xFFB0BAC9)),
                     );
                   }
                   return const SizedBox.shrink();
@@ -317,9 +314,9 @@ class _PeakHoursChart extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
-                width: 12,
+                width: 12.w,
                 borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(4)),
+                     BorderRadius.vertical(top: Radius.circular(4.r)),
               ),
             ]);
           }).toList(),

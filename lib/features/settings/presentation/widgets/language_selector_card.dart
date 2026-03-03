@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LanguageSelectorCard extends StatelessWidget {
@@ -14,14 +15,14 @@ class LanguageSelectorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding:  EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            blurRadius: 12,
+            blurRadius: 12.r,
             offset: const Offset(0, 3),
           ),
         ],
@@ -37,33 +38,32 @@ class LanguageSelectorCard extends StatelessWidget {
                 'اللغة',
                 style: GoogleFonts.cairo(
                   fontWeight: FontWeight.w700,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: const Color(0xFF0F1E2E),
                 ),
               ),
-              const SizedBox(width: 8),
+               SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(7),
+                padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
                   color: const Color(0xFFE0F5F7),
-                  borderRadius: BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(9.r),
                 ),
-                child: const Icon(Icons.translate_rounded,
-                    size: 17, color: Color(0xFF0B8A9A)),
+                child:  Icon(Icons.translate_rounded,
+                    size: 17.r, color: Color(0xFF0B8A9A)),
               ),
             ],
           ),
-          const SizedBox(height: 6),
+           SizedBox(height: 6.h),
           Text(
             'اختر اللغة المفضلة لديك',
             textAlign: TextAlign.right,
             style: GoogleFonts.cairo(
-              fontSize: 13,
+              fontSize: 13.sp,
               color: const Color(0xFF8A94A6),
             ),
           ),
-          const SizedBox(height: 16),
-          // Language options
+           SizedBox(height: 16.h),
           Row(
             children: [
               Expanded(
@@ -74,7 +74,7 @@ class LanguageSelectorCard extends StatelessWidget {
                   onTap: () => onLanguageChanged('en'),
                 ),
               ),
-              const SizedBox(width: 12),
+               SizedBox(width: 12.w),
               Expanded(
                 child: _LanguageOption(
                   label: 'العربية',
@@ -142,12 +142,12 @@ class _LanguageOptionState extends State<_LanguageOption>
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 220),
           curve: Curves.easeOut,
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding:  EdgeInsets.symmetric(vertical: 16.h),
           decoration: BoxDecoration(
             color: widget.isSelected
                 ? const Color(0xFFE8F6F8)
                 : const Color(0xFFF8FAFC),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: widget.isSelected
                   ? const Color(0xFF0B8A9A)
@@ -162,28 +162,28 @@ class _LanguageOptionState extends State<_LanguageOption>
                 duration: const Duration(milliseconds: 220),
                 child: Icon(
                   Icons.language_rounded,
-                  size: 26,
+                  size: 26.r,
                   color: widget.isSelected
                       ? const Color(0xFF0B8A9A)
                       : const Color(0xFF8A94A6),
                 ),
               ),
-              const SizedBox(height: 10),
+               SizedBox(height: 10.h),
               Text(
                 widget.label,
                 style: GoogleFonts.cairo(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   color: widget.isSelected
                       ? const Color(0xFF0B8A9A)
                       : const Color(0xFF0F1E2E),
                 ),
               ),
-              const SizedBox(height: 2),
+               SizedBox(height: 2.h),
               Text(
                 widget.subLabel,
                 style: GoogleFonts.cairo(
-                  fontSize: 11,
+                  fontSize: 11.sp,
                   color: widget.isSelected
                       ? const Color(0xFF0B8A9A).withOpacity(0.7)
                       : const Color(0xFF8A94A6),
