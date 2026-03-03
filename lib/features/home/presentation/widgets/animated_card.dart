@@ -1,5 +1,4 @@
 ﻿import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatedCard extends StatefulWidget {
   final Widget child;
@@ -53,10 +52,7 @@ class _AnimatedCardState extends State<AnimatedCard>
       });
     } else {
       Future.delayed(Duration(milliseconds: widget.delayMs)).then((_) {
-        if (!mounted) return;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) _ctrl.forward();
-        });
+        if (mounted) _ctrl.forward();
       });
     }
   }

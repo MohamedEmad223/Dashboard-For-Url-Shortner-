@@ -97,6 +97,7 @@ class LinksCubit extends Cubit<LinksState> {
 
     final result = await _getAllLinksUseCase();
 
+    if (isClosed) return;
     result.map(
       success: (success) {
         final response = success.data;
@@ -142,6 +143,7 @@ class LinksCubit extends Cubit<LinksState> {
 
     final result = await _createLinkUseCase(request);
 
+    if (isClosed) return;
     result.map(
       success: (success) {
         final response = success.data;
@@ -172,15 +174,18 @@ class LinksCubit extends Cubit<LinksState> {
   }
 
   /// Delete a link by ID
-  Future<void> deleteLink(String linkId) async {
+  Future<void> deleteLink(dynamic linkId) async {
     emit(state.copyWith(isDeletingLink: true, successMessage: null));
 
-    final result = await _deleteLinkUseCase(linkId);
+    final result = await _deleteLinkUseCase(linkId.toString());
 
+    if (isClosed) return;
     result.map(
       success: (success) {
         final response = success.data;
-        final updatedLinks = state.links.where((link) => link['id'] != linkId).toList();
+        final updatedLinks = state.links.where((link) {
+          return link['id'].toString() != linkId.toString();
+        }).toList();
 
         emit(state.copyWith(
           links: updatedLinks,
@@ -191,26 +196,31 @@ class LinksCubit extends Cubit<LinksState> {
       failure: (failure) {
         emit(state.copyWith(
           isDeletingLink: false,
-          successMessage: 'Failed to delete link: ${failure.apiErrorModel.message}',
+          errorMessage: failure.apiErrorModel.message,
         ));
       },
     );
   }
 
   /// Toggle link status (active/inactive)
-  Future<void> toggleLinkStatus(String linkId) async {
-    emit(state.copyWith(isTogglingLink: true, successMessage: null));
+  Future<void> toggleLinkStatus(dynamic linkId, {bool? newStatus}) async {
+    emit(state.copyWith(isTogglingLink: true, successMessage: null, errorMessage: null));
 
-    final result = await _toggleLinkStatusUseCase(linkId);
+    final result = await _toggleLinkStatusUseCase(linkId.toString());
 
+    if (isClosed) return;
     result.map(
       success: (success) {
         final response = success.data;
-        final linkIndex = state.links.indexWhere((link) => link['id'] == linkId);
+        final linkIndex = state.links.indexWhere(
+          (link) => link['id'].toString() == linkId.toString(),
+        );
         if (linkIndex != -1) {
+          // Use the newStatus chosen by the user, or fall back to server response
+          final updatedStatus = newStatus ?? _parseStatus(response.isActive) ?? state.links[linkIndex]['status'];
           final updatedLink = {
             ...state.links[linkIndex],
-            'status': response.isActive ?? state.links[linkIndex]['status'],
+            'status': updatedStatus,
           };
           updateLink(linkIndex, updatedLink);
         }
@@ -223,10 +233,18 @@ class LinksCubit extends Cubit<LinksState> {
       failure: (failure) {
         emit(state.copyWith(
           isTogglingLink: false,
-          successMessage: 'Failed to toggle status: ${failure.apiErrorModel.message}',
+          errorMessage: failure.apiErrorModel.message,
         ));
       },
     );
+  }
+
+  /// Parse status from server response to bool
+  bool? _parseStatus(String? value) {
+    if (value == null) return null;
+    if (value == '1' || value.toLowerCase() == 'true' || value.toLowerCase() == 'active') return true;
+    if (value == '0' || value.toLowerCase() == 'false' || value.toLowerCase() == 'inactive') return false;
+    return null;
   }
 
   /// Clear error message
@@ -237,5 +255,10 @@ class LinksCubit extends Cubit<LinksState> {
   /// Clear success message
   void clearSuccessMessage() {
     emit(state.copyWith(successMessage: null));
+  }
+
+  /// Clear error message (snackbar)
+  void clearErrorMessage() {
+    emit(state.copyWith(errorMessage: null));
   }
 }

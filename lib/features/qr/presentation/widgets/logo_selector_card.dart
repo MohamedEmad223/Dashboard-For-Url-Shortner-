@@ -27,17 +27,10 @@ class LogoSelectorCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('شعار Jo Academy',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15.sp,
-                      color: const Color(0xFF0F1E2E))),
-               SizedBox(width: 8.w),
               Container(
                 padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
@@ -46,6 +39,12 @@ class LogoSelectorCard extends StatelessWidget {
                 child:  Icon(Icons.image_outlined,
                     size: 17.r, color: Color(0xFF059669)),
               ),
+               SizedBox(width: 8.w),
+              Text('Jo Academy Logo',
+                  style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: const Color(0xFF0F1E2E))),
             ],
           ),
            SizedBox(height: 16.h),
@@ -53,7 +52,7 @@ class LogoSelectorCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _LogoOption(
-                  label: 'بدون شعار',
+                  label: 'Without Logo',
                   icon: Icons.hide_image_outlined,
                   isSelected: !withLogo,
                   onTap: () => onChanged(false),
@@ -62,7 +61,7 @@ class LogoSelectorCard extends StatelessWidget {
                SizedBox(width: 12.w),
               Expanded(
                 child: _LogoOption(
-                  label: 'مع الشعار',
+                  label: 'With Logo',
                   icon: Icons.add_photo_alternate_outlined,
                   isSelected: withLogo,
                   onTap: () => onChanged(true),

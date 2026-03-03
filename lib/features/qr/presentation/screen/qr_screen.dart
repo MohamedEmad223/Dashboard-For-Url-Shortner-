@@ -1,4 +1,5 @@
-﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/core/widgets/main_header_of_pagesa_widgets.dart' show MainHeaderOfPagesWidgets;
+import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/color_customzation_card.dart';
 import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/download_format_card.dart';
 import 'package:dashboard_for_url_shortner/features/qr/presentation/widgets/link_selector_card.dart';
@@ -30,73 +31,14 @@ class _QrScreenState extends State<QrScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F7FA),
       body: SafeArea(
-        child: CustomScrollView(
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            // ── Top Bar ───────────────────────────────────────
-            SliverToBoxAdapter(
-              child: AnimatedCard(
-                delayMs: 0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 42.w,
-                        height: 42.h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.06),
-                                blurRadius: 8.r),
-                          ],
-                        ),
-                        child:  Icon(Icons.notifications_none_rounded,
-                            color: Color(0xFF4A5568), size: 22.r),
-                      ),
-                      const Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text('توليد رموز QR',
-                              style: GoogleFonts.cairo(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w800,
-                                color: const Color(0xFF0F1E2E),
-                              )),
-                          Text('قم بتخصيص وتحميل QR Code',
-                              style: GoogleFonts.cairo(
-                                fontSize: 12.sp,
-                                color: const Color(0xFF8A94A6),
-                              )),
-                        ],
-                      ),
-                       SizedBox(width: 12.w),
-                      Container(
-                        width: 42.w,
-                        height: 42.h,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF0B8A9A), Color(0xFF13C5D8)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child:  Center(
-                          child: Text('ج',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            MainHeaderOfPagesWidgets(
+              title: 'QR Code Generator',
+              subtitle: 'Customize and generate QR codes for your links',
             ),
 
             SliverPadding(
@@ -166,6 +108,7 @@ class _QrScreenState extends State<QrScreen> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );

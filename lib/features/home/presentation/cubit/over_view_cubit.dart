@@ -16,6 +16,7 @@ class OverViewCubit extends Cubit<OverViewState> {
   Future<void> overView() async {
     emit(const OverViewState.loading());
     final response = await _overViewUseCase();
+    if (isClosed) return;
     response.when(
       success: (data) => emit(OverViewState.success(data)),
       failure: (error) => emit(OverViewState.failure(error)),

@@ -29,21 +29,13 @@ class TopLinksCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-              'Top Performing Links',
-                style: GoogleFonts.cairo(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.sp,
-                  color: const Color(0xFF0F1E2E),
-                ),
-              ),
-               SizedBox(width: 8.w),
+
               Container(
                 padding:  EdgeInsets.all(6.r),
                 decoration: BoxDecoration(
@@ -52,6 +44,15 @@ class TopLinksCard extends StatelessWidget {
                 ),
                 child:  Icon(Icons.emoji_events_outlined,
                     size: 16.r, color: Color(0xFFF97316)),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                'Top Performing Links',
+                style: GoogleFonts.cairo(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15.sp,
+                  color: const Color(0xFF0F1E2E),
+                ),
               ),
             ],
           ),

@@ -1,4 +1,5 @@
-﻿import 'package:dashboard_for_url_shortner/features/home/presentation/cubit/over_view_cubit.dart';
+﻿import 'package:dashboard_for_url_shortner/core/widgets/no_links_placeholder.dart';
+import 'package:dashboard_for_url_shortner/features/home/presentation/cubit/over_view_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/over_view_body.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/quick_stats_card.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class BlocBuilderForOverView extends StatelessWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           success: (overViewData) =>
               Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   OverViewBody(overViewResponseModel: overViewData),
                    SizedBox(height: 14.h),
@@ -29,6 +31,12 @@ class BlocBuilderForOverView extends StatelessWidget {
                 ],
               ),
           failure: (error) {
+            if (error.statusCode == 404) {
+              return const NoLinksPlaceholder(
+                title: 'No links yet',
+                subtitle: 'Create your first short link to see your dashboard overview',
+              );
+            }
             final isUnauthorized = error.statusCode == 401;
             return Center(
               child: Column(

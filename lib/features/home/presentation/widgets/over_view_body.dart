@@ -13,11 +13,10 @@ class OverViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = overViewResponseModel?.data;
 
-    return SliverPadding(
-      padding:  EdgeInsets.all(16.r),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate([
-          AnimatedCard(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AnimatedCard(
             delayMs: 150,
             child: Row(
               children: [
@@ -66,8 +65,8 @@ class OverViewBody extends StatelessWidget {
               ],
             ),
           ),
-        ]),
-      ),
-    );
+        ],
+      );
+
   }
 }

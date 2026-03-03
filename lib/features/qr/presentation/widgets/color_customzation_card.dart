@@ -52,7 +52,7 @@ class ColorCustomizationCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('تخصيص الألوان',
+              Text('Color Picker',
                   style: GoogleFonts.cairo(
                       fontWeight: FontWeight.w700,
                       fontSize: 15.sp,
@@ -71,20 +71,20 @@ class ColorCustomizationCard extends StatelessWidget {
            SizedBox(height: 16.h),
           // QR Color row
           ColorRow(
-            label: 'لون QR Code',
+            label: 'Color QR',
             color: qrColor,
             onTap: () => _showColorPicker(context, qrColor, onQrColorChanged),
           ),
            SizedBox(height: 12.h),
           ColorRow(
-            label: 'لون الخلفية',
+            label: 'Background',
             color: bgColor,
             onTap: () => _showColorPicker(context, bgColor, onBgColorChanged),
           ),
            SizedBox(height: 16.h),
           Align(
             alignment: Alignment.centerRight,
-            child: Text('ألوان سريعة',
+            child: Text('Quick Colors',
                 style: GoogleFonts.cairo(
                     fontSize: 12.sp,
                     color: const Color(0xFF8A94A6),

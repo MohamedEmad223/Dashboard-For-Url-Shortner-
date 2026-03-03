@@ -69,90 +69,24 @@ class _LinkSelectorCardState extends State<LinkSelectorCard>
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text('اختيار الرابط',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15.sp,
-                      color: const Color(0xFF0F1E2E))),
-               SizedBox(width: 8.w),
-              Container(
-                padding:  EdgeInsets.all(7.r),
-                decoration: BoxDecoration(
-                    color: const Color(0xFFE0F5F7),
-                    borderRadius: BorderRadius.circular(9.r)),
-                child:  Icon(Icons.link_rounded,
-                    size: 17.r, color: Color(0xFF0B8A9A)),
-              ),
-            ],
-          ),
-           SizedBox(height: 14.h),
-          // TabBar
-          Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFFF4F7FA),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: TabBar(
-              controller: _tabController,
-              indicator: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.07),
-                    blurRadius: 6.r,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              dividerColor: Colors.transparent,
-              labelColor: const Color(0xFF0B8A9A),
-              unselectedLabelColor: const Color(0xFF8A94A6),
-              labelStyle: GoogleFonts.cairo(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w700,
-              ),
-              unselectedLabelStyle: GoogleFonts.cairo(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
-              ),
-              labelPadding: EdgeInsets.zero,
-              padding:  EdgeInsets.all(4.r),
-              tabs: const [
-                Tab(text: 'من روابطي'),
-                Tab(text: 'رابط مخصص'),
-              ],
-            ),
-          ),
-           SizedBox(height: 14.h),
           Text(
             widget.isFromMyLinks
-                ? 'اختر رابط من روابطك المختصرة'
-                : 'أدخل الرابط الذي تريد توليد QR له',
-            textAlign: TextAlign.right,
+                ?
+                'Enter the link you want to Make a Qr code for ':'',
             style: GoogleFonts.cairo(
                 fontSize: 12.sp, color: const Color(0xFF8A94A6)),
           ),
            SizedBox(height: 10.h),
           TextField(
-            textAlign: TextAlign.right,
+            textAlign: TextAlign.left,
             style: GoogleFonts.cairo(fontSize: 14.sp),
             onChanged: widget.onUrlChanged,
             decoration: InputDecoration(
-              hintText: widget.isFromMyLinks ? '...اختر رابط' : 'https://...',
+              hintText: widget.isFromMyLinks ? 'https://...' :'',
               hintStyle: GoogleFonts.cairo(
                   color: const Color(0xFFB0BAC9), fontSize: 13.sp),
-              suffixIcon: widget.isFromMyLinks
-                  ? const Icon(Icons.keyboard_arrow_down_rounded,
-                      color: Color(0xFF8A94A6))
-                  : null,
               filled: true,
               fillColor: const Color(0xFFF8FAFC),
               contentPadding:

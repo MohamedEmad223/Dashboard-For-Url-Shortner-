@@ -60,7 +60,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       _qrKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
 
       if (boundary == null) {
-        _showSnackBar('خطأ في التقاط الصورة', isError: true);
+        _showSnackBar('Error capturing image', isError: true);
         return;
       }
 
@@ -69,13 +69,13 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       await image.toByteData(format: ui.ImageByteFormat.png);
 
       if (byteData == null) {
-        _showSnackBar('فشل في تحويل الصورة', isError: true);
+        _showSnackBar('Failed to convert image', isError: true);
         return;
       }
 
       final Uint8List pngBytes = byteData.buffer.asUint8List();
 
-      // ✅ حفظ باستخدام gal
+      // ✅ Save using gal
 
       await Gal.putImageBytes(
         pngBytes,
@@ -83,11 +83,11 @@ class _QrPreviewCardState extends State<QrPreviewCard>
       );
 
       if (mounted) {
-        _showSnackBar('تم حفظ QR Code بنجاح ✓');
+        _showSnackBar('QR Code saved successfully ✓');
       }
     } catch (e) {
       if (mounted) {
-        _showSnackBar('حدث خطأ أثناء الحفظ', isError: true);
+        _showSnackBar('Error while saving', isError: true);
       }
     } finally {
       if (mounted) {
@@ -129,18 +129,11 @@ class _QrPreviewCardState extends State<QrPreviewCard>
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('معاينة QR Code',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15.sp,
-                      color: const Color(0xFF0F1E2E))),
-               SizedBox(width: 8.w),
               Container(
                 padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
@@ -149,6 +142,12 @@ class _QrPreviewCardState extends State<QrPreviewCard>
                 child:  Icon(Icons.qr_code_2_rounded,
                     size: 17.r, color: Color(0xFF0B8A9A)),
               ),
+               SizedBox(width: 8.w),
+              Text('QR Code Preview',
+                  style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: const Color(0xFF0F1E2E))),
             ],
           ),
            SizedBox(height: 16.h),
@@ -186,7 +185,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
               if (widget.hasUrl) {
                 _saveQrImage();
               } else {
-                _showSnackBar('يرجى إدخال رابط أولاً', isError: true);
+                _showSnackBar('Please enter a URL first', isError: true);
               }
             },
             onTapCancel: () => _btnCtrl.reverse(),
@@ -233,7 +232,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
                           size: 18.r),
                      SizedBox(width: 8.w),
                     Text(
-                      _isSaving ? 'جاري الحفظ...' : 'تحميل QR Code',
+                      _isSaving ? 'Saving...' : 'Download QR Code',
                       style: GoogleFonts.cairo(
                         color: widget.hasUrl
                             ? Colors.white
@@ -260,7 +259,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
             size: 52.r, color: const Color(0xFFDDE3EC)),
          SizedBox(height: 8.h),
         Text(
-          'أدخل رابطاً لتوليد\nرمز QR',
+          'Enter a URL to generate\na QR Code',
           textAlign: TextAlign.center,
           style: GoogleFonts.cairo(
               fontSize: 12.sp, color: const Color(0xFFB0BAC9), height: 1.5),
@@ -297,7 +296,7 @@ class _QrPreviewCardState extends State<QrPreviewCard>
                     size: 36.r, color: Colors.red),
                  SizedBox(height: 6.h),
                 Text(
-                  'رابط غير صالح',
+                  'Invalid URL',
                   style: GoogleFonts.cairo(
                       fontSize: 11.sp, color: const Color(0xFFE53E3E)),
                 ),

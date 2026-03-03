@@ -1,4 +1,5 @@
-﻿import 'package:dashboard_for_url_shortner/features/states/data/models/clicks_item.dart';
+﻿import 'package:dashboard_for_url_shortner/core/widgets/no_links_placeholder.dart';
+import 'package:dashboard_for_url_shortner/features/states/data/models/clicks_item.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_state.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/widgets/visits_overtime_chart.dart';
@@ -57,6 +58,12 @@ class VisitsOverTimeChartBlocBuilder extends StatelessWidget {
 
         // ── Error ─────────────────────────────────────────────
         if (state.error != null) {
+          if (state.error!.statusCode == 404) {
+            return const NoLinksPlaceholder(
+              title: 'No links yet',
+              subtitle: 'Create a short link to see visit statistics',
+            );
+          }
           return Container(
             height: 160.h,
             decoration: BoxDecoration(

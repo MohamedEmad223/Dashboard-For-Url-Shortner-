@@ -70,38 +70,27 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
 
-  final _screens = const [
-    HomeScreen(),
-    LinksScreen(),
-    QrScreen(),
-    StatsScreen(),
-    SettingsScreen(),
-  ];
+  Widget _buildScreen(int index) {
+    switch (index) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return const LinksScreen();
+      case 2:
+        return const QrScreen();
+      case 3:
+        return const StatsScreen();
+      case 4:
+        return const SettingsScreen();
+      default:
+        return const SizedBox.shrink();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 280),
-        switchInCurve: Curves.easeOutCubic,
-        switchOutCurve: Curves.easeInCubic,
-        transitionBuilder: (child, animation) {
-          return FadeTransition(
-            opacity: animation,
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 0.04),
-                end: Offset.zero,
-              ).animate(animation),
-              child: child,
-            ),
-          );
-        },
-        child: KeyedSubtree(
-          key: ValueKey(_currentIndex),
-          child: _screens[_currentIndex],
-        ),
-      ),
+      body: _buildScreen(_currentIndex),
       bottomNavigationBar: _BottomNav(
         currentIndex: _currentIndex,
         onTap: (i) => setState(() => _currentIndex = i),
@@ -114,7 +103,6 @@ class _MainNavigationState extends State<MainNavigation> {
   }
 }
 
-// ─── Animated FAB ─────────────────────────────────────────────────────────────
 
 class _AnimatedFab extends StatefulWidget {
   final VoidCallback onTap;

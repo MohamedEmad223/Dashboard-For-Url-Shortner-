@@ -69,7 +69,7 @@ Map<String, dynamic> _$AnalyticsOverviewDataModelToJson(
 LinkAnalyticsModel _$LinkAnalyticsModelFromJson(Map<String, dynamic> json) =>
     LinkAnalyticsModel(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
+      title: json['title'] as String?,
       shortCode: json['short_code'] as String,
       originalUrl: json['original_url'] as String,
       clicks: (json['clicks'] as num).toInt(),

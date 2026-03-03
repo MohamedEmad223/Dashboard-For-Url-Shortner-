@@ -56,14 +56,14 @@ class QuickStatsCard extends StatelessWidget {
              SizedBox(height: 12.h),
             StatRowWidget(
               label: 'Most Link Visited',
-              value: data!.bestPerformingLink!.originalUrl,
+              value: data?.bestPerformingLink?.originalUrl ?? 'No Data',
               valueColor: const Color(0xFF0B8A9A),
               icon: Icons.link,
             ),
              SizedBox(height: 12.h),
             StatRowWidget(
               label: 'Last Visited',
-              value: data.peakHours != null && data.peakHours!.isNotEmpty
+              value: data?.peakHours != null && data!.peakHours!.isNotEmpty
                   ? "${data.peakHours!.first.hour}:00"
                   : "No Data",
               valueColor: const Color(0xFF0F1E2E),
@@ -72,7 +72,7 @@ class QuickStatsCard extends StatelessWidget {
              SizedBox(height: 12.h),
             StatRowWidget(
               label: 'Total Visits',
-              value: "${data.bestPerformingLink!.clicks.toString()} Clicks",
+              value: "${data?.bestPerformingLink?.clicks.toString() ?? '0'} Clicks",
               valueColor: const Color(0xFF059669),
               icon: Icons.bar_chart,
             ),

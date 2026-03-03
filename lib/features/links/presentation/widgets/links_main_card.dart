@@ -1,9 +1,10 @@
-﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/custom_action_button.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/empty_states.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_filter_section.dart';
 import 'package:dashboard_for_url_shortner/features/links/presentation/widgets/links_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +23,7 @@ class LinksMainCard extends StatelessWidget {
   final int filteredLinksCount;
   final ValueChanged<String>? onSearchChanged;
   final Function(int)? onDeleteLink;
-  final Function(int)? onToggleLinkStatus;
+  final Function(dynamic linkId, {bool newStatus})? onToggleLinkStatus;
 
   const LinksMainCard({
     super.key,
@@ -66,24 +67,65 @@ class LinksMainCard extends StatelessWidget {
   }
 
   String _statusLabel(dynamic status) {
+    if (status == true || status == 1 || status == '1') return 'Active';
+    if (status == false || status == 0 || status == '0') return 'Inactive';
     final s = status?.toString().toLowerCase() ?? '';
-    if (s == 'active' || status == true) return 'Active';
+    if (s == 'active') return 'Active';
     if (s == 'expired') return 'Expired';
     return 'Inactive';
   }
 
   Color _statusBg(dynamic status) {
-    final s = status?.toString().toLowerCase() ?? '';
-    if (s == 'active' || status == true) return const Color(0xFFE6FAF4);
-    if (s == 'expired') return const Color(0xFFFEE2E2);
+    final label = _statusLabel(status);
+    if (label == 'Active') return const Color(0xFFE6FAF4);
+    if (label == 'Expired') return const Color(0xFFFEE2E2);
     return const Color(0xFFFFF0E6);
   }
 
   Color _statusFg(dynamic status) {
-    final s = status?.toString().toLowerCase() ?? '';
-    if (s == 'active' || status == true) return const Color(0xFF059669);
-    if (s == 'expired') return const Color(0xFFDC2626);
+    final label = _statusLabel(status);
+    if (label == 'Active') return const Color(0xFF059669);
+    if (label == 'Expired') return const Color(0xFFDC2626);
     return const Color(0xFFF97316);
+  }
+
+  Widget _statusOption(BuildContext ctx, String label, String currentLabel, dynamic linkId) {
+    final isSelected = label == currentLabel;
+    return SimpleDialogOption(
+      onPressed: () {
+        Navigator.pop(ctx);
+        if (!isSelected) {
+          final newStatus = label == 'Active';
+          onToggleLinkStatus?.call(linkId, newStatus: newStatus);
+        }
+      },
+      child: Row(
+        children: [
+          Container(
+            width: 10.w,
+            height: 10.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: label == 'Active'
+                  ? const Color(0xFF059669)
+                  : const Color(0xFFF97316),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            label,
+            style: GoogleFonts.cairo(
+              fontSize: 14.sp,
+              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              color: isSelected ? const Color(0xFF0B8A9A) : const Color(0xFF475569),
+            ),
+          ),
+          const Spacer(),
+          if (isSelected)
+            Icon(Icons.check_rounded, color: const Color(0xFF0B8A9A), size: 20.r),
+        ],
+      ),
+    );
   }
 
   @override
@@ -282,7 +324,25 @@ class LinksMainCard extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           GestureDetector(
-                                            onTap: () => onToggleLinkStatus?.call(link['id']),
+                                            onTap: () {
+                                              final currentLabel = _statusLabel(link['status']);
+                                              showDialog(
+                                                context: context,
+                                                builder: (ctx) => SimpleDialog(
+                                                  title: Text(
+                                                    'Change Status',
+                                                    style: GoogleFonts.cairo(
+                                                      fontWeight: FontWeight.w700,
+                                                      fontSize: 16.sp,
+                                                    ),
+                                                  ),
+                                                  children: [
+                                                    _statusOption(ctx, 'Active', currentLabel, link['id']),
+                                                    _statusOption(ctx, 'Inactive', currentLabel, link['id']),
+                                                  ],
+                                                ),
+                                              );
+                                            },
                                             child: CustomActionButton(
                                               icon: Icons.edit_outlined,
                                               color: const Color(0xFF0B8A9A),
@@ -335,4 +395,3 @@ class LinksMainCard extends StatelessWidget {
     );
   }
 }
-

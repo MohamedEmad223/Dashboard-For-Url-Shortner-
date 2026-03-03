@@ -18,6 +18,7 @@ class LinksState extends Equatable {
   final bool isTogglingLink;
   final ApiErrorModel? error;
   final String? successMessage;
+  final String? errorMessage;
 
   const LinksState({
     this.selectedCampaign = 'All Campaigns',
@@ -34,6 +35,7 @@ class LinksState extends Equatable {
     this.isTogglingLink = false,
     this.error,
     this.successMessage,
+    this.errorMessage,
   });
 
   LinksState copyWith({
@@ -51,6 +53,7 @@ class LinksState extends Equatable {
     bool? isTogglingLink,
     ApiErrorModel? error,
     String? successMessage,
+    String? errorMessage,
   }) {
     return LinksState(
       selectedCampaign: selectedCampaign ?? this.selectedCampaign,
@@ -67,33 +70,37 @@ class LinksState extends Equatable {
       isTogglingLink: isTogglingLink ?? this.isTogglingLink,
       error: error,
       successMessage: successMessage,
+      errorMessage: errorMessage,
     );
+  }
+
+  /// Normalises the raw status value from the API to a display label.
+  static String _normaliseStatus(dynamic status) {
+    if (status == true || status == 1 || status == '1') return 'Active';
+    if (status == false || status == 0 || status == '0') return 'Inactive';
+    final s = status?.toString().toLowerCase() ?? '';
+    if (s == 'active') return 'Active';
+    if (s == 'inactive') return 'Inactive';
+    if (s == 'expired') return 'Expired';
+    return 'Inactive';
   }
 
   int get totalLinks => links.length;
 
   int get filteredLinksCount {
-    return links.where((link) {
-      final matchesCampaign = selectedCampaign == 'All Campaigns' ||
-          link['campaign'] == selectedCampaign;
-      final matchesStatus =
-          selectedStatus == 'All Statuses' || link['status'] == selectedStatus;
-      final matchesSearch = searchQuery.isEmpty ||
-          link['shortUrl'].toString().contains(searchQuery) ||
-          link['originalUrl'].toString().contains(searchQuery);
-      return matchesCampaign && matchesStatus && matchesSearch;
-    }).length;
+    return filteredLinks.length;
   }
 
   List<Map<String, dynamic>> get filteredLinks {
     return links.where((link) {
       final matchesCampaign = selectedCampaign == 'All Campaigns' ||
           link['campaign'] == selectedCampaign;
-      final matchesStatus =
-          selectedStatus == 'All Statuses' || link['status'] == selectedStatus;
+      final matchesStatus = selectedStatus == 'All Statuses' ||
+          _normaliseStatus(link['status']) == selectedStatus;
       final matchesSearch = searchQuery.isEmpty ||
-          link['shortUrl'].toString().contains(searchQuery) ||
-          link['originalUrl'].toString().contains(searchQuery);
+          (link['short']?.toString() ?? '').toLowerCase().contains(searchQuery.toLowerCase()) ||
+          (link['original']?.toString() ?? '').toLowerCase().contains(searchQuery.toLowerCase()) ||
+          (link['title']?.toString() ?? '').toLowerCase().contains(searchQuery.toLowerCase());
       return matchesCampaign && matchesStatus && matchesSearch;
     }).toList();
   }
@@ -114,6 +121,7 @@ class LinksState extends Equatable {
         isTogglingLink,
         error,
         successMessage,
+        errorMessage,
       ];
 }
 

@@ -1,4 +1,5 @@
-﻿import 'package:dashboard_for_url_shortner/features/states/data/models/recent_click_item.dart';
+﻿import 'package:dashboard_for_url_shortner/core/widgets/no_links_placeholder.dart';
+import 'package:dashboard_for_url_shortner/features/states/data/models/recent_click_item.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_state.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,12 @@ class RecentClicksBlocBuilder extends StatelessWidget {
                   ),
                 )
               else if (state.recentClicksError != null)
-                _RecentClicksError(
+                state.recentClicksError!.statusCode == 404
+                    ? const NoLinksPlaceholder(
+                        title: 'No links yet',
+                        subtitle: 'Create a short link to see recent clicks',
+                      )
+                    : _RecentClicksError(
                   message: state.recentClicksError!.message,
                   onRetry: () => context.read<StatsCubit>().fetchRecentClicks(),
                 )

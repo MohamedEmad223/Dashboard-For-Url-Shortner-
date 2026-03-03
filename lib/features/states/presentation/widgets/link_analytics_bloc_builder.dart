@@ -1,4 +1,5 @@
-﻿import 'package:dashboard_for_url_shortner/features/states/data/models/analytics_count_item.dart';
+﻿import 'package:dashboard_for_url_shortner/core/widgets/no_links_placeholder.dart';
+import 'package:dashboard_for_url_shortner/features/states/data/models/analytics_count_item.dart';
 import 'package:dashboard_for_url_shortner/features/states/data/models/link_analytics_data.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/cubit/stats_state.dart';
@@ -66,7 +67,12 @@ class LinkAnalyticsBlocBuilder extends StatelessWidget {
                   ),
                 )
               else if (state.linkAnalyticsError != null)
-                _LinkAnalyticsError(
+                state.linkAnalyticsError!.statusCode == 404
+                    ? const NoLinksPlaceholder(
+                        title: 'No links yet',
+                        subtitle: 'Create a short link to see link analytics',
+                      )
+                    : _LinkAnalyticsError(
                   message: state.linkAnalyticsError!.message,
                   onRetry: () =>
                       context.read<StatsCubit>().fetchLinkAnalytics(1),

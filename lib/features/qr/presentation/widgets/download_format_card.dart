@@ -19,19 +19,19 @@ class DownloadFormatCard extends StatelessWidget {
     {
       'format': DownloadFormat.jpeg,
       'label': 'JPEG',
-      'sub': 'حجم صغير',
+      'sub': 'Small size',
       'icon': Icons.image_outlined,
     },
     {
       'format': DownloadFormat.svg,
       'label': 'SVG',
-      'sub': 'قابل للتكبير',
+      'sub': 'Scalable',
       'icon': Icons.auto_awesome_outlined,
     },
     {
       'format': DownloadFormat.png,
       'label': 'PNG',
-      'sub': 'جودة عالية',
+      'sub': 'High quality',
       'icon': Icons.high_quality_outlined,
     },
   ];
@@ -51,18 +51,11 @@ class DownloadFormatCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('تنسيق التنزيل',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15.sp,
-                      color: const Color(0xFF0F1E2E))),
-               SizedBox(width: 8.w),
               Container(
                 padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
@@ -71,11 +64,17 @@ class DownloadFormatCard extends StatelessWidget {
                 child:  Icon(Icons.download_rounded,
                     size: 17.r, color: Color(0xFFF97316)),
               ),
+               SizedBox(width: 8.w),
+              Text('Download Format',
+                  style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: const Color(0xFF0F1E2E))),
             ],
           ),
            SizedBox(height: 6.h),
-          Text('اختر صيغة الملف المناسبة لاحتياجاتك',
-              textAlign: TextAlign.right,
+          Text('Choose the file format that suits your needs',
+              textAlign: TextAlign.left,
               style: GoogleFonts.cairo(
                   fontSize: 12.sp, color: const Color(0xFF8A94A6))),
            SizedBox(height: 14.h),
@@ -123,7 +122,7 @@ class DownloadFormatCard extends StatelessWidget {
                       _getHint(selectedFormat),
                       style: GoogleFonts.cairo(
                           fontSize: 12.sp, color: const Color(0xFF2563EB)),
-                      textAlign: TextAlign.right,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ],
@@ -138,11 +137,11 @@ class DownloadFormatCard extends StatelessWidget {
   String _getHint(DownloadFormat f) {
     switch (f) {
       case DownloadFormat.png:
-        return '✓ PNG: الأفضل لجودة عالية مع دعم الشفافية';
+        return '✓ PNG: Best for high quality with transparency support';
       case DownloadFormat.svg:
-        return '✓ SVG: مثالي للطباعة وقابل للتكبير بلا حدود';
+        return '✓ SVG: Ideal for printing and infinitely scalable';
       case DownloadFormat.jpeg:
-        return '✓ JPEG: حجم ملف أصغر مناسب للمشاركة السريعة';
+        return '✓ JPEG: Smaller file size, great for quick sharing';
     }
   }
 }

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../core/widgets/main_header_of_pagesa_widgets.dart' show MainHeaderOfPagesWidgets;
 import '../widgets/export_button.dart';
 import '../widgets/states_state_card.dart';
 import '../widgets/top_links_card.dart';
@@ -40,77 +41,9 @@ class _StatsScreenBody extends StatelessWidget {
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(
-              child: AnimatedCard(
-                delayMs: 0,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 42.w,
-                        height: 42.h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.06),
-                              blurRadius: 8.r,
-                            ),
-                          ],
-                        ),
-                        child:  Icon(Icons.notifications_none_rounded,
-                            color: Color(0xFF4A5568), size: 22.r),
-                      ),
-                      const Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Statistics Dashboard',
-                            style: GoogleFonts.cairo(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w800,
-                              color: const Color(0xFF0F1E2E),
-                            ),
-                          ),
-                          Text(
-                            'Full analysis of your short links performance',
-                            style: GoogleFonts.cairo(
-                              fontSize: 12.sp,
-                              color: const Color(0xFF8A94A6),
-                            ),
-                          ),
-                        ],
-                      ),
-                       SizedBox(width: 12.w),
-                      Container(
-                        width: 42.w,
-                        height: 42.h,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF0B8A9A), Color(0xFF13C5D8)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child:  Center(
-                          child: Text(
-                            'ج',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            MainHeaderOfPagesWidgets(
+              title: 'Analytics',
+              subtitle: 'dive into your link performance',
             ),
             SliverToBoxAdapter(
               child: AnimatedCard(
@@ -123,8 +56,6 @@ class _StatsScreenBody extends StatelessWidget {
                     builder: (context, state) {
                       return Row(
                         children: [
-                          ExportButton(onTap: () {}),
-                          const Spacer(),
                           DateRangeChip(
                             selected: state.selectedRange,
                             onChanged: (value) =>
@@ -146,8 +77,6 @@ class _StatsScreenBody extends StatelessWidget {
                 ),
               ),
             ),
-
-            // ── Recent Clicks ─────────────────────────────────
             SliverToBoxAdapter(
               child: AnimatedCard(
                 delayMs: 440,
@@ -157,8 +86,6 @@ class _StatsScreenBody extends StatelessWidget {
                 ),
               ),
             ),
-
-            // ── Link Analytics ────────────────────────────────
             SliverToBoxAdapter(
               child: AnimatedCard(
                 delayMs: 500,
@@ -168,8 +95,6 @@ class _StatsScreenBody extends StatelessWidget {
                 ),
               ),
             ),
-
-            // ── Top Links ─────────────────────────────────────
             SliverToBoxAdapter(
               child: AnimatedCard(
                 delayMs: 560,

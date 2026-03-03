@@ -30,85 +30,36 @@ class HeaderBanner extends StatelessWidget {
             ),
           ],
         ),
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Decorative circles
-            Positioned(
-              top: -20,
-              left: -20,
-              child: Container(
-                width: 100.w,
-                height: 100.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.05),
-                ),
+            Text(
+              'Hello in your dashboard links,',
+              style: GoogleFonts.cairo(
+                color: Colors.white.withOpacity(0.85),
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500,
               ),
+              textAlign: TextAlign.left,
             ),
-            Positioned(
-              bottom: -30,
-              right: -10,
-              child: Container(
-                width: 140.w,
-                height: 140.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.04),
-                ),
+            Text(
+              'John Academy',
+              style: GoogleFonts.cairo(
+                color: Colors.white,
+                fontSize: 26.sp,
+                fontWeight: FontWeight.w800,
+                height: 1.2,
               ),
+              textAlign: TextAlign.left,
             ),
-            // Content
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hello in your dashboard links,',
-                  style: GoogleFonts.cairo(
-                    color: Colors.white.withOpacity(0.85),
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                Text(
-                  'John Academy',
-                  style: GoogleFonts.cairo(
-                    color: Colors.white,
-                    fontSize: 26.sp,
-                    fontWeight: FontWeight.w800,
-                    height: 1.2,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                 SizedBox(height: 6.h),
-                Text(
-                  'Make Your Links Short & Memorable with Our Dashboard',
-                  style: GoogleFonts.cairo(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 13.sp,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                 SizedBox(height: 20.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    BannerButton(
-                      label: 'Create Link',
-                      icon: Icons.add_link,
-                      filled: true,
-                      onTap: () {},
-                    ),
-                     SizedBox(width: 10.w),
-                    BannerButton(
-                      label: 'All Links',
-                      icon: Icons.list_alt_rounded,
-                      filled: false,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ],
+             SizedBox(height: 6.h),
+            Text(
+              'Make Your Links Short & Memorable with Our Dashboard',
+              style: GoogleFonts.cairo(
+                color: Colors.white.withOpacity(0.7),
+                fontSize: 13.sp,
+              ),
+              textAlign: TextAlign.left,
             ),
           ],
         ),

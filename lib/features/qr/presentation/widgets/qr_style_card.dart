@@ -29,17 +29,10 @@ class QrStyleCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('أسلوب QR Code',
-                  style: GoogleFonts.cairo(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15.sp,
-                      color: const Color(0xFF0F1E2E))),
-               SizedBox(width: 8.w),
               Container(
                 padding:  EdgeInsets.all(7.r),
                 decoration: BoxDecoration(
@@ -48,6 +41,12 @@ class QrStyleCard extends StatelessWidget {
                 child:  Icon(Icons.style_outlined,
                     size: 17.r, color: Color(0xFF2563EB)),
               ),
+               SizedBox(width: 8.w),
+              Text('QR Code Style',
+                  style: GoogleFonts.cairo(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.sp,
+                      color: const Color(0xFF0F1E2E))),
             ],
           ),
            SizedBox(height: 16.h),
@@ -55,7 +54,7 @@ class QrStyleCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _StyleOption(
-                  label: 'مستدير',
+                  label: 'Rounded',
                   icon: Icons.circle_outlined,
                   isSelected: selectedStyle == QrStyle.rounded,
                   onTap: () => onStyleChanged(QrStyle.rounded),
@@ -64,7 +63,7 @@ class QrStyleCard extends StatelessWidget {
                SizedBox(width: 12.w),
               Expanded(
                 child: _StyleOption(
-                  label: 'مربعات',
+                  label: 'Square',
                   icon: Icons.crop_square_rounded,
                   isSelected: selectedStyle == QrStyle.square,
                   onTap: () => onStyleChanged(QrStyle.square),
