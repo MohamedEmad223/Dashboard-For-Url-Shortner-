@@ -1,15 +1,17 @@
-﻿import 'package:flutter/material.dart';
+﻿import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
+import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppInfoCard extends StatelessWidget {
   const AppInfoCard({super.key});
 
-  static const _rows = [
-    {'label': 'Version', 'value': '1.0', 'isLink': false},
-    {'label': 'Domain', 'value': 'joc.li', 'isLink': true},
-    {'label': 'Platform', 'value': 'Jo Academy', 'isLink': false},
-    {
+  static final _rows = [
+    const {'label': 'Version', 'value': '1.0', 'isLink': false},
+    const {'label': 'Domain', 'value': 'Dev', 'isLink': true},
+    {'label': 'Platform', 'value': '${CacheHelper.getString(key: ApiConstants.name)} Academy', 'isLink': false},
+    const {
       'label': 'Fonts',
       'value': 'Arabic: Readex Pro\nEnglish: Rubik',
       'isLink': false

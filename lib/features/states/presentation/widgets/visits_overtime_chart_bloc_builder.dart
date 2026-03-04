@@ -12,18 +12,15 @@ import 'package:google_fonts/google_fonts.dart';
 class VisitsOverTimeChartBlocBuilder extends StatelessWidget {
   const VisitsOverTimeChartBlocBuilder({super.key});
 
-  /// Convert API clicks list → FlSpot list
   List<FlSpot> _toSpots(List<ClicksItem> items) {
     return List.generate(items.length, (i) {
       return FlSpot(i.toDouble(), items[i].clicks.toDouble());
     });
   }
 
-  /// Extract date labels from API data
   List<String> _toLabels(List<ClicksItem> items) {
     return items.map((e) {
-      // e.date is yyyy-MM-dd, show MM-dd
-      if (e.date.length >= 10) return e.date.substring(5); // MM-dd
+      if (e.date.length >= 10) return e.date.substring(5); 
       return e.date;
     }).toList();
   }
@@ -32,7 +29,6 @@ class VisitsOverTimeChartBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<StatsCubit, StatsState>(
       builder: (context, state) {
-        // ── Loading ───────────────────────────────────────────
         if (state.isLoading) {
           return Container(
             height: 280.h,
@@ -56,7 +52,6 @@ class VisitsOverTimeChartBlocBuilder extends StatelessWidget {
           );
         }
 
-        // ── Error ─────────────────────────────────────────────
         if (state.error != null) {
           if (state.error!.statusCode == 404) {
             return const NoLinksPlaceholder(
@@ -117,17 +112,19 @@ class VisitsOverTimeChartBlocBuilder extends StatelessWidget {
           );
         }
 
-        // ── Success ───────────────────────────────────────────
         final items = state.clicksData?.clicksOverTime;
-        final realSpots =
-            (items != null && items.isNotEmpty) ? _toSpots(items) : null;
-        final realLabels =
-            (items != null && items.isNotEmpty) ? _toLabels(items) : null;
+
+        if (items == null || items.isEmpty) {
+          return const NoLinksPlaceholder(
+            title: 'No visits yet',
+            subtitle: 'Your links haven\'t received any clicks in this period',
+          );
+        }
 
         return VisitsOverTimeChart(
           selectedRange: state.selectedRange,
-          realSpots: realSpots,
-          realLabels: realLabels,
+          spots: _toSpots(items),
+          labels: _toLabels(items),
         );
       },
     );

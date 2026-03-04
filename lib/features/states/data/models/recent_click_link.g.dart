@@ -9,7 +9,7 @@ part of 'recent_click_link.dart';
 RecentClickLink _$RecentClickLinkFromJson(Map<String, dynamic> json) =>
     RecentClickLink(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
+      title: json['title'] as String?,
       shortCode: json['short_code'] as String,
     );
 

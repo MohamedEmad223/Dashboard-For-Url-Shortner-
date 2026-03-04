@@ -23,8 +23,6 @@ class _QrScreenState extends State<QrScreen> {
   Color _qrColor = const Color(0xFF0F3D5C);
   Color _bgColor = Colors.white;
   QrStyle _qrStyle = QrStyle.square;
-  bool _withLogo = true;
-  DownloadFormat _downloadFormat = DownloadFormat.png;
 
   @override
   Widget build(BuildContext context) {

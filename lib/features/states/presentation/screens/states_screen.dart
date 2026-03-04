@@ -7,12 +7,8 @@ import 'package:dashboard_for_url_shortner/features/states/presentation/widgets/
 import 'package:dashboard_for_url_shortner/features/states/presentation/widgets/recent_clicks_bloc_builder.dart';
 import 'package:dashboard_for_url_shortner/features/states/presentation/widgets/visits_overtime_chart_bloc_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/widgets/main_header_of_pagesa_widgets.dart' show MainHeaderOfPagesWidgets;
-import '../widgets/export_button.dart';
-import '../widgets/states_state_card.dart';
 import '../widgets/top_links_card.dart';
 
 class StatsScreen extends StatelessWidget {
@@ -24,7 +20,7 @@ class StatsScreen extends StatelessWidget {
       create: (_) => getIt<StatsCubit>()
         ..fetchClicksOverTime()
         ..fetchRecentClicks()
-        ..fetchLinkAnalytics(1),
+        ..fetchOverview(),
       child: const _StatsScreenBody(),
     );
   }

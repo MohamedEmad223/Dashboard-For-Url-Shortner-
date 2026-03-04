@@ -41,8 +41,8 @@ class ColorPickerSheet extends StatelessWidget {
                   color: const Color(0xFF0F1E2E))),
            SizedBox(height: 16.h),
           Wrap(
-            spacing: 14,
-            runSpacing: 14,
+            spacing: 14.r,
+            runSpacing: 14.r,
             alignment: WrapAlignment.end,
             children: colors.map((c) {
               final isSel = c == current;
@@ -52,8 +52,8 @@ class ColorPickerSheet extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Container(
-                  width: 48.w,
-                  height: 48.h,
+                  width: 48.r,
+                  height: 48.r,
                   decoration: BoxDecoration(
                     color: c,
                     borderRadius: BorderRadius.circular(12.r),
@@ -65,7 +65,7 @@ class ColorPickerSheet extends StatelessWidget {
                     ),
                     boxShadow: [
                       BoxShadow(
-                          color: c.withOpacity(0.35),
+                          color: c.withValues(alpha: 0.35),
                           blurRadius: 8.r,
                           offset: const Offset(0, 3))
                     ],

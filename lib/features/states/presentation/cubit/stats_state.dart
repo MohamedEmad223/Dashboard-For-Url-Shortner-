@@ -3,6 +3,7 @@ import 'package:dashboard_for_url_shortner/core/errors/api/models/api_error_mode
 import 'package:dashboard_for_url_shortner/features/states/data/models/clicks_over_time_data.dart';
 import 'package:dashboard_for_url_shortner/features/states/data/models/link_analytics_response.dart';
 import 'package:dashboard_for_url_shortner/features/states/data/models/recent_clicks_response.dart';
+import 'package:dashboard_for_url_shortner/features/home/data/model/over_view_response_model.dart';
 
 class StatsState extends Equatable {
   // ── Clicks Over Time ─────────────────────────────────────
@@ -21,6 +22,11 @@ class StatsState extends Equatable {
   final LinkAnalyticsResponse? linkAnalytics;
   final ApiErrorModel? linkAnalyticsError;
 
+  // ── Overview (for top links) ─────────────────────────────
+  final bool isLoadingOverview;
+  final OverViewResponseModel? overview;
+  final ApiErrorModel? overviewError;
+
   const StatsState({
     this.selectedRange = 'Last 30 Days',
     this.isLoading = false,
@@ -32,6 +38,9 @@ class StatsState extends Equatable {
     this.isLoadingLinkAnalytics = false,
     this.linkAnalytics,
     this.linkAnalyticsError,
+    this.isLoadingOverview = false,
+    this.overview,
+    this.overviewError,
   });
 
   StatsState copyWith({
@@ -49,6 +58,10 @@ class StatsState extends Equatable {
     LinkAnalyticsResponse? linkAnalytics,
     ApiErrorModel? linkAnalyticsError,
     bool clearLinkAnalyticsError = false,
+    bool? isLoadingOverview,
+    OverViewResponseModel? overview,
+    ApiErrorModel? overviewError,
+    bool clearOverviewError = false,
   }) {
     return StatsState(
       selectedRange: selectedRange ?? this.selectedRange,
@@ -67,6 +80,11 @@ class StatsState extends Equatable {
       linkAnalyticsError: clearLinkAnalyticsError
           ? null
           : (linkAnalyticsError ?? this.linkAnalyticsError),
+      isLoadingOverview: isLoadingOverview ?? this.isLoadingOverview,
+      overview: overview ?? this.overview,
+      overviewError: clearOverviewError
+          ? null
+          : (overviewError ?? this.overviewError),
     );
   }
 
@@ -82,6 +100,9 @@ class StatsState extends Equatable {
         isLoadingLinkAnalytics,
         linkAnalytics,
         linkAnalyticsError,
+        isLoadingOverview,
+        overview,
+        overviewError,
       ];
 }
 

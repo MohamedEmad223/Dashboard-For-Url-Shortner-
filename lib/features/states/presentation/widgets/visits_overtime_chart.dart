@@ -1,99 +1,19 @@
-﻿import 'dart:math';
-
-import 'package:fl_chart/fl_chart.dart';
+﻿import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VisitsOverTimeChart extends StatelessWidget {
   final String selectedRange;
-
-  /// When provided, these override the dummy-generated data.
-  final List<FlSpot>? realSpots;
-  final List<String>? realLabels;
+  final List<FlSpot> spots;
+  final List<String> labels;
 
   const VisitsOverTimeChart({
     super.key,
     this.selectedRange = 'Last 30 Days',
-    this.realSpots,
-    this.realLabels,
+    required this.spots,
+    required this.labels,
   });
-
-  // ── English month names ──────────────────────────────────────
-  static const _months = {
-    1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr',
-    5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug',
-    9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec',
-  };
-
-  static String _formatDate(DateTime date, {bool withYear = false}) {
-    final month = _months[date.month]!;
-    if (withYear) return '$month \'${date.year % 100}';
-    return '$month ${date.day}';
-  }
-
-  // ── Generate spots & labels dynamically ─────────────────────
-  int get _totalDays {
-    switch (selectedRange) {
-      case 'Last 7 Days':
-        return 7;
-      case 'Last 90 Days':
-        return 90;
-      case 'All Time':
-        return 365;
-      default:
-        return 30;
-    }
-  }
-
-  int get _pointCount {
-    switch (selectedRange) {
-      case 'Last 7 Days':
-        return 7;
-      case 'Last 90 Days':
-        return 12;
-      case 'All Time':
-        return 15;
-      default:
-        return 30;
-    }
-  }
-
-  int get _labelCount {
-    switch (selectedRange) {
-      case 'Last 7 Days':
-        return 7;
-      case 'Last 30 Days':
-        return 8;
-      case 'Last 90 Days':
-        return 7;
-      case 'All Time':
-        return 7;
-      default:
-        return 8;
-    }
-  }
-
-  List<FlSpot> _generateSpots() {
-    final rng = Random(selectedRange.hashCode); // stable per range
-    final count = _pointCount;
-    return List.generate(count, (i) {
-      return FlSpot(i.toDouble(), (rng.nextDouble() * 60 + 10).roundToDouble());
-    });
-  }
-
-  List<String> _generateLabels() {
-    final now = DateTime.now();
-    final total = _totalDays;
-    final count = _labelCount;
-    final withYear = selectedRange == 'All Time';
-
-    return List.generate(count, (i) {
-      final daysBack = total - (total * i / (count - 1)).round();
-      final date = now.subtract(Duration(days: daysBack));
-      return _formatDate(date, withYear: withYear);
-    });
-  }
 
   // ── Helpers ─────────────────────────────────────────────────
 
@@ -110,8 +30,6 @@ class VisitsOverTimeChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spots = realSpots ?? _generateSpots();
-    final labels = realLabels ?? _generateLabels();
     final maxX = spots.isEmpty ? 1.0 : (spots.length - 1).toDouble();
     final maxY = _maxY(spots);
     final yInterval = _yInterval(maxY);

@@ -5,7 +5,7 @@ part 'link_analytics_link.g.dart';
 @JsonSerializable()
 class LinkAnalyticsLink {
   final int id;
-  final String title;
+  final String? title;
 
   @JsonKey(name: 'short_code')
   final String shortCode;
@@ -21,7 +21,7 @@ class LinkAnalyticsLink {
 
   LinkAnalyticsLink({
     required this.id,
-    required this.title,
+    this.title,
     required this.shortCode,
     required this.originalUrl,
     required this.isActive,

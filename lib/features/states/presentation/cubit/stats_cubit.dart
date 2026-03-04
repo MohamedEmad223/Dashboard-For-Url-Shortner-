@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:dashboard_for_url_shortner/core/networking/api_result.dart';
+import 'package:dashboard_for_url_shortner/features/home/domain/use_case/over_view_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/states/domain/use_case/get_clicks_over_time_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/states/domain/use_case/get_link_analytics_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/states/domain/use_case/get_recent_clicks_use_case.dart';
@@ -10,12 +11,48 @@ class StatsCubit extends Cubit<StatsState> {
   final GetClicksOverTimeUseCase _getClicksOverTimeUseCase;
   final GetRecentClicksUseCase _getRecentClicksUseCase;
   final GetLinkAnalyticsUseCase _getLinkAnalyticsUseCase;
+  final OverViewUseCase _overViewUseCase;
 
   StatsCubit(
     this._getClicksOverTimeUseCase,
     this._getRecentClicksUseCase,
     this._getLinkAnalyticsUseCase,
+    this._overViewUseCase,
   ) : super(const StatsState());
+
+  // ── Overview (for top links + auto link analytics) ────────
+
+  Future<void> fetchOverview() async {
+    emit(state.copyWith(isLoadingOverview: true, clearOverviewError: true));
+
+    final result = await _overViewUseCase();
+
+    if (isClosed) return;
+    result.map(
+      success: (s) {
+        emit(state.copyWith(
+          isLoadingOverview: false,
+          overview: s.data,
+          clearOverviewError: true,
+        ));
+        // Auto-fetch link analytics for the best performing link
+        final bestLink = s.data.data.bestPerformingLink;
+        if (bestLink != null) {
+          fetchLinkAnalytics(bestLink.id);
+        } else {
+          // No links — set link analytics as 404 to show placeholder
+          emit(state.copyWith(
+            isLoadingLinkAnalytics: false,
+            clearLinkAnalyticsError: true,
+          ));
+        }
+      },
+      failure: (f) => emit(state.copyWith(
+        isLoadingOverview: false,
+        overviewError: f.apiErrorModel,
+      )),
+    );
+  }
 
   // ── Clicks Over Time ──────────────────────────────────────
 
@@ -87,7 +124,6 @@ class StatsCubit extends Cubit<StatsState> {
     );
   }
 
-  // ── Link Analytics ────────────────────────────────────────
 
   Future<void> fetchLinkAnalytics(int linkId) async {
     emit(state.copyWith(

@@ -8,7 +8,7 @@ class ColorRow extends StatelessWidget {
   final VoidCallback onTap;
 
   const ColorRow(
-      {required this.label, required this.color, required this.onTap});
+      {super.key, required this.label, required this.color, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,35 +21,33 @@ class ColorRow extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: const Color(0xFFEDF0F4)),
          ),
-        child: Expanded(
-          child: Row(
-            children: [
-              Container(
-                width: 30.w,
-                height: 30.h,
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(color: const Color(0xFFDDE3EC)),
-                ),
+        child: Row(
+          children: [
+            Container(
+              width: 30.w,
+              height: 30.h,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(color: const Color(0xFFDDE3EC)),
               ),
-               SizedBox(width: 10.w),
-              Text(
-                '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
-                style: GoogleFonts.robotoMono(
-                  fontSize: 13.sp,
-                  color: const Color(0xFF4A5568),
-                  fontWeight: FontWeight.w500,
-                ),
+            ),
+             SizedBox(width: 10.w),
+            Text(
+              '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
+              style: GoogleFonts.robotoMono(
+                fontSize: 13.sp,
+                color: const Color(0xFF4A5568),
+                fontWeight: FontWeight.w500,
               ),
-              const Spacer(),
-              Text(label,
-                  style: GoogleFonts.cairo(
-                      fontSize: 13.sp,
-                      color: const Color(0xFF4A5568),
-                      fontWeight: FontWeight.w600)),
-            ],
-          ),
+            ),
+            const Spacer(),
+            Text(label,
+                style: GoogleFonts.cairo(
+                    fontSize: 13.sp,
+                    color: const Color(0xFF4A5568),
+                    fontWeight: FontWeight.w600)),
+          ],
         ),
       ),
     );

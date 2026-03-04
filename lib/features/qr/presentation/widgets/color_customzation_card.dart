@@ -34,13 +34,13 @@ class ColorCustomizationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:  EdgeInsets.all(18.r),
+      padding: EdgeInsets.all(18.r),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 12.r,
               offset: const Offset(0, 3)),
         ],
@@ -92,44 +92,44 @@ class ColorCustomizationCard extends StatelessWidget {
                     fontWeight: FontWeight.w500)),
           ),
            SizedBox(height: 10.h),
-            Wrap(
-              spacing: 8.w,
-              runSpacing: 8.h,
-              children: _quickColors.map((c) {
-                final isSelected = c == qrColor;
-                return GestureDetector(
-                  onTap: () => onQrColorChanged(c),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 180),
-                    width: 28.w,
-                    height: 28.h,
-                    decoration: BoxDecoration(
-                      color: c,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: isSelected
-                            ? const Color(0xFF0B8A9A)
-                            : Colors.transparent,
-                        width: 2.5,
-                      ),
-                      boxShadow: isSelected
-                          ? [
-                        BoxShadow(
-                            color: c.withOpacity(0.4),
-                            blurRadius: 8.r,
-                            offset: const Offset(0, 2))
-                      ]
-                          : [],
+          Wrap(
+            spacing: 8.r,
+            runSpacing: 8.r,
+            children: _quickColors.map((c) {
+              final isSelected = c == qrColor;
+              return GestureDetector(
+                onTap: () => onQrColorChanged(c),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  width: 28.r,
+                  height: 28.r,
+                  decoration: BoxDecoration(
+                    color: c,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isSelected
+                          ? const Color(0xFF0B8A9A)
+                          : Colors.transparent,
+                      width: 2.5,
                     ),
-                    child: isSelected
-                        ? Icon(Icons.check_rounded,
-                        color: Colors.white, size: 14.r)
-                        : null,
+                    boxShadow: isSelected
+                        ? [
+                      BoxShadow(
+                          color: c.withValues(alpha: 0.4),
+                          blurRadius: 8.r,
+                          offset: const Offset(0, 2))
+                    ]
+                        : [],
                   ),
-                );
-              }).toList(),
-            ),
-          ]
+                  child: isSelected
+                      ? Icon(Icons.check_rounded,
+                      color: Colors.white, size: 14.r)
+                      : null,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
 
     );

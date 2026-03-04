@@ -35,9 +35,13 @@ class SignUpRepoImpl implements SignUpRepo{
             return ApiResult.failure(e.apiErrorModel);
 
     }on DioException catch (e) {
-      ExceptionHelperMethods.handle(e);
+      try {
+        ExceptionHelperMethods.handle(e);
+      } on ApiException catch (ae) {
+        return ApiResult.failure(ae.apiErrorModel);
+      }
       return ApiResult.failure(
-        ApiErrorModel(message: e.toString(), statusCode: 0),
+        ApiErrorModel(message: 'Unexpected Error', statusCode: 0),
       );
 
     }catch(e){

@@ -1,4 +1,6 @@
-﻿import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
+﻿import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
+import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
+import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +33,9 @@ class MainHeaderOfPagesWidgets extends StatelessWidget {
                 ),
                 child:  Center(
                   child: Text(
-                    'J',
+                    (CacheHelper.getString(key: ApiConstants.name) ?? 'U')
+                        .substring(0, 1)
+                        .toUpperCase(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,

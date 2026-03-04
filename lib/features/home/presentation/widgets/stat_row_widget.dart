@@ -18,25 +18,32 @@ class StatRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
       children: [
-        Text(
-          label,
-          style: GoogleFonts.cairo(
-            color: const Color(0xFF4A5568),
-            fontSize: 13.sp,
+        SizedBox(
+          width: 130.w,
+          child: Text(
+            label,
+            style: GoogleFonts.cairo(
+              color: const Color(0xFF4A5568),
+              fontSize: 13.sp,
+            ),
           ),
         ),
-        const Spacer(),
-
-        Text(
-          value,
-          style: GoogleFonts.cairo(
-            color: valueColor,
-            fontWeight: FontWeight.w700,
-            fontSize: 13.sp,
+        Flexible(
+          child: Text(
+            value,
+            style: GoogleFonts.cairo(
+              color: valueColor,
+              fontWeight: FontWeight.w700,
+              fontSize: 13.sp,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ),
-         SizedBox(width: 8.w),
+        SizedBox(width: 8.w),
         Icon(icon, size: 16.r, color: const Color(0xFF8A94A6)),
       ],
     );

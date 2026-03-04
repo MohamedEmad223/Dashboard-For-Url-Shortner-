@@ -73,21 +73,18 @@ class LinksMainCard extends StatelessWidget {
     if (status == false || status == 0 || status == '0') return 'Inactive';
     final s = status?.toString().toLowerCase() ?? '';
     if (s == 'active') return 'Active';
-    if (s == 'expired') return 'Expired';
     return 'Inactive';
   }
 
   Color _statusBg(dynamic status) {
     final label = _statusLabel(status);
     if (label == 'Active') return const Color(0xFFE6FAF4);
-    if (label == 'Expired') return const Color(0xFFFEE2E2);
     return const Color(0xFFFFF0E6);
   }
 
   Color _statusFg(dynamic status) {
     final label = _statusLabel(status);
     if (label == 'Active') return const Color(0xFF059669);
-    if (label == 'Expired') return const Color(0xFFDC2626);
     return const Color(0xFFF97316);
   }
 
@@ -110,8 +107,7 @@ class LinksMainCard extends StatelessWidget {
               shape: BoxShape.circle,
               color: label == 'Active'
                   ? const Color(0xFF059669)
-                  : label == 'Expired'
-                      ? const Color(0xFFDC2626)
+
                       : const Color(0xFFF97316),
             ),
           ),
@@ -391,7 +387,6 @@ class LinksMainCard extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    // Visits
                                     _dataCell(
                                       Text(
                                         '${link['visits'] ?? 0}',
@@ -403,7 +398,6 @@ class LinksMainCard extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    // Status badge
                                     _dataCell(
                                       Center(
                                         child: Container(
@@ -427,7 +421,6 @@ class LinksMainCard extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    // Actions
                                     _dataCell(
                                       Row(
                                         mainAxisAlignment:
@@ -450,7 +443,6 @@ class LinksMainCard extends StatelessWidget {
                                                   children: [
                                                     _statusOption(ctx, 'Active', currentLabel, link['id']),
                                                     _statusOption(ctx, 'Inactive', currentLabel, link['id']),
-                                                    _statusOption(ctx, 'Expired', currentLabel, link['id']),
                                                   ],
                                                 ),
                                               );

@@ -11,7 +11,6 @@ import 'package:dashboard_for_url_shortner/features/settings/presentation/cubit/
 import 'package:dashboard_for_url_shortner/features/settings/presentation/widgets/app_info_card.dart';
 import 'package:dashboard_for_url_shortner/features/settings/presentation/widgets/log_out_bloc_listener.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -58,6 +57,8 @@ class SettingsScreen extends StatelessWidget {
                                 key: ApiConstants.accessToken,
                               );
 
+                              CacheHelper.delete(key: ApiConstants.name);
+
                               if (token == null) {
                                 navigator.pushNamedAndRemoveUntil(
                                   Routes.loginScreen,
@@ -65,6 +66,7 @@ class SettingsScreen extends StatelessWidget {
                                 );
                                 return;
                               }
+                              
 
                               cubit.logout(
                                 LogOutModelRequest(token: token),

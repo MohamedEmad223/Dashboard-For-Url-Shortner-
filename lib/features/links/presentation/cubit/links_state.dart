@@ -28,7 +28,7 @@ class LinksState extends Equatable {
     this.showStatusDropdown = false,
     this.links = const [],
     this.campaigns = const ['All Campaigns', 'No Campaign'],
-    this.statuses = const ['All Statuses', 'Active', 'Inactive', 'Expired'],
+    this.statuses = const ['All Statuses', 'Active', 'Inactive'],
     this.isLoadingLinks = false,
     this.isCreatingLink = false,
     this.isDeletingLink = false,
@@ -81,7 +81,6 @@ class LinksState extends Equatable {
     final s = status?.toString().toLowerCase() ?? '';
     if (s == 'active') return 'Active';
     if (s == 'inactive') return 'Inactive';
-    if (s == 'expired') return 'Expired';
     return 'Inactive';
   }
 

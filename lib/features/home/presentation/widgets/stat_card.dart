@@ -71,8 +71,11 @@ class StatCard extends StatelessWidget {
                 style: GoogleFonts.cairo(
                   fontSize: 12.sp,
                   color: const Color(0xFF8A94A6),
+
                   fontWeight: FontWeight.w500,
                 ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
                SizedBox(height: 12.h),
               if (progress != null)

@@ -30,7 +30,6 @@ class _LinksScreenViewState extends State<LinksScreenView> {
   @override
   void initState() {
     super.initState();
-    // Fetch links when screen initializes
     context.read<LinksCubit>().getLinks();
   }
 

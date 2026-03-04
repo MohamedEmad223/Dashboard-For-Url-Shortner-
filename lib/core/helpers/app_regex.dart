@@ -1,8 +1,8 @@
 class AppRegex {
   static bool isEmailValid(String email) {
     return RegExp(
-      r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$',
-    ).hasMatch(email);
+      r'^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com|live\.com|msn\.com|icloud\.com|aol\.com|me\.com|zoho\.com|yandex\.com|gmx\.com)$',
+    ).hasMatch(email.trim());
   }
 
   static bool isNameValid(String name) {

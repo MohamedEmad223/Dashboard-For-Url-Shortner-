@@ -1,4 +1,6 @@
-﻿import 'package:dashboard_for_url_shortner/config/theme/app_colors.dart';
+﻿import 'package:dashboard_for_url_shortner/config/cache/cache_helper.dart';
+import 'package:dashboard_for_url_shortner/config/theme/app_colors.dart';
+import 'package:dashboard_for_url_shortner/core/networking/api_constants.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/Banner_button.dart';
 import 'package:dashboard_for_url_shortner/features/home/presentation/widgets/animated_card.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +45,7 @@ class HeaderBanner extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             Text(
-              'John Academy',
+              CacheHelper.getString(key: ApiConstants.name)??'',
               style: GoogleFonts.cairo(
                 color: Colors.white,
                 fontSize: 26.sp,

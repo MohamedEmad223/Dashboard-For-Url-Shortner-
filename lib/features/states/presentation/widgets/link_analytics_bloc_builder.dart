@@ -74,8 +74,14 @@ class LinkAnalyticsBlocBuilder extends StatelessWidget {
                       )
                     : _LinkAnalyticsError(
                   message: state.linkAnalyticsError!.message,
-                  onRetry: () =>
-                      context.read<StatsCubit>().fetchLinkAnalytics(1),
+                  onRetry: () {
+                    final bestLink = context.read<StatsCubit>().state.overview?.data.bestPerformingLink;
+                    if (bestLink != null) {
+                      context.read<StatsCubit>().fetchLinkAnalytics(bestLink.id);
+                    } else {
+                      context.read<StatsCubit>().fetchOverview();
+                    }
+                  },
                 )
               else if (state.linkAnalytics?.data.analytics == null)
                 const _LinkAnalyticsEmpty()

@@ -2,8 +2,10 @@ import 'package:dashboard_for_url_shortner/core/networking/dio_factory.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/data/repo/forget_password_repo_impl.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/repo/forget_password_repo.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/use_case/forget_password_use_case.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/use_case/reset_password_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/domain/use_case/verify_code_use_case.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/forget_password_cubit.dart';
+import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/forget_password/presentation/cubit/verify_code_cubit.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/data/data_source/login_data_source.dart';
 import 'package:dashboard_for_url_shortner/features/auth/login/data/repo/login_repo_impl.dart';
@@ -215,10 +217,22 @@ void _setupForgetPasswordDependencies() {
         () => VerifyCodeUseCase(getIt<ForgetPasswordRepo>()),
   );
 
+  getIt.registerLazySingleton<ResetPasswordUseCase>(
+        () => ResetPasswordUseCase(getIt<ForgetPasswordRepo>()),
+  );
+
   getIt.registerFactory<VerifyCodeCubit>(
         () => VerifyCodeCubit(getIt<VerifyCodeUseCase>()),
+
   );
+
+  getIt.registerFactory<ResetPasswordCubit>(
+        () => ResetPasswordCubit(getIt<ResetPasswordUseCase>()),
+
+  );
+
 }
+
 
 void _setupStatesDependencies() {
   // Data Source
@@ -250,6 +264,7 @@ void _setupStatesDependencies() {
       getIt<GetClicksOverTimeUseCase>(),
       getIt<GetRecentClicksUseCase>(),
       getIt<GetLinkAnalyticsUseCase>(),
+      getIt<OverViewUseCase>(),
     ),
   );
 }

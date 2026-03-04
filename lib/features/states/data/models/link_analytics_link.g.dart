@@ -9,7 +9,7 @@ part of 'link_analytics_link.dart';
 LinkAnalyticsLink _$LinkAnalyticsLinkFromJson(Map<String, dynamic> json) =>
     LinkAnalyticsLink(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
+      title: json['title'] as String?,
       shortCode: json['short_code'] as String,
       originalUrl: json['original_url'] as String,
       isActive: (json['is_active'] as num).toInt(),

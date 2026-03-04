@@ -20,13 +20,18 @@ class LoginRepoImpl implements LoginRepo {
     try {
       final response = await _loginDataSource.login(loginBody: loginUserData);
       CacheHelper.setSecureData(key: ApiConstants.accessToken, value: response.data.accessToken);
+      CacheHelper.set(key: ApiConstants.name, value: response.data.user.name);
       return ApiResult.success(response);
     } on ApiException catch (e) {
       return ApiResult.failure(e.apiErrorModel);
     } on DioException catch (e) {
-      ExceptionHelperMethods.handle(e);
+      try {
+        ExceptionHelperMethods.handle(e);
+      } on ApiException catch (ae) {
+        return ApiResult.failure(ae.apiErrorModel);
+      }
       return ApiResult.failure(
-        ApiErrorModel(message: 'Un Excpected Error', statusCode: 0),
+        ApiErrorModel(message: 'Unexpected Error', statusCode: 0),
       );
     } catch (e) {
       return ApiResult.failure(
