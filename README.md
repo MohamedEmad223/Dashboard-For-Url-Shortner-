@@ -44,8 +44,7 @@ Built using clean architecture principles and scalable state management.
 ---
 
 # 📸 Screenshots
-<img width="1344" height="2992" alt="Screenshot_20260301_043922" src="https://github.com/user-attachments/assets/caba0e11-9324-4e5a-8219-100024c0fe87" />
-<img width="1344" height="2992" alt="Screenshot_20260301_043914" src="https://github.com/user-attachments/assets/20d1334c-385a-4657-889c-d1aa17b810f9" />
+
 <img width="1344" height="2992" alt="Screenshot_20260303_232219" src="https://github.com/user-attachments/assets/2ebf4f5d-0903-41fd-8de9-e4c6bc294b8a" />
 <img width="1344" height="2992" alt="Screenshot_20260303_232156" src="https://github.com/user-attachments/assets/7077f508-90f1-4118-82c5-615cf78164eb" />
 <img width="1344" height="2992" alt="Screenshot_20260303_232147" src="https://github.com/user-attachments/assets/76b8e843-8ab2-4a8c-8b52-1fd362dac38c" />
